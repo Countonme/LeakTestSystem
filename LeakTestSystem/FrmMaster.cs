@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LeakTestSystem.Services;
+using LeakTestSystem.Services.MES;
+using Sunny.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,16 +11,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LeakTestSystem.Services;
-using Sunny.UI;
 
 namespace LeakTestSystem
 {
-    public partial class Form1 : UIForm
+    public partial class FrmMaster : UIForm
     {
-        public  ModbusIoController modbusIo;
+        public ModbusIoController modbusIo;
         private SerialPort serialPort1, serialPort2, serialPort3, serialPort4, serialPort5, serialPort6, serialPort7;
-        public Form1()
+        private bool flagProductionModel;
+
+        public FrmMaster()
         {
             InitializeComponent();
             this.Load += Form1_Load;
@@ -89,6 +92,7 @@ namespace LeakTestSystem
             serialPort6.DataReceived += Serial_DataReceived;
             serialPort7.DataReceived += Serial_DataReceived;
         }
+
         private void CloseAllPorts()
         {
             TryClose(serialPort1);
@@ -99,6 +103,7 @@ namespace LeakTestSystem
             TryClose(serialPort6);
             TryClose(serialPort7);
         }
+
         private void OpenAllPorts()
         {
             TryOpen(serialPort1);
@@ -109,6 +114,7 @@ namespace LeakTestSystem
             TryOpen(serialPort6);
             TryOpen(serialPort7); // Modbus RTU
         }
+
         private void TryClose(SerialPort port)
         {
             if (port == null) return;
@@ -125,6 +131,7 @@ namespace LeakTestSystem
                 MessageBox.Show($"{port.PortName} 关闭失败: {ex.Message}");
             }
         }
+
         private void TryOpen(SerialPort port)
         {
             if (port == null) return;
@@ -141,9 +148,89 @@ namespace LeakTestSystem
                 MessageBox.Show($"{port.PortName} 打开失败: {ex.Message}");
             }
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             initComList();
+            this.switchMES.Click += SwitchMES_Click;
+            this.RadioDebugMode.Click += RadioDebugMode_Click;
+            this.RadioBtnProductionMode.Click += RadioBtnProductionMode_Click;
+        }
+
+        /// <summary>
+        /// Handles the click event for enabling or disabling radio debug mode.
+        /// </summary>
+        /// <param name="sender">Represents the source of the click event.</param>
+        /// <param name="e">Contains the event data associated with the click action.</param>
+        private void RadioDebugMode_Click(object sender, EventArgs e)
+        {
+            flagProductionModel = false;
+        }
+
+        private void SwitchMES_Click(object sender, EventArgs e)
+        {
+            //ERR.Visible = true;
+            if (switchMES.Active)
+            {
+                var message = MES_Service.CheckLib();
+                if (string.IsNullOrEmpty(message))
+                {
+                    //ShowSystemLogs("MES", "MesConnect");
+                    MES_Service.MesConnect();
+                }
+                else
+                {
+                    this.ShowErrorNotifier($"MES连接失败 {message}");
+                    switchMES.Active = false;
+                    return;
+                }
+            }
+            else
+            {
+                //ShowSystemLogs("MES", "MesDisConnect");
+                MES_Service.MesDisConnect();
+                //切换Debug模式
+                // RadioDebugMode.Checked = true;
+            }
+        }
+
+        /// <summary>
+        /// Handles the click event for a radio button that toggles production mode.
+        /// </summary>
+        /// <param name="sender">Represents the source of the click event.</param>
+        /// <param name="e">Contains the event data associated with the click action.</param>
+        private void RadioBtnProductionMode_Click(object sender, EventArgs e)
+        {
+            if (RadioBtnProductionMode.Checked)
+            {
+                //if (string.IsNullOrEmpty(txtModelName.Text))
+                //{
+                //    RadioDebugMode.Checked = true;
+                //    this.ShowErrorDialog("没有选择配置文件");
+                //    return;
+                //}
+
+                if (string.IsNullOrEmpty(txtEmp.Text))
+                {
+                    RadioDebugMode.Checked = true;
+                    this.ShowErrorDialog("没有输入人员工号");
+
+                    return;
+                }
+                string message = string.Empty;
+                bool checkFlag = MES_Service.CommandCheckUser(txtEmp.Text, ref message);
+                if (!checkFlag)
+                {
+                    Sys_User.username = txtEmp.Text;
+                    RadioDebugMode.Checked = true;
+
+                    this.ShowErrorDialog($"{message}");
+                    return;
+                }
+                Sys_User.username = txtEmp.Text;
+                txtEmp.Enabled = false;
+                this.ShowSuccessTip($"登录成功 {txtEmp.Text}");
+            }
         }
 
         /// <summary>
@@ -192,6 +279,7 @@ namespace LeakTestSystem
                 case 6: ledCom7.Color = color; break;
             }
         }
+
         /// <summary>
         /// Initializes the LED indicators to reflect the current status of available serial ports (COM1–COM7).
         /// </summary>
@@ -212,6 +300,7 @@ namespace LeakTestSystem
                 }
             }
         }
+
         /// <summary>
         /// Determines whether the specified serial port name exists on the system.
         /// </summary>
@@ -222,6 +311,7 @@ namespace LeakTestSystem
         {
             return SerialPort.GetPortNames().Contains(comName);
         }
+
         /// <summary>
         /// Handles the DataReceived event of the serial port, which occurs when data is received through the port.
         /// </summary>
@@ -245,7 +335,7 @@ namespace LeakTestSystem
                 // COM7 = Modbus
                 if (port == serialPort7)
                 {
-                   // HandleModbus(buffer);
+                    // HandleModbus(buffer);
                 }
                 else
                 {
@@ -256,8 +346,8 @@ namespace LeakTestSystem
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
+
         private int GetPortIndex(SerialPort port)
         {
             if (port == serialPort1) return 0;
@@ -270,6 +360,7 @@ namespace LeakTestSystem
 
             return -1;
         }
+
         private void HandleNormalSerial(int index, byte[] data)
         {
             string text = Encoding.ASCII.GetString(data);
@@ -287,6 +378,5 @@ namespace LeakTestSystem
                 }
             }));
         }
-
     }
 }
