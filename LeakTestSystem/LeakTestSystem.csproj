@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>hangyu.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SunnyUI, Version=3.9.6.0, Culture=neutral, PublicKeyToken=3f4ebed4237db5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\SunnyUI.3.9.6\lib\net472\SunnyUI.dll</HintPath>
@@ -100,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="hangyu.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -16,5 +16,7 @@ namespace LeakTestSystem.Model
         public string error { get; set; }
 
         public string message { get; set; }
+
+        public bool model { get; set; }
     }
 }

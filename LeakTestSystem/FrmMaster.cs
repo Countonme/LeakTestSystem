@@ -163,6 +163,8 @@ namespace LeakTestSystem
             this.txtMasterInput.TextChanged += TxtMasterInput_TextChanged;
             this.txtMasterInput.KeyDown += TxtMasterInput_KeyDown;
             this.btnReSet.Click += BtnReSet_Click;
+            InitScanMaster();
+           
         }
 
         private void BtnReSet_Click(object sender, EventArgs e)
@@ -174,6 +176,7 @@ namespace LeakTestSystem
             txtsn4.Text = string.Empty;
             txtsn5.Text = string.Empty;
             txtsn6.Text = string.Empty;
+            InitScanMaster();
             this.ShowSuccessTip("队列已经清空");
         }
 
@@ -185,8 +188,17 @@ namespace LeakTestSystem
 
                 if (!string.IsNullOrEmpty(barcode))
                 {
-                    snList.Add(new ScanModel { serialNumber = barcode });
-
+                    if (flagProductionModel)
+                    { var message = string.Empty;
+                        var flag = MES_Service.CheckSerialNumber(barcode,ref message);
+                        if (!flag) 
+                        {
+                            this.ShowErrorDialog(message);
+                            this.ShowErrorNotifier(message);
+                            return;
+                        }
+                    }
+                    snList.Add(new ScanModel { serialNumber = barcode,model= flagProductionModel });
                     // 👉 按当前数量安全赋值
                     if (snList.Count > 0) txtsn1.Text = snList[0].serialNumber;
                     if (snList.Count > 1) txtsn2.Text = snList[1].serialNumber;
@@ -198,11 +210,12 @@ namespace LeakTestSystem
                     // 👉 满6个再处理
                     if (snList.Count == 6)
                     {
-                        MessageBox.Show("已扫满6个");
+                        // this.ShowErrorNotifier("已扫满6个");
                         // 这里可以做提交逻辑
-
+                        this.ShowWaitForm();
                         // 如果要继续扫下一批，记得清空
-                        // snList.Clear();
+                        this.HideWaitForm();
+                        snList.Clear();
                     }
 
                     txtMasterInput.Clear();
@@ -362,6 +375,15 @@ namespace LeakTestSystem
                     SetLedByIndex(i - 1, Color.Green);
                 }
             }
+        }
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        private void InitScanMaster() 
+        {
+         this.txtMasterInput.Text= string.Empty;
+            this.txtMasterInput.Focus();
         }
 
         /// <summary>
