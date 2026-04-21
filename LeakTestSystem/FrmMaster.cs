@@ -1,16 +1,20 @@
-﻿using LeakTestSystem.Services;
+﻿using LeakTestSystem.Model;
+using LeakTestSystem.Services;
 using LeakTestSystem.Services.MES;
 using Sunny.UI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LeakTestSystem
 {
@@ -19,6 +23,7 @@ namespace LeakTestSystem
         public ModbusIoController modbusIo;
         private SerialPort serialPort1, serialPort2, serialPort3, serialPort4, serialPort5, serialPort6, serialPort7;
         private bool flagProductionModel;
+        private List<ScanModel> snList = new List<ScanModel>();
 
         public FrmMaster()
         {
@@ -155,6 +160,62 @@ namespace LeakTestSystem
             this.switchMES.Click += SwitchMES_Click;
             this.RadioDebugMode.Click += RadioDebugMode_Click;
             this.RadioBtnProductionMode.Click += RadioBtnProductionMode_Click;
+            this.txtMasterInput.TextChanged += TxtMasterInput_TextChanged;
+            this.txtMasterInput.KeyDown += TxtMasterInput_KeyDown;
+            this.btnReSet.Click += BtnReSet_Click;
+        }
+
+        private void BtnReSet_Click(object sender, EventArgs e)
+        {
+            snList.Clear();
+            txtsn1.Text = string.Empty;
+            txtsn2.Text = string.Empty;
+            txtsn3.Text = string.Empty;
+            txtsn4.Text = string.Empty;
+            txtsn5.Text = string.Empty;
+            txtsn6.Text = string.Empty;
+            this.ShowSuccessTip("队列已经清空");
+        }
+
+        private void TxtMasterInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string barcode = txtMasterInput.Text.Trim();
+
+                if (!string.IsNullOrEmpty(barcode))
+                {
+                    snList.Add(new ScanModel { serialNumber = barcode });
+
+                    // 👉 按当前数量安全赋值
+                    if (snList.Count > 0) txtsn1.Text = snList[0].serialNumber;
+                    if (snList.Count > 1) txtsn2.Text = snList[1].serialNumber;
+                    if (snList.Count > 2) txtsn3.Text = snList[2].serialNumber;
+                    if (snList.Count > 3) txtsn4.Text = snList[3].serialNumber;
+                    if (snList.Count > 4) txtsn5.Text = snList[4].serialNumber;
+                    if (snList.Count > 5) txtsn6.Text = snList[5].serialNumber;
+
+                    // 👉 满6个再处理
+                    if (snList.Count == 6)
+                    {
+                        MessageBox.Show("已扫满6个");
+                        // 这里可以做提交逻辑
+
+                        // 如果要继续扫下一批，记得清空
+                        // snList.Clear();
+                    }
+
+                    txtMasterInput.Clear();
+                }
+
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void TxtMasterInput_TextChanged(object sender, EventArgs e)
+        {
+            int length = txtMasterInput.Text.Length;
+            lineLen.Text = $"长度: {length}";
         }
 
         /// <summary>
@@ -229,6 +290,8 @@ namespace LeakTestSystem
                 }
                 Sys_User.username = txtEmp.Text;
                 txtEmp.Enabled = false;
+                txtMasterInput.SelectAll();
+                txtMasterInput.Focus();
                 this.ShowSuccessTip($"登录成功 {txtEmp.Text}");
             }
         }

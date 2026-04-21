@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.uiTabControl1 = new Sunny.UI.UITabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.uiLine8 = new Sunny.UI.UILine();
             this.uiLine7 = new Sunny.UI.UILine();
             this.uiLine6 = new Sunny.UI.UILine();
@@ -54,27 +55,27 @@
             this.uiLabel7 = new Sunny.UI.UILabel();
             this.switchCom7 = new Sunny.UI.UISwitch();
             this.uiTitlePanel7 = new Sunny.UI.UITitlePanel();
-            this.uiTextBox6 = new Sunny.UI.UITextBox();
+            this.txtsn6 = new Sunny.UI.UITextBox();
             this.uiListBox6 = new Sunny.UI.UIListBox();
             this.ledCom6 = new Sunny.UI.UILedBulb();
             this.uiLabel6 = new Sunny.UI.UILabel();
             this.uiTitlePanel6 = new Sunny.UI.UITitlePanel();
-            this.uiTextBox5 = new Sunny.UI.UITextBox();
+            this.txtsn5 = new Sunny.UI.UITextBox();
             this.uiListBox5 = new Sunny.UI.UIListBox();
             this.ledCom5 = new Sunny.UI.UILedBulb();
             this.uiLabel5 = new Sunny.UI.UILabel();
             this.uiTitlePanel5 = new Sunny.UI.UITitlePanel();
-            this.uiTextBox4 = new Sunny.UI.UITextBox();
+            this.txtsn4 = new Sunny.UI.UITextBox();
             this.uiListBox4 = new Sunny.UI.UIListBox();
             this.ledCom4 = new Sunny.UI.UILedBulb();
             this.uiLabel4 = new Sunny.UI.UILabel();
             this.uiTitlePanel4 = new Sunny.UI.UITitlePanel();
-            this.uiTextBox3 = new Sunny.UI.UITextBox();
+            this.txtsn3 = new Sunny.UI.UITextBox();
             this.uiListBox3 = new Sunny.UI.UIListBox();
             this.ledCom3 = new Sunny.UI.UILedBulb();
             this.uiLabel3 = new Sunny.UI.UILabel();
             this.uiTitlePanel1 = new Sunny.UI.UITitlePanel();
-            this.uiTextBox2 = new Sunny.UI.UITextBox();
+            this.txtsn2 = new Sunny.UI.UITextBox();
             this.uiListBox2 = new Sunny.UI.UIListBox();
             this.ledCom2 = new Sunny.UI.UILedBulb();
             this.uiLabel2 = new Sunny.UI.UILabel();
@@ -87,9 +88,12 @@
             this.uiTitlePanel3 = new Sunny.UI.UITitlePanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip(this.components);
-            this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.txtMasterInput = new Sunny.UI.UITextBox();
+            this.lineLen = new Sunny.UI.UILine();
+            this.btnReSet = new Sunny.UI.UIButton();
             this.uiTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.uiGroupBox1.SuspendLayout();
             this.uiTitlePanel9.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.uiTitlePanel8.SuspendLayout();
@@ -144,6 +148,22 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "System";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // uiGroupBox1
+            // 
+            this.uiGroupBox1.Controls.Add(this.btnReSet);
+            this.uiGroupBox1.Controls.Add(this.lineLen);
+            this.uiGroupBox1.Controls.Add(this.txtMasterInput);
+            this.uiGroupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiGroupBox1.Location = new System.Drawing.Point(746, 188);
+            this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox1.Name = "uiGroupBox1";
+            this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox1.Size = new System.Drawing.Size(520, 110);
+            this.uiGroupBox1.TabIndex = 98;
+            this.uiGroupBox1.Text = "SN List";
+            this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // uiLine8
             // 
@@ -453,7 +473,7 @@
             // 
             // uiTitlePanel7
             // 
-            this.uiTitlePanel7.Controls.Add(this.uiTextBox6);
+            this.uiTitlePanel7.Controls.Add(this.txtsn6);
             this.uiTitlePanel7.Controls.Add(this.uiListBox6);
             this.uiTitlePanel7.Controls.Add(this.ledCom6);
             this.uiTitlePanel7.Controls.Add(this.uiLabel6);
@@ -469,21 +489,21 @@
             this.uiTitlePanel7.Text = "Channels(6)";
             this.uiTitlePanel7.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiTextBox6
+            // txtsn6
             // 
-            this.uiTextBox6.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox6.Enabled = false;
-            this.uiTextBox6.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.uiTextBox6.Location = new System.Drawing.Point(7, 73);
-            this.uiTextBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox6.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox6.Name = "uiTextBox6";
-            this.uiTextBox6.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox6.ShowText = false;
-            this.uiTextBox6.Size = new System.Drawing.Size(192, 29);
-            this.uiTextBox6.TabIndex = 5;
-            this.uiTextBox6.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox6.Watermark = "";
+            this.txtsn6.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtsn6.Enabled = false;
+            this.txtsn6.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtsn6.Location = new System.Drawing.Point(7, 73);
+            this.txtsn6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtsn6.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtsn6.Name = "txtsn6";
+            this.txtsn6.Padding = new System.Windows.Forms.Padding(5);
+            this.txtsn6.ShowText = false;
+            this.txtsn6.Size = new System.Drawing.Size(192, 29);
+            this.txtsn6.TabIndex = 5;
+            this.txtsn6.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtsn6.Watermark = "";
             // 
             // uiListBox6
             // 
@@ -522,7 +542,7 @@
             // 
             // uiTitlePanel6
             // 
-            this.uiTitlePanel6.Controls.Add(this.uiTextBox5);
+            this.uiTitlePanel6.Controls.Add(this.txtsn5);
             this.uiTitlePanel6.Controls.Add(this.uiListBox5);
             this.uiTitlePanel6.Controls.Add(this.ledCom5);
             this.uiTitlePanel6.Controls.Add(this.uiLabel5);
@@ -538,21 +558,21 @@
             this.uiTitlePanel6.Text = "Channels(5)";
             this.uiTitlePanel6.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiTextBox5
+            // txtsn5
             // 
-            this.uiTextBox5.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox5.Enabled = false;
-            this.uiTextBox5.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.uiTextBox5.Location = new System.Drawing.Point(7, 74);
-            this.uiTextBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox5.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox5.Name = "uiTextBox5";
-            this.uiTextBox5.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox5.ShowText = false;
-            this.uiTextBox5.Size = new System.Drawing.Size(192, 29);
-            this.uiTextBox5.TabIndex = 10;
-            this.uiTextBox5.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox5.Watermark = "";
+            this.txtsn5.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtsn5.Enabled = false;
+            this.txtsn5.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtsn5.Location = new System.Drawing.Point(7, 74);
+            this.txtsn5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtsn5.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtsn5.Name = "txtsn5";
+            this.txtsn5.Padding = new System.Windows.Forms.Padding(5);
+            this.txtsn5.ShowText = false;
+            this.txtsn5.Size = new System.Drawing.Size(192, 29);
+            this.txtsn5.TabIndex = 10;
+            this.txtsn5.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtsn5.Watermark = "";
             // 
             // uiListBox5
             // 
@@ -591,7 +611,7 @@
             // 
             // uiTitlePanel5
             // 
-            this.uiTitlePanel5.Controls.Add(this.uiTextBox4);
+            this.uiTitlePanel5.Controls.Add(this.txtsn4);
             this.uiTitlePanel5.Controls.Add(this.uiListBox4);
             this.uiTitlePanel5.Controls.Add(this.ledCom4);
             this.uiTitlePanel5.Controls.Add(this.uiLabel4);
@@ -607,21 +627,21 @@
             this.uiTitlePanel5.Text = "Channels(4)";
             this.uiTitlePanel5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiTextBox4
+            // txtsn4
             // 
-            this.uiTextBox4.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox4.Enabled = false;
-            this.uiTextBox4.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.uiTextBox4.Location = new System.Drawing.Point(5, 74);
-            this.uiTextBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox4.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox4.Name = "uiTextBox4";
-            this.uiTextBox4.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox4.ShowText = false;
-            this.uiTextBox4.Size = new System.Drawing.Size(192, 29);
-            this.uiTextBox4.TabIndex = 5;
-            this.uiTextBox4.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox4.Watermark = "";
+            this.txtsn4.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtsn4.Enabled = false;
+            this.txtsn4.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtsn4.Location = new System.Drawing.Point(5, 74);
+            this.txtsn4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtsn4.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtsn4.Name = "txtsn4";
+            this.txtsn4.Padding = new System.Windows.Forms.Padding(5);
+            this.txtsn4.ShowText = false;
+            this.txtsn4.Size = new System.Drawing.Size(192, 29);
+            this.txtsn4.TabIndex = 5;
+            this.txtsn4.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtsn4.Watermark = "";
             // 
             // uiListBox4
             // 
@@ -660,7 +680,7 @@
             // 
             // uiTitlePanel4
             // 
-            this.uiTitlePanel4.Controls.Add(this.uiTextBox3);
+            this.uiTitlePanel4.Controls.Add(this.txtsn3);
             this.uiTitlePanel4.Controls.Add(this.uiListBox3);
             this.uiTitlePanel4.Controls.Add(this.ledCom3);
             this.uiTitlePanel4.Controls.Add(this.uiLabel3);
@@ -676,21 +696,21 @@
             this.uiTitlePanel4.Text = "Channels(3)";
             this.uiTitlePanel4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiTextBox3
+            // txtsn3
             // 
-            this.uiTextBox3.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox3.Enabled = false;
-            this.uiTextBox3.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.uiTextBox3.Location = new System.Drawing.Point(7, 74);
-            this.uiTextBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox3.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox3.Name = "uiTextBox3";
-            this.uiTextBox3.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox3.ShowText = false;
-            this.uiTextBox3.Size = new System.Drawing.Size(192, 29);
-            this.uiTextBox3.TabIndex = 7;
-            this.uiTextBox3.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox3.Watermark = "";
+            this.txtsn3.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtsn3.Enabled = false;
+            this.txtsn3.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtsn3.Location = new System.Drawing.Point(7, 74);
+            this.txtsn3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtsn3.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtsn3.Name = "txtsn3";
+            this.txtsn3.Padding = new System.Windows.Forms.Padding(5);
+            this.txtsn3.ShowText = false;
+            this.txtsn3.Size = new System.Drawing.Size(192, 29);
+            this.txtsn3.TabIndex = 7;
+            this.txtsn3.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtsn3.Watermark = "";
             // 
             // uiListBox3
             // 
@@ -729,7 +749,7 @@
             // 
             // uiTitlePanel1
             // 
-            this.uiTitlePanel1.Controls.Add(this.uiTextBox2);
+            this.uiTitlePanel1.Controls.Add(this.txtsn2);
             this.uiTitlePanel1.Controls.Add(this.uiListBox2);
             this.uiTitlePanel1.Controls.Add(this.ledCom2);
             this.uiTitlePanel1.Controls.Add(this.uiLabel2);
@@ -745,21 +765,21 @@
             this.uiTitlePanel1.Text = "Channels(2)";
             this.uiTitlePanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiTextBox2
+            // txtsn2
             // 
-            this.uiTextBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox2.Enabled = false;
-            this.uiTextBox2.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.uiTextBox2.Location = new System.Drawing.Point(7, 74);
-            this.uiTextBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox2.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox2.Name = "uiTextBox2";
-            this.uiTextBox2.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox2.ShowText = false;
-            this.uiTextBox2.Size = new System.Drawing.Size(192, 29);
-            this.uiTextBox2.TabIndex = 5;
-            this.uiTextBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox2.Watermark = "";
+            this.txtsn2.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtsn2.Enabled = false;
+            this.txtsn2.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtsn2.Location = new System.Drawing.Point(7, 74);
+            this.txtsn2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtsn2.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtsn2.Name = "txtsn2";
+            this.txtsn2.Padding = new System.Windows.Forms.Padding(5);
+            this.txtsn2.ShowText = false;
+            this.txtsn2.Size = new System.Drawing.Size(192, 29);
+            this.txtsn2.TabIndex = 5;
+            this.txtsn2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtsn2.Watermark = "";
             // 
             // uiListBox2
             // 
@@ -904,18 +924,48 @@
             this.uiContextMenuStrip1.Name = "uiContextMenuStrip1";
             this.uiContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // uiGroupBox1
+            // txtMasterInput
             // 
-            this.uiGroupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiGroupBox1.Location = new System.Drawing.Point(746, 188);
-            this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiGroupBox1.Name = "uiGroupBox1";
-            this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox1.Size = new System.Drawing.Size(520, 110);
-            this.uiGroupBox1.TabIndex = 98;
-            this.uiGroupBox1.Text = "作业模式";
-            this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtMasterInput.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtMasterInput.DoubleValue = 10024114D;
+            this.txtMasterInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtMasterInput.IntValue = 10024114;
+            this.txtMasterInput.Location = new System.Drawing.Point(4, 73);
+            this.txtMasterInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtMasterInput.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtMasterInput.Name = "txtMasterInput";
+            this.txtMasterInput.Padding = new System.Windows.Forms.Padding(5);
+            this.txtMasterInput.ShowText = false;
+            this.txtMasterInput.Size = new System.Drawing.Size(512, 29);
+            this.txtMasterInput.TabIndex = 98;
+            this.txtMasterInput.Text = "10024114";
+            this.txtMasterInput.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtMasterInput.Watermark = "";
+            // 
+            // lineLen
+            // 
+            this.lineLen.BackColor = System.Drawing.Color.Transparent;
+            this.lineLen.Font = new System.Drawing.Font("SimSun", 12F);
+            this.lineLen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.lineLen.Location = new System.Drawing.Point(4, 45);
+            this.lineLen.MinimumSize = new System.Drawing.Size(16, 16);
+            this.lineLen.Name = "lineLen";
+            this.lineLen.Size = new System.Drawing.Size(92, 20);
+            this.lineLen.TabIndex = 99;
+            this.lineLen.Text = "Len=0";
+            this.lineLen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnReSet
+            // 
+            this.btnReSet.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReSet.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnReSet.Location = new System.Drawing.Point(448, 21);
+            this.btnReSet.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnReSet.Name = "btnReSet";
+            this.btnReSet.Size = new System.Drawing.Size(68, 29);
+            this.btnReSet.TabIndex = 100;
+            this.btnReSet.Text = "ReSet";
+            this.btnReSet.TipsFont = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             // 
             // FrmMaster
             // 
@@ -930,6 +980,7 @@
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.uiTabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.uiGroupBox1.ResumeLayout(false);
             this.uiTitlePanel9.ResumeLayout(false);
             this.uiGroupBox2.ResumeLayout(false);
             this.uiTitlePanel8.ResumeLayout(false);
@@ -995,17 +1046,20 @@
         private Sunny.UI.UIAvatar uiAvatar1;
         private Sunny.UI.UILine uiLine9;
         private Sunny.UI.UITextBox txtsn1;
-        private Sunny.UI.UITextBox uiTextBox6;
-        private Sunny.UI.UITextBox uiTextBox5;
-        private Sunny.UI.UITextBox uiTextBox4;
-        private Sunny.UI.UITextBox uiTextBox3;
-        private Sunny.UI.UITextBox uiTextBox2;
+        private Sunny.UI.UITextBox txtsn6;
+        private Sunny.UI.UITextBox txtsn5;
+        private Sunny.UI.UITextBox txtsn4;
+        private Sunny.UI.UITextBox txtsn3;
+        private Sunny.UI.UITextBox txtsn2;
         private Sunny.UI.UISwitch switchMES;
         private Sunny.UI.UIGroupBox uiGroupBox2;
         private Sunny.UI.UIRadioButton RadioDebugMode;
         private Sunny.UI.UIRadioButton RadioBtnProductionMode;
         private Sunny.UI.UITextBox txtEmp;
         private Sunny.UI.UIGroupBox uiGroupBox1;
+        private Sunny.UI.UILine lineLen;
+        private Sunny.UI.UITextBox txtMasterInput;
+        private Sunny.UI.UIButton btnReSet;
     }
 }
 
