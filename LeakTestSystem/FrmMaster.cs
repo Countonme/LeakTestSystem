@@ -24,12 +24,37 @@ namespace LeakTestSystem
         private SerialPort serialPort1, serialPort2, serialPort3, serialPort4, serialPort5, serialPort6, serialPort7;
         private bool flagProductionModel;
         private List<ScanModel> snList = new List<ScanModel>();
-
+        private int maxCount = 6;
         public FrmMaster()
         {
             InitializeComponent();
             this.Load += Form1_Load;
             this.switchCom7.Click += SwitchCom7_Click;
+            this.IntegerUpDownChannels.TextChanged += IntegerUpDownChannels_TextChanged;
+            //this.FrmMaster_FormClosing += FrmMaster_FormClosing;
+        }
+
+        private void FrmMaster_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.ShowAskDialog("您确定退出窗体吗", true);
+            {
+
+            }
+        }
+
+        private void IntegerUpDownChannels_TextChanged(object sender, EventArgs e)
+        {
+            if (!switchCom7.Active)
+            {
+                this.titlePanel8.Text = $"Master Channels ({IntegerUpDownChannels.Value})";
+                this.ShowSuccessTip(IntegerUpDownChannels.Value.ToString());
+                initTitlePanelColor();
+                maxCount = IntegerUpDownChannels.Value;
+            }
+            else
+            {
+                this.ShowErrorNotifier("请先关闭通道在修改通道数量");
+            }
         }
 
         private void SwitchCom7_Click(object sender, EventArgs e)
@@ -163,8 +188,16 @@ namespace LeakTestSystem
             this.txtMasterInput.TextChanged += TxtMasterInput_TextChanged;
             this.txtMasterInput.KeyDown += TxtMasterInput_KeyDown;
             this.btnReSet.Click += BtnReSet_Click;
+            this.Shown += FrmMaster_Shown;
+
+
+        }
+
+        private void FrmMaster_Shown(object sender, EventArgs e)
+        {
             InitScanMaster();
-           
+            initTitlePanelColor();
+            maxCount = IntegerUpDownChannels.Value;
         }
 
         private void BtnReSet_Click(object sender, EventArgs e)
@@ -189,16 +222,17 @@ namespace LeakTestSystem
                 if (!string.IsNullOrEmpty(barcode))
                 {
                     if (flagProductionModel)
-                    { var message = string.Empty;
-                        var flag = MES_Service.CheckSerialNumber(barcode,ref message);
-                        if (!flag) 
+                    {
+                        var message = string.Empty;
+                        var flag = MES_Service.CheckSerialNumber(barcode, ref message);
+                        if (!flag)
                         {
                             this.ShowErrorDialog(message);
                             this.ShowErrorNotifier(message);
                             return;
                         }
                     }
-                    snList.Add(new ScanModel { serialNumber = barcode,model= flagProductionModel });
+                    snList.Add(new ScanModel { serialNumber = barcode, model = flagProductionModel });
                     // 👉 按当前数量安全赋值
                     if (snList.Count > 0) txtsn1.Text = snList[0].serialNumber;
                     if (snList.Count > 1) txtsn2.Text = snList[1].serialNumber;
@@ -208,7 +242,7 @@ namespace LeakTestSystem
                     if (snList.Count > 5) txtsn6.Text = snList[5].serialNumber;
 
                     // 👉 满6个再处理
-                    if (snList.Count == 6)
+                    if (snList.Count == maxCount)
                     {
                         // this.ShowErrorNotifier("已扫满6个");
                         // 这里可以做提交逻辑
@@ -342,6 +376,31 @@ namespace LeakTestSystem
             SetLedColor(serialPort7, ledCom7);
         }
 
+
+        /// <summary>
+        /// 初始化标题颜色
+        /// </summary>
+        public void initTitlePanelColor()
+        {
+
+            titlePanel1.TitleColor = Color.Gray;
+            titlePanel2.TitleColor = Color.Gray;
+            titlePanel3.TitleColor = Color.Gray;
+            titlePanel4.TitleColor = Color.Gray;
+            titlePanel5.TitleColor = Color.Gray;
+            titlePanel6.TitleColor = Color.Gray;
+            titlePanel8.TitleColor = Color.YellowGreen;
+            //使用的状态是ForestGreen
+            //待使用的状态是 yellowGreen
+            if (IntegerUpDownChannels.Value > 0) { titlePanel1.TitleColor = Color.YellowGreen; }
+            if (IntegerUpDownChannels.Value > 1) { titlePanel2.TitleColor = Color.YellowGreen; }
+            if (IntegerUpDownChannels.Value > 2) { titlePanel3.TitleColor = Color.YellowGreen; }
+            if (IntegerUpDownChannels.Value > 3) { titlePanel4.TitleColor = Color.YellowGreen; }
+            if (IntegerUpDownChannels.Value > 4) { titlePanel5.TitleColor = Color.YellowGreen; }
+            if (IntegerUpDownChannels.Value > 5) { titlePanel6.TitleColor = Color.YellowGreen; }
+
+        }
+
         private void SetLedByIndex(int index, Color color)
         {
             switch (index)
@@ -380,9 +439,9 @@ namespace LeakTestSystem
         /// <summary>
         /// 初始化
         /// </summary>
-        private void InitScanMaster() 
+        private void InitScanMaster()
         {
-         this.txtMasterInput.Text= string.Empty;
+            this.txtMasterInput.Text = string.Empty;
             this.txtMasterInput.Focus();
         }
 
