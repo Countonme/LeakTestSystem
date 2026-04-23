@@ -25,6 +25,7 @@ namespace LeakTestSystem
         private bool flagProductionModel;
         private List<ScanModel> snList = new List<ScanModel>();
         private int maxCount = 6;
+
         public FrmMaster()
         {
             InitializeComponent();
@@ -38,7 +39,6 @@ namespace LeakTestSystem
         {
             this.ShowAskDialog("您确定退出窗体吗", true);
             {
-
             }
         }
 
@@ -189,8 +189,6 @@ namespace LeakTestSystem
             this.txtMasterInput.KeyDown += TxtMasterInput_KeyDown;
             this.btnReSet.Click += BtnReSet_Click;
             this.Shown += FrmMaster_Shown;
-
-
         }
 
         private void FrmMaster_Shown(object sender, EventArgs e)
@@ -376,13 +374,11 @@ namespace LeakTestSystem
             SetLedColor(serialPort7, ledCom7);
         }
 
-
         /// <summary>
         /// 初始化标题颜色
         /// </summary>
         public void initTitlePanelColor()
         {
-
             titlePanel1.TitleColor = Color.Gray;
             titlePanel2.TitleColor = Color.Gray;
             titlePanel3.TitleColor = Color.Gray;
@@ -398,7 +394,6 @@ namespace LeakTestSystem
             if (IntegerUpDownChannels.Value > 3) { titlePanel4.TitleColor = Color.YellowGreen; }
             if (IntegerUpDownChannels.Value > 4) { titlePanel5.TitleColor = Color.YellowGreen; }
             if (IntegerUpDownChannels.Value > 5) { titlePanel6.TitleColor = Color.YellowGreen; }
-
         }
 
         private void SetLedByIndex(int index, Color color)
@@ -514,11 +509,11 @@ namespace LeakTestSystem
                 switch (index)
                 {
                     case 0: uiListBox1.Items.Add(text); break;
-                    case 1: uiListBox1.Items.Add(text); break;
-                    case 2: uiListBox1.Items.Add(text); break;
-                    case 3: uiListBox1.Items.Add(text); break;
-                    case 4: uiListBox1.Items.Add(text); break;
-                    case 5: uiListBox1.Items.Add(text); break;
+                    case 1: uiListBox2.Items.Add(text); break;
+                    case 2: uiListBox3.Items.Add(text); break;
+                    case 3: uiListBox4.Items.Add(text); break;
+                    case 4: uiListBox5.Items.Add(text); break;
+                    case 5: uiListBox6.Items.Add(text); break;
                 }
             }));
         }
