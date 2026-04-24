@@ -189,6 +189,45 @@ namespace LeakTestSystem
             this.txtMasterInput.KeyDown += TxtMasterInput_KeyDown;
             this.btnReSet.Click += BtnReSet_Click;
             this.Shown += FrmMaster_Shown;
+            this.uiCheckBox1.Click += UiCheckBox_Click;
+            this.uiCheckBox2.Click += UiCheckBox_Click;
+            this.uiCheckBox3.Click += UiCheckBox_Click;
+            this.uiCheckBox4.Click += UiCheckBox_Click;
+            this.uiCheckBox5.Click += UiCheckBox_Click;
+            this.uiCheckBox6.Click += UiCheckBox_Click;
+            this.uiCheckBox7.Click += UiCheckBox_Click;
+            this.uiCheckBox8.Click += UiCheckBox_Click;
+            this.uiCheckBox9.Click += UiCheckBox_Click;
+            this.uiCheckBox10.Click += UiCheckBox_Click;
+            this.uiCheckBox11.Click += UiCheckBox_Click;
+            this.uiCheckBox12.Click += UiCheckBox_Click;
+            this.uiCheckBox13.Click += UiCheckBox_Click;
+            this.uiCheckBox14.Click += UiCheckBox_Click;
+            this.uiCheckBox15.Click += UiCheckBox_Click;
+            this.uiCheckBox16.Click += UiCheckBox_Click;
+        }
+
+        private void UiCheckBox_Click(object sender, EventArgs e)
+        {
+            var checkBox = sender as UICheckBox;
+            if (serialPort7 != null && serialPort7.IsOpen)
+            {
+                var cli = int.Parse(checkBox.Text) - 1;
+                if (checkBox.Checked)
+                {
+                    this.ShowSuccessTip($"已选中 {cli}");
+                    modbusIo.SetRelay(1, cli, true);
+                }
+                else
+                {
+                    this.ShowErrorTip($"已取消 {cli}");
+                    modbusIo.SetRelay(1, cli, false);
+                }
+            }
+            else
+            {
+                this.ShowErrorNotifier("请先打开COM7");
+            }
         }
 
         private void FrmMaster_Shown(object sender, EventArgs e)
@@ -247,6 +286,7 @@ namespace LeakTestSystem
                         this.ShowWaitForm();
                         // 如果要继续扫下一批，记得清空
                         this.HideWaitForm();
+                        modbusIo.SetRelay(1, 12, true); // 举例：触发继电器1
                         snList.Clear();
                     }
 
