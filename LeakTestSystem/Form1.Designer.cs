@@ -133,7 +133,7 @@
             this.uiTabControl1.Controls.Add(this.tabPage2);
             this.uiTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.uiTabControl1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTabControl1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ItemSize = new System.Drawing.Size(150, 40);
             this.uiTabControl1.Location = new System.Drawing.Point(0, 35);
             this.uiTabControl1.MainPage = "";
@@ -142,7 +142,7 @@
             this.uiTabControl1.Size = new System.Drawing.Size(1277, 886);
             this.uiTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl1.TabIndex = 0;
-            this.uiTabControl1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTabControl1.TipsFont = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
             // tabPage1
             // 
@@ -201,7 +201,7 @@
             // lineLen
             // 
             this.lineLen.BackColor = System.Drawing.Color.Transparent;
-            this.lineLen.Font = new System.Drawing.Font("宋体", 12F);
+            this.lineLen.Font = new System.Drawing.Font("SimSun", 12F);
             this.lineLen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.lineLen.Location = new System.Drawing.Point(4, 45);
             this.lineLen.MinimumSize = new System.Drawing.Size(16, 16);
@@ -233,7 +233,7 @@
             // 
             this.uiLine8.BackColor = System.Drawing.Color.Transparent;
             this.uiLine8.Direction = Sunny.UI.UILine.LineDirection.Vertical;
-            this.uiLine8.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine8.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLine8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine8.LineDashStyle = Sunny.UI.UILineDashStyle.DashDotDot;
             this.uiLine8.LineSize = 2;
@@ -249,7 +249,7 @@
             // 
             this.uiLine7.BackColor = System.Drawing.Color.Transparent;
             this.uiLine7.Direction = Sunny.UI.UILine.LineDirection.Vertical;
-            this.uiLine7.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine7.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLine7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine7.LineDashStyle = Sunny.UI.UILineDashStyle.DashDotDot;
             this.uiLine7.LineSize = 2;
@@ -265,7 +265,7 @@
             // 
             this.uiLine6.BackColor = System.Drawing.Color.Transparent;
             this.uiLine6.Direction = Sunny.UI.UILine.LineDirection.Vertical;
-            this.uiLine6.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine6.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLine6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine6.LineDashStyle = Sunny.UI.UILineDashStyle.DashDotDot;
             this.uiLine6.LineSize = 2;
@@ -281,7 +281,7 @@
             // 
             this.uiLine5.BackColor = System.Drawing.Color.Transparent;
             this.uiLine5.Direction = Sunny.UI.UILine.LineDirection.Vertical;
-            this.uiLine5.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine5.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLine5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine5.LineDashStyle = Sunny.UI.UILineDashStyle.DashDotDot;
             this.uiLine5.LineSize = 2;
@@ -297,7 +297,7 @@
             // 
             this.uiLine4.BackColor = System.Drawing.Color.Transparent;
             this.uiLine4.Direction = Sunny.UI.UILine.LineDirection.Vertical;
-            this.uiLine4.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine4.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLine4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine4.LineDashStyle = Sunny.UI.UILineDashStyle.DashDotDot;
             this.uiLine4.LineSize = 2;
@@ -313,7 +313,7 @@
             // 
             this.uiLine3.BackColor = System.Drawing.Color.Transparent;
             this.uiLine3.Direction = Sunny.UI.UILine.LineDirection.Vertical;
-            this.uiLine3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine3.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLine3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine3.LineDashStyle = Sunny.UI.UILineDashStyle.DashDotDot;
             this.uiLine3.LineSize = 2;
@@ -329,7 +329,7 @@
             // 
             this.uiLine11.BackColor = System.Drawing.Color.Transparent;
             this.uiLine11.Direction = Sunny.UI.UILine.LineDirection.Vertical;
-            this.uiLine11.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine11.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLine11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine11.LineDashStyle = Sunny.UI.UILineDashStyle.DashDotDot;
             this.uiLine11.LineSize = 2;
@@ -344,7 +344,7 @@
             // uiLine1
             // 
             this.uiLine1.BackColor = System.Drawing.Color.Transparent;
-            this.uiLine1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLine1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine1.Location = new System.Drawing.Point(109, 380);
             this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
@@ -360,7 +360,7 @@
             this.uiTitlePanel9.Controls.Add(this.uiLine9);
             this.uiTitlePanel9.Controls.Add(this.uiLine2);
             this.uiTitlePanel9.Controls.Add(this.uiAvatar1);
-            this.uiTitlePanel9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTitlePanel9.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTitlePanel9.Location = new System.Drawing.Point(9, 14);
             this.uiTitlePanel9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel9.MinimumSize = new System.Drawing.Size(1, 1);
@@ -444,7 +444,7 @@
             // uiLine9
             // 
             this.uiLine9.BackColor = System.Drawing.Color.Transparent;
-            this.uiLine9.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiLine9.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiLine9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine9.Location = new System.Drawing.Point(4, 128);
             this.uiLine9.MinimumSize = new System.Drawing.Size(16, 16);
@@ -457,7 +457,7 @@
             // uiLine2
             // 
             this.uiLine2.BackColor = System.Drawing.Color.Transparent;
-            this.uiLine2.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiLine2.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiLine2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine2.Location = new System.Drawing.Point(4, 38);
             this.uiLine2.MinimumSize = new System.Drawing.Size(16, 16);
@@ -470,7 +470,7 @@
             // uiAvatar1
             // 
             this.uiAvatar1.AvatarSize = 55;
-            this.uiAvatar1.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiAvatar1.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiAvatar1.Location = new System.Drawing.Point(4, 64);
             this.uiAvatar1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiAvatar1.Name = "uiAvatar1";
@@ -485,7 +485,7 @@
             this.titlePanel8.Controls.Add(this.ledCom7);
             this.titlePanel8.Controls.Add(this.uiLabel7);
             this.titlePanel8.Controls.Add(this.switchCom7);
-            this.titlePanel8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel8.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel8.Location = new System.Drawing.Point(534, 209);
             this.titlePanel8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel8.MinimumSize = new System.Drawing.Size(1, 1);
@@ -499,7 +499,7 @@
             // 
             // uiBattery1
             // 
-            this.uiBattery1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiBattery1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiBattery1.Location = new System.Drawing.Point(2, 69);
             this.uiBattery1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiBattery1.Name = "uiBattery1";
@@ -518,7 +518,7 @@
             // 
             // uiLabel7
             // 
-            this.uiLabel7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel7.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabel7.Location = new System.Drawing.Point(4, 46);
             this.uiLabel7.Name = "uiLabel7";
@@ -528,7 +528,7 @@
             // 
             // switchCom7
             // 
-            this.switchCom7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.switchCom7.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.switchCom7.Location = new System.Drawing.Point(96, 42);
             this.switchCom7.MinimumSize = new System.Drawing.Size(1, 1);
             this.switchCom7.Name = "switchCom7";
@@ -542,7 +542,7 @@
             this.titlePanel6.Controls.Add(this.uiListBox6);
             this.titlePanel6.Controls.Add(this.ledCom6);
             this.titlePanel6.Controls.Add(this.uiLabel6);
-            this.titlePanel6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel6.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel6.Location = new System.Drawing.Point(1067, 469);
             this.titlePanel6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel6.MinimumSize = new System.Drawing.Size(1, 1);
@@ -572,8 +572,7 @@
             // 
             // uiListBox6
             // 
-            this.uiListBox6.Enabled = false;
-            this.uiListBox6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox6.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox6.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox6.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox6.Location = new System.Drawing.Point(7, 114);
@@ -597,7 +596,7 @@
             // 
             // uiLabel6
             // 
-            this.uiLabel6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel6.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabel6.Location = new System.Drawing.Point(11, 45);
             this.uiLabel6.Name = "uiLabel6";
@@ -611,7 +610,7 @@
             this.titlePanel5.Controls.Add(this.uiListBox5);
             this.titlePanel5.Controls.Add(this.ledCom5);
             this.titlePanel5.Controls.Add(this.uiLabel5);
-            this.titlePanel5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel5.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel5.Location = new System.Drawing.Point(855, 469);
             this.titlePanel5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel5.MinimumSize = new System.Drawing.Size(1, 1);
@@ -641,8 +640,7 @@
             // 
             // uiListBox5
             // 
-            this.uiListBox5.Enabled = false;
-            this.uiListBox5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox5.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox5.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox5.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox5.Location = new System.Drawing.Point(7, 114);
@@ -666,7 +664,7 @@
             // 
             // uiLabel5
             // 
-            this.uiLabel5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel5.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabel5.Location = new System.Drawing.Point(8, 48);
             this.uiLabel5.Name = "uiLabel5";
@@ -680,7 +678,7 @@
             this.titlePanel4.Controls.Add(this.uiListBox4);
             this.titlePanel4.Controls.Add(this.ledCom4);
             this.titlePanel4.Controls.Add(this.uiLabel4);
-            this.titlePanel4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel4.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel4.Location = new System.Drawing.Point(645, 469);
             this.titlePanel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel4.MinimumSize = new System.Drawing.Size(1, 1);
@@ -710,8 +708,7 @@
             // 
             // uiListBox4
             // 
-            this.uiListBox4.Enabled = false;
-            this.uiListBox4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox4.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox4.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox4.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox4.Location = new System.Drawing.Point(7, 114);
@@ -735,7 +732,7 @@
             // 
             // uiLabel4
             // 
-            this.uiLabel4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel4.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabel4.Location = new System.Drawing.Point(7, 48);
             this.uiLabel4.Name = "uiLabel4";
@@ -749,7 +746,7 @@
             this.titlePanel3.Controls.Add(this.uiListBox3);
             this.titlePanel3.Controls.Add(this.ledCom3);
             this.titlePanel3.Controls.Add(this.uiLabel3);
-            this.titlePanel3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel3.Location = new System.Drawing.Point(433, 469);
             this.titlePanel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel3.MinimumSize = new System.Drawing.Size(1, 1);
@@ -779,8 +776,7 @@
             // 
             // uiListBox3
             // 
-            this.uiListBox3.Enabled = false;
-            this.uiListBox3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox3.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox3.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox3.Location = new System.Drawing.Point(7, 113);
@@ -804,7 +800,7 @@
             // 
             // uiLabel3
             // 
-            this.uiLabel3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabel3.Location = new System.Drawing.Point(8, 48);
             this.uiLabel3.Name = "uiLabel3";
@@ -818,7 +814,7 @@
             this.titlePanel2.Controls.Add(this.uiListBox2);
             this.titlePanel2.Controls.Add(this.ledCom2);
             this.titlePanel2.Controls.Add(this.uiLabel2);
-            this.titlePanel2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel2.Location = new System.Drawing.Point(221, 469);
             this.titlePanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel2.MinimumSize = new System.Drawing.Size(1, 1);
@@ -848,8 +844,7 @@
             // 
             // uiListBox2
             // 
-            this.uiListBox2.Enabled = false;
-            this.uiListBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox2.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox2.Location = new System.Drawing.Point(7, 113);
@@ -873,7 +868,7 @@
             // 
             // uiLabel2
             // 
-            this.uiLabel2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabel2.Location = new System.Drawing.Point(7, 48);
             this.uiLabel2.Name = "uiLabel2";
@@ -887,7 +882,7 @@
             this.titlePanel1.Controls.Add(this.uiListBox1);
             this.titlePanel1.Controls.Add(this.ledCom1);
             this.titlePanel1.Controls.Add(this.uiLabel1);
-            this.titlePanel1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel1.Location = new System.Drawing.Point(9, 469);
             this.titlePanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel1.MinimumSize = new System.Drawing.Size(1, 1);
@@ -917,8 +912,7 @@
             // 
             // uiListBox1
             // 
-            this.uiListBox1.Enabled = false;
-            this.uiListBox1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox1.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox1.Location = new System.Drawing.Point(7, 113);
@@ -942,7 +936,7 @@
             // 
             // uiLabel1
             // 
-            this.uiLabel1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLabel1.Location = new System.Drawing.Point(4, 46);
             this.uiLabel1.Name = "uiLabel1";
@@ -956,7 +950,7 @@
             this.tabPage2.Controls.Add(this.uiTitlePanel3);
             this.tabPage2.Location = new System.Drawing.Point(0, 40);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1277, 846);
+            this.tabPage2.Size = new System.Drawing.Size(200, 60);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Setting";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -993,7 +987,7 @@
             // uiCheckBox16
             // 
             this.uiCheckBox16.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox16.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox16.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox16.Location = new System.Drawing.Point(427, 88);
             this.uiCheckBox16.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1006,7 +1000,7 @@
             // uiCheckBox15
             // 
             this.uiCheckBox15.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox15.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox15.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox15.Location = new System.Drawing.Point(368, 88);
             this.uiCheckBox15.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1019,7 +1013,7 @@
             // uiCheckBox14
             // 
             this.uiCheckBox14.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox14.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox14.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox14.Location = new System.Drawing.Point(309, 88);
             this.uiCheckBox14.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1032,7 +1026,7 @@
             // uiCheckBox13
             // 
             this.uiCheckBox13.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox13.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox13.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox13.Location = new System.Drawing.Point(250, 88);
             this.uiCheckBox13.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1045,7 +1039,7 @@
             // uiCheckBox12
             // 
             this.uiCheckBox12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox12.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox12.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox12.Location = new System.Drawing.Point(191, 88);
             this.uiCheckBox12.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1058,7 +1052,7 @@
             // uiCheckBox11
             // 
             this.uiCheckBox11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox11.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox11.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox11.Location = new System.Drawing.Point(133, 88);
             this.uiCheckBox11.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1071,7 +1065,7 @@
             // uiCheckBox10
             // 
             this.uiCheckBox10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox10.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox10.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox10.Location = new System.Drawing.Point(73, 88);
             this.uiCheckBox10.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1084,7 +1078,7 @@
             // uiCheckBox9
             // 
             this.uiCheckBox9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox9.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox9.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox9.Location = new System.Drawing.Point(14, 88);
             this.uiCheckBox9.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1097,7 +1091,7 @@
             // uiCheckBox8
             // 
             this.uiCheckBox8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox8.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox8.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox8.Location = new System.Drawing.Point(427, 47);
             this.uiCheckBox8.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1110,7 +1104,7 @@
             // uiCheckBox7
             // 
             this.uiCheckBox7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox7.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox7.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox7.Location = new System.Drawing.Point(368, 47);
             this.uiCheckBox7.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1123,7 +1117,7 @@
             // uiCheckBox6
             // 
             this.uiCheckBox6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox6.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox6.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox6.Location = new System.Drawing.Point(309, 47);
             this.uiCheckBox6.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1136,7 +1130,7 @@
             // uiCheckBox5
             // 
             this.uiCheckBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox5.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox5.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox5.Location = new System.Drawing.Point(250, 47);
             this.uiCheckBox5.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1149,7 +1143,7 @@
             // uiCheckBox4
             // 
             this.uiCheckBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox4.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox4.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox4.Location = new System.Drawing.Point(191, 47);
             this.uiCheckBox4.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1162,7 +1156,7 @@
             // uiCheckBox3
             // 
             this.uiCheckBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox3.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox3.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox3.Location = new System.Drawing.Point(132, 47);
             this.uiCheckBox3.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1175,7 +1169,7 @@
             // uiCheckBox2
             // 
             this.uiCheckBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox2.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox2.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox2.Location = new System.Drawing.Point(73, 47);
             this.uiCheckBox2.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1188,7 +1182,7 @@
             // uiCheckBox1
             // 
             this.uiCheckBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox1.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox1.Font = new System.Drawing.Font("SimSun", 12F);
             this.uiCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiCheckBox1.Location = new System.Drawing.Point(14, 47);
             this.uiCheckBox1.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1201,7 +1195,7 @@
             // uiTitlePanel3
             // 
             this.uiTitlePanel3.Controls.Add(this.IntegerUpDownChannels);
-            this.uiTitlePanel3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTitlePanel3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTitlePanel3.Location = new System.Drawing.Point(4, 5);
             this.uiTitlePanel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel3.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1216,7 +1210,7 @@
             // IntegerUpDownChannels
             // 
             this.IntegerUpDownChannels.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.IntegerUpDownChannels.Font = new System.Drawing.Font("宋体", 12F);
+            this.IntegerUpDownChannels.Font = new System.Drawing.Font("SimSun", 12F);
             this.IntegerUpDownChannels.Location = new System.Drawing.Point(35, 53);
             this.IntegerUpDownChannels.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.IntegerUpDownChannels.Maximum = 6D;
@@ -1243,7 +1237,7 @@
             // uiContextMenuStrip1
             // 
             this.uiContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.uiContextMenuStrip1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiContextMenuStrip1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiContextMenuStrip1.Name = "uiContextMenuStrip1";
             this.uiContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 

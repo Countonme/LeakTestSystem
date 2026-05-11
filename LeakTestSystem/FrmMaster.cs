@@ -25,6 +25,8 @@ namespace LeakTestSystem
         private bool flagProductionModel;
         private List<ScanModel> snList = new List<ScanModel>();
         private int maxCount = 6;
+        private readonly StringBuilder _serialBuffer = new StringBuilder();
+        private readonly object _lock = new object();
 
         public FrmMaster()
         {
@@ -506,11 +508,7 @@ namespace LeakTestSystem
 
             try
             {
-                int len = port.BytesToRead;
-                byte[] buffer = new byte[len];
-                port.Read(buffer, 0, len);
-
-                int index = GetPortIndex(port);
+                //int index = GetPortIndex(port);
 
                 // COM7 = Modbus
                 if (port == serialPort7)
@@ -519,7 +517,35 @@ namespace LeakTestSystem
                 }
                 else
                 {
-                    HandleNormalSerial(index, buffer);
+                    string data = port.ReadExisting();
+
+                    lock (_lock)
+                    {
+                        _serialBuffer.Append(data);
+
+                        // 判断是否收到完整包
+                        while (_serialBuffer.ToString().Contains("\r\n"))
+                        {
+                            string allData = _serialBuffer.ToString();
+
+                            int endIndex = allData.IndexOf("\r\n");
+
+                            // 取一包完整数据
+                            string oneMessage = allData.Substring(0, endIndex);
+
+                            // 删除已处理数据
+                            _serialBuffer.Remove(0, endIndex + 2);
+
+                            int index = GetPortIndex(port);
+
+                            this.BeginInvoke(new Action(() =>
+                            {
+                                this.ShowInfoTip(oneMessage);
+                            }));
+
+                            HandleNormalSerial(index, oneMessage);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -544,6 +570,24 @@ namespace LeakTestSystem
         private void HandleNormalSerial(int index, byte[] data)
         {
             string text = Encoding.ASCII.GetString(data);
+
+            this.Invoke(new Action(() =>
+            {
+                switch (index)
+                {
+                    case 0: uiListBox1.Items.Add(text); break;
+                    case 1: uiListBox2.Items.Add(text); break;
+                    case 2: uiListBox3.Items.Add(text); break;
+                    case 3: uiListBox4.Items.Add(text); break;
+                    case 4: uiListBox5.Items.Add(text); break;
+                    case 5: uiListBox6.Items.Add(text); break;
+                }
+            }));
+        }
+
+        private void HandleNormalSerial(int index, string data)
+        {
+            string text = (data);
 
             this.Invoke(new Action(() =>
             {
