@@ -32,6 +32,7 @@ namespace LeakTestSystem
             this.Load += Form1_Load;
             this.switchCom7.Click += SwitchCom7_Click;
             this.IntegerUpDownChannels.TextChanged += IntegerUpDownChannels_TextChanged;
+            this.Text += $"->(Version:{Application.ProductVersion})";
             //this.FrmMaster_FormClosing += FrmMaster_FormClosing;
         }
 
