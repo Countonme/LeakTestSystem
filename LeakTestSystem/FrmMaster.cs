@@ -112,7 +112,7 @@ namespace LeakTestSystem
             serialPort6 = new SerialPort("COM6", 9600);
 
             // COM7 = Modbus RTU
-            serialPort7 = new SerialPort("COM7", 9600);
+            serialPort7 = new SerialPort("COM7", 115200);
             // 统一绑定事件（关键）
             serialPort1.DataReceived += Serial_DataReceived;
             serialPort2.DataReceived += Serial_DataReceived;
