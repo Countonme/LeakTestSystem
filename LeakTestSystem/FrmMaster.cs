@@ -289,7 +289,8 @@ namespace LeakTestSystem
                         this.ShowWaitForm();
                         // 如果要继续扫下一批，记得清空
                         this.HideWaitForm();
-                        modbusIo.SetRelay(1, 12, true); // 举例：触发继电器1
+                        modbusIo.SetRelay(1, 0, true); // 举例：触发继电器1
+                 
                         snList.Clear();
                     }
 
@@ -505,7 +506,7 @@ namespace LeakTestSystem
         {
             var port = sender as SerialPort;
             if (port == null) return;
-
+            modbusIo.SetRelay(1, 0, false); // 举例：关闭继电器1
             try
             {
                 //int index = GetPortIndex(port);
