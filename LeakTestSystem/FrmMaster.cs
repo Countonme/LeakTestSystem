@@ -81,12 +81,12 @@ namespace LeakTestSystem
                 // 4. 重点：COM7 初始化 Modbus
                 modbusIo = new ModbusIoController(serialPort7);
 
-                MessageBox.Show("所有串口已打开，Modbus已就绪");
+               this.ShowSuccessNotifier("所有串口已打开，Modbus已就绪");
             }
             else
             {
                 CloseAllPorts();
-                MessageBox.Show("所有串口已关闭");
+                this.ShowSuccessNotifier("所有串口已关闭");
             }
         }
 
