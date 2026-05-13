@@ -1,19 +1,23 @@
-﻿using LeakTestSystem.Model;
-using LeakTestSystem.Services;
-using LeakTestSystem.Services.MES;
-using Sunny.UI;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LeakTestSystem.Model;
+using LeakTestSystem.Services;
+using LeakTestSystem.Services.MES;
+using Sunny.UI;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LeakTestSystem
@@ -34,7 +38,7 @@ namespace LeakTestSystem
             this.Load += Form1_Load;
             this.switchCom7.Click += SwitchCom7_Click;
             this.IntegerUpDownChannels.TextChanged += IntegerUpDownChannels_TextChanged;
-            this.Text += $"->(Version:{Application.ProductVersion})";
+            this.Text += $"->(Version:{System.Windows.Forms.Application.ProductVersion})";
             //this.FrmMaster_FormClosing += FrmMaster_FormClosing;
         }
 
@@ -161,7 +165,8 @@ namespace LeakTestSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{port.PortName} 关闭失败: {ex.Message}");
+                ShowLogs($"{port.PortName} 关闭失败: {ex.Message}", Color.Red);
+                this.ShowErrorNotifier($"{port.PortName} 关闭失败: {ex.Message}");
             }
         }
 
@@ -178,7 +183,8 @@ namespace LeakTestSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{port.PortName} 打开失败: {ex.Message}");
+                ShowLogs($"{port.PortName} 打开失败: {ex.Message}", Color.Red);
+                this.ShowErrorNotifier($"{port.PortName} 打开失败: {ex.Message}");
             }
         }
 
@@ -208,6 +214,8 @@ namespace LeakTestSystem
             this.uiCheckBox14.Click += UiCheckBox_Click;
             this.uiCheckBox15.Click += UiCheckBox_Click;
             this.uiCheckBox16.Click += UiCheckBox_Click;
+            var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
+            getResult(0, data);
         }
 
         private void UiCheckBox_Click(object sender, EventArgs e)
@@ -230,6 +238,7 @@ namespace LeakTestSystem
             else
             {
                 this.ShowErrorNotifier("请先打开COM7");
+                ShowLogs("请先打开COM7", Color.Red);
             }
         }
 
@@ -285,20 +294,31 @@ namespace LeakTestSystem
                     // 👉 满6个再处理
                     if (snList.Count == maxCount)
                     {
-                        // this.ShowErrorNotifier("已扫满6个");
-                        // 这里可以做提交逻辑
-                        this.ShowWaitForm();
-                        // 如果要继续扫下一批，记得清空
-                        //初始化继电器状态
-                        modbusIo.SetRelay(1, 0, false);
-                        this.HideWaitForm();
-                        //开启继电器
-                        modbusIo.SetRelay(1, 0, true); // 举例：触发继电器1
+                        if (serialPort7 != null && serialPort7.IsOpen)
+                        {
+                            // this.ShowErrorNotifier("已扫满6个");
+                            modbusIo.SetRelay(1, 0, false);
+                            ShowLogs("初始化继电器", Color.Black);
+                            // 这里可以做提交逻辑
+                            this.ShowWaitForm("启动测试...请等待...");
+                            // 如果要继续扫下一批，记得清空
 
-                        snList.Clear();
+                            Thread.Sleep(1000);
+                            this.HideWaitForm();
+                            //开启继电器
+                            modbusIo.SetRelay(1, 0, true); // 举例：触发继电器1
+                            ShowLogs("启动测试...请等待...", Color.Black);
+                            snList.Clear();
+                        }
+                        else
+                        {
+                            this.ShowErrorNotifier("请先打开COM7");
+                            ShowLogs("请先打开COM7", Color.Red);
+                        }
+                        txtMasterInput.Clear();
                     }
 
-                    txtMasterInput.Clear();
+              
                 }
 
                 e.SuppressKeyPress = true;
@@ -386,6 +406,7 @@ namespace LeakTestSystem
                 txtMasterInput.SelectAll();
                 txtMasterInput.Focus();
                 this.ShowSuccessTip($"登录成功 {txtEmp.Text}");
+                ShowLogs($"登录成功 {txtEmp.Text}", Color.Green);
             }
         }
 
@@ -434,14 +455,21 @@ namespace LeakTestSystem
             titlePanel5.TitleColor = Color.Gray;
             titlePanel6.TitleColor = Color.Gray;
             titlePanel8.TitleColor = Color.YellowGreen;
+            ConnectitonStatusV1.ValveColor = Color.Gray;
+            ConnectitonStatusV2.ValveColor = Color.Gray;
+            ConnectitonStatusV3.ValveColor = Color.Gray;
+            ConnectitonStatusV4.ValveColor = Color.Gray;
+            ConnectitonStatusV5.ValveColor = Color.Gray;
+            ConnectitonStatusV6.ValveColor = Color.Gray;
+
             //使用的状态是ForestGreen
             //待使用的状态是 yellowGreen
-            if (IntegerUpDownChannels.Value > 0) { titlePanel1.TitleColor = Color.YellowGreen; }
-            if (IntegerUpDownChannels.Value > 1) { titlePanel2.TitleColor = Color.YellowGreen; }
-            if (IntegerUpDownChannels.Value > 2) { titlePanel3.TitleColor = Color.YellowGreen; }
-            if (IntegerUpDownChannels.Value > 3) { titlePanel4.TitleColor = Color.YellowGreen; }
-            if (IntegerUpDownChannels.Value > 4) { titlePanel5.TitleColor = Color.YellowGreen; }
-            if (IntegerUpDownChannels.Value > 5) { titlePanel6.TitleColor = Color.YellowGreen; }
+            if (IntegerUpDownChannels.Value > 0) { titlePanel1.TitleColor = Color.YellowGreen; ConnectitonStatusV1.ValveColor = Color.YellowGreen; }
+            if (IntegerUpDownChannels.Value > 1) { titlePanel2.TitleColor = Color.YellowGreen; ConnectitonStatusV2.ValveColor = Color.YellowGreen; }
+            if (IntegerUpDownChannels.Value > 2) { titlePanel3.TitleColor = Color.YellowGreen; ConnectitonStatusV3.ValveColor = Color.YellowGreen; }
+            if (IntegerUpDownChannels.Value > 3) { titlePanel4.TitleColor = Color.YellowGreen; ConnectitonStatusV4.ValveColor = Color.YellowGreen; }
+            if (IntegerUpDownChannels.Value > 4) { titlePanel5.TitleColor = Color.YellowGreen; ConnectitonStatusV5.ValveColor = Color.YellowGreen; }
+            if (IntegerUpDownChannels.Value > 5) { titlePanel6.TitleColor = Color.YellowGreen; ConnectitonStatusV6.ValveColor = Color.YellowGreen; }
         }
 
         private void SetLedByIndex(int index, Color color)
@@ -510,7 +538,7 @@ namespace LeakTestSystem
         {
             var port = sender as SerialPort;
             if (port == null) return;
-            modbusIo.SetRelay(1, 0, false); // 举例：关闭继电器1
+          
             try
             {
                 //int index = GetPortIndex(port);
@@ -519,9 +547,16 @@ namespace LeakTestSystem
                 if (port == serialPort7)
                 {
                     // HandleModbus(buffer);
+                    byte[] data = new byte[port.BytesToRead];
+                    port.Read(data, 0, data.Length);
+
+                    string hex = BitConverter.ToString(data).Replace("-", " ");
+                    ShowLogs($"MCU COM7 收到数据: {hex}", Color.Blue);
+                   // ShowLogs($"MCU COM7 收到数据: {port.ReadExisting()}", Color.Blue);
                 }
                 else
                 {
+                    modbusIo.SetRelay(1, 0, false); // 举例：关闭继电器1
                     string data = port.ReadExisting();
 
                     lock (_lock)
@@ -606,6 +641,136 @@ namespace LeakTestSystem
                     case 5: uiListBox6.Items.Add(text); break;
                 }
             }));
+            ShowLogs(data, Color.Black);
+            //var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
+            getResult(index, data);
+        }
+
+        private void ShowLogs(string InfoLogs, Color color)
+        {
+            // 1. 如果日志太长，清空内容（保留你原有的逻辑）
+            if (uiRichTextBox1.Text.Length > 1024)
+            {
+                uiRichTextBox1.Clear();
+            }
+
+            // 2. 构建要显示的字符串
+            string msg = $"{DateTime.Now:HH:mm:ss} - {InfoLogs}";
+
+            // 3. 【关键步骤】记录追加前的光标位置（也就是新文本开始的位置）
+            int startIndex = uiRichTextBox1.TextLength;
+
+            // 4. 追加文本（暂时不换行，或者先追加，后面一起处理）
+            uiRichTextBox1.AppendText(msg);
+
+            // 5. 【关键步骤】确定选中的长度
+            // 我们需要选中从 startIndex 开始，到文本结束的部分
+            // 注意：这里我们不需要手动加 Environment.NewLine，因为 AppendText 后光标已经在末尾
+            int length = uiRichTextBox1.TextLength - startIndex;
+
+            // 6. 【核心】设置颜色
+            uiRichTextBox1.Select(startIndex, length); // 选中刚写入的内容
+            uiRichTextBox1.SelectionColor = color;     // 设置颜色
+            uiRichTextBox1.SelectionBackColor = uiRichTextBox1.BackColor; // 确保背景色不变
+
+            // 7. 【关键步骤】添加换行符（为了下一行日志能正常换行）
+            // 注意：换行符不能带颜色，所以必须在设置完颜色后单独追加
+            uiRichTextBox1.AppendText(Environment.NewLine);
+
+            // 8. 取消选中状态（将光标移到最后，避免界面上有一块蓝/红背景选中效果）
+            uiRichTextBox1.Select(uiRichTextBox1.TextLength, 0);
+
+            // 9. 自动滚动到底部
+            uiRichTextBox1.ScrollToCaret();
+
+            // --- 下面是你的文件保存逻辑 ---
+            try
+            {
+                string path = Path.Combine(System.Windows.Forms.Application.StartupPath, "Logs", DateTime.Now.ToString("yyyyMM"));
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                string logFilePath = Path.Combine(path, $"{DateTime.Now:yyyyMMdd}.log");
+                // 写入文件时不需要颜色，直接写原始文本即可
+                File.AppendAllText(logFilePath, msg + Environment.NewLine);
+            }
+            catch (Exception ex)
+            {
+                // 简单的异常处理，防止日志写入失败导致程序崩溃
+                MessageBox.Show($"写入日志失败: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// 解析测试结果并显示日志
+        /// </summary>
+        /// <param name="index">索引，用于获取对应的SN</param>
+        /// <param name="data">测试结果数据</param>
+        private void getResult(int index, string data)
+        {
+            var dataArry = data.Split(":");
+            if (dataArry.Length != 4)
+            {
+                ShowLogs($" 数据格式错误: {getSN(index)} {data}", Color.Red);
+                return;
+
+            }
+            var proName = dataArry[0];
+            var valve1 = dataArry[1];
+            var result = dataArry[2];
+            var value2 = dataArry[3];
+            result = result.Replace("(", "").Replace(")", "").Trim();
+            switch (result)
+            {
+                case "OK":
+                    {
+                        ShowLogs($"测试结果:SN:{getSN(index)} {result}  proName={proName}  valve1={valve1}  value2={value2} ", Color.Green);
+                        break;
+                    }
+                case "AL":
+                    {
+                        ShowLogs($"测试结果:SN:{getSN(index)} {result} 测试报警  proName={proName}  valve1={valve1}  value2={value2} ", Color.Red);
+                        break;
+                    }
+                case "TD":
+                    {
+                        ShowLogs($"测试结果:SN:{getSN(index)} {result} 正常值泄露 NG  proName={proName}  valve1={valve1}  value2={value2} ", Color.Green);
+                        break;
+                    }
+                case "RD":
+                    {
+                        ShowLogs($"测试结果:SN:{getSN(index)} {result} 负值泄露 NG proName={proName}  valve1={valve1}  value2={value2} ", Color.Green);
+                        break;
+                    }
+                default:
+                    {
+                        ShowLogs($"测试结果:SN:{getSN(index)} {result} 未知结果 proName={proName}  valve1={valve1}  value2={value2} ", Color.Orange);
+                        break;
+                    }
+
+            }
+
+        }
+
+        /// <summary>
+        /// 获取SN，根据index返回对应的文本框内容
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        private string getSN(int index) 
+        {
+            switch (index)
+            {
+                case 0: return txtsn1.Text; 
+                case 1: return txtsn2.Text;
+                case 2: return txtsn3.Text;
+                case 3: return txtsn4.Text;
+                case 4: return txtsn5.Text;
+                case 5: return txtsn6.Text;
+                default: return string.Empty;
+            }
+        
         }
     }
 }
