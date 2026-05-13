@@ -81,7 +81,7 @@ namespace LeakTestSystem
                 // 4. 重点：COM7 初始化 Modbus
                 modbusIo = new ModbusIoController(serialPort7);
 
-               this.ShowSuccessNotifier("所有串口已打开，Modbus已就绪");
+                this.ShowSuccessNotifier("所有串口已打开，Modbus已就绪");
             }
             else
             {
@@ -238,6 +238,7 @@ namespace LeakTestSystem
             InitScanMaster();
             initTitlePanelColor();
             maxCount = IntegerUpDownChannels.Value;
+            uiGroupBox3.Height = this.Height - titlePanel1.Height - titlePanel1.Location.Y - 80;
         }
 
         private void BtnReSet_Click(object sender, EventArgs e)
@@ -288,9 +289,12 @@ namespace LeakTestSystem
                         // 这里可以做提交逻辑
                         this.ShowWaitForm();
                         // 如果要继续扫下一批，记得清空
+                        //初始化继电器状态
+                        modbusIo.SetRelay(1, 0, false);
                         this.HideWaitForm();
+                        //开启继电器
                         modbusIo.SetRelay(1, 0, true); // 举例：触发继电器1
-                 
+
                         snList.Clear();
                     }
 
