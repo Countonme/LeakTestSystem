@@ -214,8 +214,8 @@ namespace LeakTestSystem
             this.uiCheckBox14.Click += UiCheckBox_Click;
             this.uiCheckBox15.Click += UiCheckBox_Click;
             this.uiCheckBox16.Click += UiCheckBox_Click;
-            var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
-            getResult(0, data);
+            //var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
+            //getResult(0, data);
         }
 
         private void UiCheckBox_Click(object sender, EventArgs e)
@@ -317,8 +317,6 @@ namespace LeakTestSystem
                         }
                         txtMasterInput.Clear();
                     }
-
-              
                 }
 
                 e.SuppressKeyPress = true;
@@ -538,7 +536,7 @@ namespace LeakTestSystem
         {
             var port = sender as SerialPort;
             if (port == null) return;
-          
+
             try
             {
                 //int index = GetPortIndex(port);
@@ -552,7 +550,7 @@ namespace LeakTestSystem
 
                     string hex = BitConverter.ToString(data).Replace("-", " ");
                     ShowLogs($"MCU COM7 收到数据: {hex}", Color.Blue);
-                   // ShowLogs($"MCU COM7 收到数据: {port.ReadExisting()}", Color.Blue);
+                    // ShowLogs($"MCU COM7 收到数据: {port.ReadExisting()}", Color.Blue);
                 }
                 else
                 {
@@ -712,9 +710,13 @@ namespace LeakTestSystem
             var dataArry = data.Split(":");
             if (dataArry.Length != 4)
             {
+                if (dataArry.Length == 3)
+                {
+                    var res = dataArry[1];
+                    ShowLogs($"测试结果:SN:{getSN(index)} {res} 测试报警 {dataArry[2]} ", Color.Red);
+                }
                 ShowLogs($" 数据格式错误: {getSN(index)} {data}", Color.Red);
                 return;
-
             }
             var proName = dataArry[0];
             var valve1 = dataArry[1];
@@ -748,9 +750,7 @@ namespace LeakTestSystem
                         ShowLogs($"测试结果:SN:{getSN(index)} {result} 未知结果 proName={proName}  valve1={valve1}  value2={value2} ", Color.Orange);
                         break;
                     }
-
             }
-
         }
 
         /// <summary>
@@ -758,11 +758,11 @@ namespace LeakTestSystem
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        private string getSN(int index) 
+        private string getSN(int index)
         {
             switch (index)
             {
-                case 0: return txtsn1.Text; 
+                case 0: return txtsn1.Text;
                 case 1: return txtsn2.Text;
                 case 2: return txtsn3.Text;
                 case 3: return txtsn4.Text;
@@ -770,7 +770,6 @@ namespace LeakTestSystem
                 case 5: return txtsn6.Text;
                 default: return string.Empty;
             }
-        
         }
     }
 }
