@@ -17,9 +17,11 @@ using Controller;
 using LeakTestSystem.Model;
 using LeakTestSystem.Services;
 using LeakTestSystem.Services.MES;
+using Newtonsoft.Json;
 using Sunny.UI;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Application = System.Windows.Forms.Application;
 
 namespace LeakTestSystem
 {
@@ -33,7 +35,7 @@ namespace LeakTestSystem
         private readonly StringBuilder _serialBuffer = new StringBuilder();
         private readonly object _lock = new object();
         private readonly UITextBox[] snTextBoxes;
-
+        private SettingConfig _config = new SettingConfig();
         /// <summary>
         /// 测试记录
         /// </summary>
@@ -44,7 +46,6 @@ namespace LeakTestSystem
             InitializeComponent();
             this.Load += Form1_Load;
             this.switchCom7.Click += SwitchCom7_Click;
-            this.IntegerUpDownChannels.TextChanged += IntegerUpDownChannels_TextChanged;
             this.Text += $"->(Version:{System.Windows.Forms.Application.ProductVersion})";
             //this.FrmMaster_FormClosing += FrmMaster_FormClosing;
             snTextBoxes = new[] { txtsn1, txtsn2, txtsn3, txtsn4, txtsn5, txtsn6 };
@@ -58,20 +59,7 @@ namespace LeakTestSystem
             }
         }
 
-        private void IntegerUpDownChannels_TextChanged(object sender, EventArgs e)
-        {
-            if (!switchCom7.Active)
-            {
-                this.titlePanel8.Text = $"Master Channels ({IntegerUpDownChannels.Value})";
-                this.ShowSuccessTip(IntegerUpDownChannels.Value.ToString());
-                initTitlePanelColor();
-                maxCount = IntegerUpDownChannels.Value;
-            }
-            else
-            {
-                this.ShowErrorNotifier("请先关闭通道在修改通道数量");
-            }
-        }
+
 
         private void SwitchCom7_Click(object sender, EventArgs e)
         {
@@ -120,15 +108,37 @@ namespace LeakTestSystem
 
         private void InitAllPorts()
         {
-            serialPort1 = new SerialPort("COM1", 9600);
-            serialPort2 = new SerialPort("COM2", 9600);
-            serialPort3 = new SerialPort("COM3", 9600);
-            serialPort4 = new SerialPort("COM4", 9600);
-            serialPort5 = new SerialPort("COM5", 9600);
-            serialPort6 = new SerialPort("COM6", 9600);
-
+            if (string.IsNullOrEmpty(_config.masterComName))
+            {
+                this.ShowErrorNotifier(_config.masterComName);
+                return;
+            }
+            if (_config.channel1Status)
+            {
+                serialPort1 = new SerialPort(_config.channel1ComName, 9600);
+            }
+            if (_config.channel2Status)
+            {
+                serialPort2 = new SerialPort(_config.channel2ComName, 9600);
+            }
+            if (_config.channel3Status)
+            {
+                serialPort3 = new SerialPort(_config.channel3ComName, 9600);
+            }
+            if (_config.channel4Status)
+            {
+                serialPort4 = new SerialPort(_config.channel4ComName, 9600);
+            }
+            if (_config.channel5Status)
+            {
+                serialPort5 = new SerialPort(_config.channel5ComName, 9600);
+            }
+            if (_config.channel6Status)
+            {
+                serialPort6 = new SerialPort(_config.channel6ComName, 9600);
+            }
             // COM7 = Modbus RTU
-            serialPort7 = new SerialPort("COM7", 115200);
+            serialPort7 = new SerialPort(_config.masterComName, 115200);
             // 统一绑定事件（关键）
             serialPort1.DataReceived += Serial_DataReceived;
             serialPort2.DataReceived += Serial_DataReceived;
@@ -224,10 +234,135 @@ namespace LeakTestSystem
             this.uiCheckBox15.Click += UiCheckBox_Click;
             this.uiCheckBox16.Click += UiCheckBox_Click;
             //var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
-            var data = "<04>:-0.483 PSI:(OK):-0.1521 sccm";
-            GetResult(0, data);
-            var data1 = "<03>:(AL):SEALED PART VOL TOO SMALL";
-            GetResult(1, data1);
+            //var data = "<04>:-0.483 PSI:(OK):-0.1521 sccm";
+            //GetResult(0, data);
+            //var data1 = "<03>:(AL):SEALED PART VOL TOO SMALL";
+            //GetResult(1, data1);
+            this.saveToolStripMenuItem.Click += SaveToolStripMenuItem_Click;
+            this.refreshToolStripMenuItem.Click += RefreshToolStripMenuItem_Click;
+            this.reloadToolStripMenuItem.Click += ReloadToolStripMenuItem_Click;
+            LoadConfig();
+        }
+        /// <summary>
+        /// 重新加载配方
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadConfig();
+            initTitlePanelColor();
+ 
+        }
+
+        /// <summary>
+        /// 重新加载COM列表，更新UI显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RefreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            reloadComList();
+        }
+
+        /// <summary>
+        /// 保存配方
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var conf = new SettingConfig
+            {
+                masterComName = cobChannelMaster.Text,
+                channel1ComName = cobChannel1.Text,
+                channel2ComName = cobChannel2.Text,
+                channel3ComName = cobChannel3.Text,
+                channel4ComName = cobChannel4.Text,
+                channel5ComName = cobChannel5.Text,
+                channel6ComName = cobChannel6.Text,
+                channel1Status = checkBoxChannel1.Checked,
+                channel2Status = checkBoxChannel2.Checked,
+                channel3Status = checkBoxChannel3.Checked,
+                channel4Status = checkBoxChannel4.Checked,
+                channel5Status = checkBoxChannel5.Checked,
+                channel6Status = checkBoxChannel6.Checked,
+                readTimeout = readTimeout.Value,
+                mesNgLock = switchMesNgLock.Active
+            };
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(conf, Newtonsoft.Json.Formatting.Indented);
+            string path = Path.Combine(Application.StartupPath, "config.json");
+            File.WriteAllText(path, json);
+            reloadToolStripMenuItem.PerformClick();
+            this.ShowSuccessTip("保存成功");
+        }
+        /// <summary>
+        /// 加载配方
+        /// </summary>
+        private void LoadConfig()
+        {
+            if (File.Exists(Path.Combine(Application.StartupPath, "config.json")))
+            {
+                //关闭串口，避免占用无法读取配置
+                switchCom7.Active = false;
+                CloseAllPorts();
+
+                var configString = File.ReadAllText(Path.Combine(Application.StartupPath, "config.json"));
+                _config = JsonConvert.DeserializeObject<SettingConfig>(configString) ?? new SettingConfig();
+                cobChannelMaster.Text = _config.masterComName;
+                cobChannel1.Text = _config.channel1ComName;
+                cobChannel2.Text = _config.channel2ComName;
+                cobChannel3.Text = _config.channel3ComName;
+                cobChannel4.Text = _config.channel4ComName;
+                cobChannel5.Text = _config.channel5ComName;
+                cobChannel6.Text = _config.channel6ComName;
+                checkBoxChannel1.Checked = _config.channel1Status;
+                checkBoxChannel2.Checked = _config.channel2Status;
+                checkBoxChannel3.Checked = _config.channel3Status;
+                checkBoxChannel4.Checked = _config.channel4Status;
+                checkBoxChannel5.Checked = _config.channel5Status;
+                checkBoxChannel6.Checked = _config.channel6Status;
+                readTimeout.Value = _config.readTimeout;
+                labCH1.Text = _config.channel1Status ? _config.channel1ComName : "未启用";
+                labCH2.Text = _config.channel2Status ? _config.channel2ComName : "未启用";
+                labCH3.Text = _config.channel3Status ? _config.channel3ComName : "未启用";
+                labCH4.Text = _config.channel4Status ? _config.channel4ComName : "未启用";
+                labCH5.Text = _config.channel5Status ? _config.channel5ComName : "未启用";
+                labCH6.Text = _config.channel6Status ? _config.channel6ComName : "未启用";
+                labMaster.Text = _config.masterComName;
+                switchMesNgLock.Active = _config.mesNgLock;
+                maxCount = _config.GetEnableChannelCount(_config);
+                titlePanel8.Text = $"Master Channels ({maxCount})";
+            }
+            this.ShowSuccessNotifier("配置已加载...");
+        }
+
+
+        /// <summary>
+        /// 重新加载串口
+        /// </summary>
+        private void reloadComList()
+        {
+            var com = SerialPort.GetPortNames();
+            cobChannel1.Items.Clear();
+            cobChannel2.Items.Clear();
+            cobChannel3.Items.Clear();
+            cobChannel4.Items.Clear();
+            cobChannel5.Items.Clear();
+            cobChannel6.Items.Clear();
+            cobChannelMaster.Items.Clear();
+            foreach (var comName in com)
+            {
+                cobChannel1.Items.Add(comName);
+                cobChannel2.Items.Add(comName);
+                cobChannel3.Items.Add(comName);
+                cobChannel4.Items.Add(comName);
+                cobChannel5.Items.Add(comName);
+                cobChannel6.Items.Add(comName);
+                cobChannelMaster.Items.Add(comName);
+            }
+            this.ShowSuccessNotifier($"COM 列表已刷新 共找到{com.Length}个串口");
         }
 
         private void UiCheckBox_Click(object sender, EventArgs e)
@@ -258,7 +393,6 @@ namespace LeakTestSystem
         {
             InitScanMaster();
             initTitlePanelColor();
-            maxCount = IntegerUpDownChannels.Value;
             uiGroupBox3.Height = this.Height - titlePanel1.Height - titlePanel1.Location.Y - 80;
         }
 
@@ -474,12 +608,12 @@ namespace LeakTestSystem
 
             //使用的状态是ForestGreen
             //待使用的状态是 yellowGreen
-            if (IntegerUpDownChannels.Value > 0) { titlePanel1.TitleColor = Color.YellowGreen; ConnectitonStatusV1.ValveColor = Color.YellowGreen; }
-            if (IntegerUpDownChannels.Value > 1) { titlePanel2.TitleColor = Color.YellowGreen; ConnectitonStatusV2.ValveColor = Color.YellowGreen; }
-            if (IntegerUpDownChannels.Value > 2) { titlePanel3.TitleColor = Color.YellowGreen; ConnectitonStatusV3.ValveColor = Color.YellowGreen; }
-            if (IntegerUpDownChannels.Value > 3) { titlePanel4.TitleColor = Color.YellowGreen; ConnectitonStatusV4.ValveColor = Color.YellowGreen; }
-            if (IntegerUpDownChannels.Value > 4) { titlePanel5.TitleColor = Color.YellowGreen; ConnectitonStatusV5.ValveColor = Color.YellowGreen; }
-            if (IntegerUpDownChannels.Value > 5) { titlePanel6.TitleColor = Color.YellowGreen; ConnectitonStatusV6.ValveColor = Color.YellowGreen; }
+            if (_config.channel1Status) { titlePanel1.TitleColor = Color.YellowGreen; ConnectitonStatusV1.ValveColor = Color.YellowGreen; }
+            if (_config.channel2Status) { titlePanel2.TitleColor = Color.YellowGreen; ConnectitonStatusV2.ValveColor = Color.YellowGreen; }
+            if (_config.channel3Status) { titlePanel3.TitleColor = Color.YellowGreen; ConnectitonStatusV3.ValveColor = Color.YellowGreen; }
+            if (_config.channel4Status) { titlePanel4.TitleColor = Color.YellowGreen; ConnectitonStatusV4.ValveColor = Color.YellowGreen; }
+            if (_config.channel5Status) { titlePanel5.TitleColor = Color.YellowGreen; ConnectitonStatusV5.ValveColor = Color.YellowGreen; }
+            if (_config.channel6Status) { titlePanel6.TitleColor = Color.YellowGreen; ConnectitonStatusV6.ValveColor = Color.YellowGreen; }
         }
 
         private void SetLedByIndex(int index, Color color)

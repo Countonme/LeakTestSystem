@@ -36,6 +36,9 @@
     <ApplicationIcon>hangyu.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SunnyUI, Version=3.9.6.0, Culture=neutral, PublicKeyToken=3f4ebed4237db5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\SunnyUI.3.9.6\lib\net472\SunnyUI.dll</HintPath>
     </Reference>
@@ -70,6 +73,7 @@
       <DependentUpon>FrmMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ScanModel.cs" />
+    <Compile Include="Model\SettingConfig.cs" />
     <Compile Include="Model\TestResult.cs" />
     <Compile Include="Model\TestStep.cs" />
     <Compile Include="Program.cs" />
@@ -91,6 +95,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -108,6 +113,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="hangyu.ico" />
+    <None Include="Resources\dianliu.png" />
+    <None Include="Resources\shujukaifa.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

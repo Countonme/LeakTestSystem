@@ -40,9 +40,67 @@
             this.ConnectitonStatusV6 = new Sunny.UI.UIValve();
             this.uiPipe18 = new Sunny.UI.UIPipe();
             this.ConnectitonStatusV1 = new Sunny.UI.UIValve();
-            this.uiTitlePanel3 = new Sunny.UI.UITitlePanel();
-            this.IntegerUpDownChannels = new Sunny.UI.UIIntegerUpDown();
             this.uiTitlePanel9 = new Sunny.UI.UITitlePanel();
+            this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
+            this.RadioDebugMode = new Sunny.UI.UIRadioButton();
+            this.RadioBtnProductionMode = new Sunny.UI.UIRadioButton();
+            this.txtEmp = new Sunny.UI.UITextBox();
+            this.switchMES = new Sunny.UI.UISwitch();
+            this.uiLine9 = new Sunny.UI.UILine();
+            this.uiLine2 = new Sunny.UI.UILine();
+            this.uiAvatar1 = new Sunny.UI.UIAvatar();
+            this.groupSnList = new Sunny.UI.UIGroupBox();
+            this.btnReSet = new Sunny.UI.UIButton();
+            this.lineLen = new Sunny.UI.UILine();
+            this.txtMasterInput = new Sunny.UI.UITextBox();
+            this.titlePanel8 = new Sunny.UI.UITitlePanel();
+            this.labMaster = new Sunny.UI.UILabel();
+            this.switchCom7 = new Sunny.UI.UISwitch();
+            this.ledCom7 = new Sunny.UI.UILedBulb();
+            this.titlePanel6 = new Sunny.UI.UITitlePanel();
+            this.txtsn6 = new Sunny.UI.UITextBox();
+            this.uiListBox6 = new Sunny.UI.UIListBox();
+            this.labCH6 = new Sunny.UI.UILabel();
+            this.ledCom6 = new Sunny.UI.UILedBulb();
+            this.titlePanel5 = new Sunny.UI.UITitlePanel();
+            this.txtsn5 = new Sunny.UI.UITextBox();
+            this.uiListBox5 = new Sunny.UI.UIListBox();
+            this.labCH5 = new Sunny.UI.UILabel();
+            this.ledCom5 = new Sunny.UI.UILedBulb();
+            this.titlePanel4 = new Sunny.UI.UITitlePanel();
+            this.txtsn4 = new Sunny.UI.UITextBox();
+            this.uiListBox4 = new Sunny.UI.UIListBox();
+            this.labCH4 = new Sunny.UI.UILabel();
+            this.ledCom4 = new Sunny.UI.UILedBulb();
+            this.titlePanel3 = new Sunny.UI.UITitlePanel();
+            this.txtsn3 = new Sunny.UI.UITextBox();
+            this.uiListBox3 = new Sunny.UI.UIListBox();
+            this.labCH3 = new Sunny.UI.UILabel();
+            this.ledCom3 = new Sunny.UI.UILedBulb();
+            this.titlePanel2 = new Sunny.UI.UITitlePanel();
+            this.txtsn2 = new Sunny.UI.UITextBox();
+            this.uiListBox2 = new Sunny.UI.UIListBox();
+            this.labCH2 = new Sunny.UI.UILabel();
+            this.ledCom2 = new Sunny.UI.UILedBulb();
+            this.titlePanel1 = new Sunny.UI.UITitlePanel();
+            this.ledCom1 = new Sunny.UI.UILedBulb();
+            this.txtsn1 = new Sunny.UI.UITextBox();
+            this.uiListBox1 = new Sunny.UI.UIListBox();
+            this.labCH1 = new Sunny.UI.UILabel();
+            this.uiPipe1 = new Sunny.UI.UIPipe();
+            this.uiPipe11 = new Sunny.UI.UIPipe();
+            this.uiPipe19 = new Sunny.UI.UIPipe();
+            this.uiPipe8 = new Sunny.UI.UIPipe();
+            this.ConnectitonStatusV5 = new Sunny.UI.UIValve();
+            this.uiPipe4 = new Sunny.UI.UIPipe();
+            this.uiPipe3 = new Sunny.UI.UIPipe();
+            this.uiPipe2 = new Sunny.UI.UIPipe();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.uiGroupBox5 = new Sunny.UI.UIGroupBox();
+            this.uiTitlePanel2 = new Sunny.UI.UITitlePanel();
+            this.readTimeout = new Sunny.UI.UIIntegerUpDown();
+            this.uiTitlePanel1 = new Sunny.UI.UITitlePanel();
+            this.switchMesNgLock = new Sunny.UI.UISwitch();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.uiCheckBox16 = new Sunny.UI.UICheckBox();
             this.uiCheckBox15 = new Sunny.UI.UICheckBox();
@@ -60,85 +118,34 @@
             this.uiCheckBox3 = new Sunny.UI.UICheckBox();
             this.uiCheckBox2 = new Sunny.UI.UICheckBox();
             this.uiCheckBox1 = new Sunny.UI.UICheckBox();
-            this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
-            this.RadioDebugMode = new Sunny.UI.UIRadioButton();
-            this.RadioBtnProductionMode = new Sunny.UI.UIRadioButton();
-            this.txtEmp = new Sunny.UI.UITextBox();
-            this.switchMES = new Sunny.UI.UISwitch();
-            this.uiLine9 = new Sunny.UI.UILine();
-            this.uiLine2 = new Sunny.UI.UILine();
-            this.uiAvatar1 = new Sunny.UI.UIAvatar();
-            this.groupSnList = new Sunny.UI.UIGroupBox();
-            this.btnReSet = new Sunny.UI.UIButton();
-            this.lineLen = new Sunny.UI.UILine();
-            this.txtMasterInput = new Sunny.UI.UITextBox();
-            this.titlePanel8 = new Sunny.UI.UITitlePanel();
-            this.uiLabel7 = new Sunny.UI.UILabel();
-            this.switchCom7 = new Sunny.UI.UISwitch();
-            this.ledCom7 = new Sunny.UI.UILedBulb();
-            this.titlePanel6 = new Sunny.UI.UITitlePanel();
-            this.txtsn6 = new Sunny.UI.UITextBox();
-            this.uiListBox6 = new Sunny.UI.UIListBox();
-            this.uiLabel6 = new Sunny.UI.UILabel();
-            this.ledCom6 = new Sunny.UI.UILedBulb();
-            this.titlePanel5 = new Sunny.UI.UITitlePanel();
-            this.txtsn5 = new Sunny.UI.UITextBox();
-            this.uiListBox5 = new Sunny.UI.UIListBox();
-            this.uiLabel5 = new Sunny.UI.UILabel();
-            this.ledCom5 = new Sunny.UI.UILedBulb();
-            this.titlePanel4 = new Sunny.UI.UITitlePanel();
-            this.txtsn4 = new Sunny.UI.UITextBox();
-            this.uiListBox4 = new Sunny.UI.UIListBox();
-            this.uiLabel4 = new Sunny.UI.UILabel();
-            this.ledCom4 = new Sunny.UI.UILedBulb();
-            this.titlePanel3 = new Sunny.UI.UITitlePanel();
-            this.txtsn3 = new Sunny.UI.UITextBox();
-            this.uiListBox3 = new Sunny.UI.UIListBox();
-            this.uiLabel3 = new Sunny.UI.UILabel();
-            this.ledCom3 = new Sunny.UI.UILedBulb();
-            this.titlePanel2 = new Sunny.UI.UITitlePanel();
-            this.txtsn2 = new Sunny.UI.UITextBox();
-            this.uiListBox2 = new Sunny.UI.UIListBox();
-            this.uiLabel2 = new Sunny.UI.UILabel();
-            this.ledCom2 = new Sunny.UI.UILedBulb();
-            this.titlePanel1 = new Sunny.UI.UITitlePanel();
-            this.ledCom1 = new Sunny.UI.UILedBulb();
-            this.txtsn1 = new Sunny.UI.UITextBox();
-            this.uiListBox1 = new Sunny.UI.UIListBox();
-            this.uiLabel1 = new Sunny.UI.UILabel();
-            this.uiPipe1 = new Sunny.UI.UIPipe();
-            this.uiPipe11 = new Sunny.UI.UIPipe();
-            this.uiPipe19 = new Sunny.UI.UIPipe();
-            this.uiPipe8 = new Sunny.UI.UIPipe();
-            this.ConnectitonStatusV5 = new Sunny.UI.UIValve();
-            this.uiPipe4 = new Sunny.UI.UIPipe();
-            this.uiPipe3 = new Sunny.UI.UIPipe();
-            this.uiPipe2 = new Sunny.UI.UIPipe();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.uiTitlePanel1 = new Sunny.UI.UITitlePanel();
-            this.uiSwitch1 = new Sunny.UI.UISwitch();
             this.uiGroupBox4 = new Sunny.UI.UIGroupBox();
-            this.uiCheckBox27 = new Sunny.UI.UICheckBox();
-            this.uiCheckBox28 = new Sunny.UI.UICheckBox();
-            this.uiCheckBox29 = new Sunny.UI.UICheckBox();
-            this.uiCheckBox30 = new Sunny.UI.UICheckBox();
-            this.uiCheckBox31 = new Sunny.UI.UICheckBox();
-            this.uiCheckBox32 = new Sunny.UI.UICheckBox();
+            this.cobChannelMaster = new System.Windows.Forms.ComboBox();
+            this.uiCheckBox17 = new Sunny.UI.UICheckBox();
+            this.cobChannel6 = new System.Windows.Forms.ComboBox();
+            this.cobChannel5 = new System.Windows.Forms.ComboBox();
+            this.cobChannel4 = new System.Windows.Forms.ComboBox();
+            this.cobChannel3 = new System.Windows.Forms.ComboBox();
+            this.cobChannel2 = new System.Windows.Forms.ComboBox();
+            this.cobChannel1 = new System.Windows.Forms.ComboBox();
+            this.checkBoxChannel6 = new Sunny.UI.UICheckBox();
+            this.checkBoxChannel5 = new Sunny.UI.UICheckBox();
+            this.checkBoxChannel4 = new Sunny.UI.UICheckBox();
+            this.checkBoxChannel3 = new Sunny.UI.UICheckBox();
+            this.checkBoxChannel2 = new Sunny.UI.UICheckBox();
+            this.checkBoxChannel1 = new Sunny.UI.UICheckBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip(this.components);
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip(this.components);
-            this.uiIntegerUpDown1 = new Sunny.UI.UIIntegerUpDown();
-            this.uiLine1 = new Sunny.UI.UILine();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uiTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.uiGroupBox3.SuspendLayout();
-            this.uiTitlePanel3.SuspendLayout();
             this.uiTitlePanel9.SuspendLayout();
-            this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.groupSnList.SuspendLayout();
             this.titlePanel8.SuspendLayout();
@@ -149,7 +156,10 @@
             this.titlePanel2.SuspendLayout();
             this.titlePanel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.uiGroupBox5.SuspendLayout();
+            this.uiTitlePanel2.SuspendLayout();
             this.uiTitlePanel1.SuspendLayout();
+            this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -160,16 +170,16 @@
             this.uiTabControl1.Controls.Add(this.tabPage2);
             this.uiTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.uiTabControl1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTabControl1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ItemSize = new System.Drawing.Size(150, 40);
             this.uiTabControl1.Location = new System.Drawing.Point(0, 35);
             this.uiTabControl1.MainPage = "";
             this.uiTabControl1.Name = "uiTabControl1";
             this.uiTabControl1.SelectedIndex = 0;
-            this.uiTabControl1.Size = new System.Drawing.Size(1727, 1052);
+            this.uiTabControl1.Size = new System.Drawing.Size(1930, 1052);
             this.uiTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl1.TabIndex = 0;
-            this.uiTabControl1.TipsFont = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTabControl1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
             // tabPage1
             // 
@@ -180,7 +190,6 @@
             this.tabPage1.Controls.Add(this.ConnectitonStatusV6);
             this.tabPage1.Controls.Add(this.uiPipe18);
             this.tabPage1.Controls.Add(this.ConnectitonStatusV1);
-            this.tabPage1.Controls.Add(this.uiTitlePanel3);
             this.tabPage1.Controls.Add(this.uiTitlePanel9);
             this.tabPage1.Controls.Add(this.titlePanel8);
             this.tabPage1.Controls.Add(this.titlePanel6);
@@ -199,7 +208,7 @@
             this.tabPage1.Controls.Add(this.uiPipe2);
             this.tabPage1.Location = new System.Drawing.Point(0, 40);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1727, 1012);
+            this.tabPage1.Size = new System.Drawing.Size(1930, 1012);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "System";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -214,7 +223,7 @@
             this.uiGroupBox3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox3.Name = "uiGroupBox3";
             this.uiGroupBox3.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox3.Size = new System.Drawing.Size(1727, 229);
+            this.uiGroupBox3.Size = new System.Drawing.Size(1930, 229);
             this.uiGroupBox3.TabIndex = 114;
             this.uiGroupBox3.Text = "Logs:";
             this.uiGroupBox3.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -230,14 +239,14 @@
             this.uiRichTextBox1.Name = "uiRichTextBox1";
             this.uiRichTextBox1.Padding = new System.Windows.Forms.Padding(2);
             this.uiRichTextBox1.ShowText = false;
-            this.uiRichTextBox1.Size = new System.Drawing.Size(1727, 197);
+            this.uiRichTextBox1.Size = new System.Drawing.Size(1930, 197);
             this.uiRichTextBox1.TabIndex = 0;
             this.uiRichTextBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ConnectitonStatusV4
             // 
             this.ConnectitonStatusV4.Active = true;
-            this.ConnectitonStatusV4.Font = new System.Drawing.Font("SimSun", 12F);
+            this.ConnectitonStatusV4.Font = new System.Drawing.Font("宋体", 12F);
             this.ConnectitonStatusV4.Location = new System.Drawing.Point(1066, 409);
             this.ConnectitonStatusV4.MinimumSize = new System.Drawing.Size(1, 1);
             this.ConnectitonStatusV4.Name = "ConnectitonStatusV4";
@@ -250,7 +259,7 @@
             // ConnectitonStatusV3
             // 
             this.ConnectitonStatusV3.Active = true;
-            this.ConnectitonStatusV3.Font = new System.Drawing.Font("SimSun", 12F);
+            this.ConnectitonStatusV3.Font = new System.Drawing.Font("宋体", 12F);
             this.ConnectitonStatusV3.Location = new System.Drawing.Point(744, 409);
             this.ConnectitonStatusV3.MinimumSize = new System.Drawing.Size(1, 1);
             this.ConnectitonStatusV3.Name = "ConnectitonStatusV3";
@@ -263,7 +272,7 @@
             // ConnectitonStatusV2
             // 
             this.ConnectitonStatusV2.Active = true;
-            this.ConnectitonStatusV2.Font = new System.Drawing.Font("SimSun", 12F);
+            this.ConnectitonStatusV2.Font = new System.Drawing.Font("宋体", 12F);
             this.ConnectitonStatusV2.Location = new System.Drawing.Point(444, 409);
             this.ConnectitonStatusV2.MinimumSize = new System.Drawing.Size(1, 1);
             this.ConnectitonStatusV2.Name = "ConnectitonStatusV2";
@@ -276,7 +285,7 @@
             // ConnectitonStatusV6
             // 
             this.ConnectitonStatusV6.Active = true;
-            this.ConnectitonStatusV6.Font = new System.Drawing.Font("SimSun", 12F);
+            this.ConnectitonStatusV6.Font = new System.Drawing.Font("宋体", 12F);
             this.ConnectitonStatusV6.Location = new System.Drawing.Point(1712, 409);
             this.ConnectitonStatusV6.MinimumSize = new System.Drawing.Size(1, 1);
             this.ConnectitonStatusV6.Name = "ConnectitonStatusV6";
@@ -295,7 +304,7 @@
             this.uiPipe18.FlowInterval = 16;
             this.uiPipe18.FlowSize = 28;
             this.uiPipe18.FlowSpeed = 12;
-            this.uiPipe18.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiPipe18.Font = new System.Drawing.Font("宋体", 12F);
             this.uiPipe18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.uiPipe18.Location = new System.Drawing.Point(1746, 349);
             this.uiPipe18.MinimumSize = new System.Drawing.Size(1, 1);
@@ -312,7 +321,7 @@
             // 
             // ConnectitonStatusV1
             // 
-            this.ConnectitonStatusV1.Font = new System.Drawing.Font("SimSun", 12F);
+            this.ConnectitonStatusV1.Font = new System.Drawing.Font("宋体", 12F);
             this.ConnectitonStatusV1.Location = new System.Drawing.Point(124, 409);
             this.ConnectitonStatusV1.MinimumSize = new System.Drawing.Size(1, 1);
             this.ConnectitonStatusV1.Name = "ConnectitonStatusV1";
@@ -322,43 +331,8 @@
             this.ConnectitonStatusV1.ValveColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.ConnectitonStatusV1.ZoomScaleDisabled = true;
             // 
-            // uiTitlePanel3
-            // 
-            this.uiTitlePanel3.Controls.Add(this.IntegerUpDownChannels);
-            this.uiTitlePanel3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTitlePanel3.Location = new System.Drawing.Point(592, 216);
-            this.uiTitlePanel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTitlePanel3.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiTitlePanel3.Name = "uiTitlePanel3";
-            this.uiTitlePanel3.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
-            this.uiTitlePanel3.ShowText = false;
-            this.uiTitlePanel3.Size = new System.Drawing.Size(218, 89);
-            this.uiTitlePanel3.TabIndex = 99;
-            this.uiTitlePanel3.Text = "Number of Channels";
-            this.uiTitlePanel3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // IntegerUpDownChannels
-            // 
-            this.IntegerUpDownChannels.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.IntegerUpDownChannels.Font = new System.Drawing.Font("SimSun", 12F);
-            this.IntegerUpDownChannels.Location = new System.Drawing.Point(34, 47);
-            this.IntegerUpDownChannels.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.IntegerUpDownChannels.Maximum = 6D;
-            this.IntegerUpDownChannels.MaxLength = 6;
-            this.IntegerUpDownChannels.Minimum = 1D;
-            this.IntegerUpDownChannels.MinimumSize = new System.Drawing.Size(100, 0);
-            this.IntegerUpDownChannels.Name = "IntegerUpDownChannels";
-            this.IntegerUpDownChannels.Padding = new System.Windows.Forms.Padding(5);
-            this.IntegerUpDownChannels.ShowText = false;
-            this.IntegerUpDownChannels.Size = new System.Drawing.Size(150, 29);
-            this.IntegerUpDownChannels.TabIndex = 8;
-            this.IntegerUpDownChannels.Text = "6";
-            this.IntegerUpDownChannels.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.IntegerUpDownChannels.Value = 6;
-            // 
             // uiTitlePanel9
             // 
-            this.uiTitlePanel9.Controls.Add(this.uiGroupBox1);
             this.uiTitlePanel9.Controls.Add(this.uiGroupBox2);
             this.uiTitlePanel9.Controls.Add(this.txtEmp);
             this.uiTitlePanel9.Controls.Add(this.switchMES);
@@ -366,7 +340,7 @@
             this.uiTitlePanel9.Controls.Add(this.uiLine2);
             this.uiTitlePanel9.Controls.Add(this.uiAvatar1);
             this.uiTitlePanel9.Controls.Add(this.groupSnList);
-            this.uiTitlePanel9.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTitlePanel9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTitlePanel9.Location = new System.Drawing.Point(9, 14);
             this.uiTitlePanel9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel9.MinimumSize = new System.Drawing.Size(1, 1);
@@ -377,243 +351,6 @@
             this.uiTitlePanel9.TabIndex = 11;
             this.uiTitlePanel9.Text = "MES";
             this.uiTitlePanel9.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiGroupBox1
-            // 
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox16);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox15);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox14);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox13);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox12);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox11);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox10);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox9);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox8);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox7);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox6);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox5);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox4);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox3);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox2);
-            this.uiGroupBox1.Controls.Add(this.uiCheckBox1);
-            this.uiGroupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.uiGroupBox1.Location = new System.Drawing.Point(592, 41);
-            this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiGroupBox1.Name = "uiGroupBox1";
-            this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox1.Size = new System.Drawing.Size(465, 109);
-            this.uiGroupBox1.TabIndex = 100;
-            this.uiGroupBox1.Text = "DO";
-            this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // uiCheckBox16
-            // 
-            this.uiCheckBox16.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox16.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox16.Location = new System.Drawing.Point(416, 71);
-            this.uiCheckBox16.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox16.Name = "uiCheckBox16";
-            this.uiCheckBox16.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox16.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox16.TabIndex = 67;
-            this.uiCheckBox16.Text = "16";
-            // 
-            // uiCheckBox15
-            // 
-            this.uiCheckBox15.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox15.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox15.Location = new System.Drawing.Point(357, 71);
-            this.uiCheckBox15.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox15.Name = "uiCheckBox15";
-            this.uiCheckBox15.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox15.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox15.TabIndex = 66;
-            this.uiCheckBox15.Text = "15";
-            // 
-            // uiCheckBox14
-            // 
-            this.uiCheckBox14.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox14.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox14.Location = new System.Drawing.Point(298, 71);
-            this.uiCheckBox14.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox14.Name = "uiCheckBox14";
-            this.uiCheckBox14.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox14.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox14.TabIndex = 65;
-            this.uiCheckBox14.Text = "14";
-            // 
-            // uiCheckBox13
-            // 
-            this.uiCheckBox13.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox13.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox13.Location = new System.Drawing.Point(239, 71);
-            this.uiCheckBox13.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox13.Name = "uiCheckBox13";
-            this.uiCheckBox13.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox13.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox13.TabIndex = 64;
-            this.uiCheckBox13.Text = "13";
-            // 
-            // uiCheckBox12
-            // 
-            this.uiCheckBox12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox12.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox12.Location = new System.Drawing.Point(180, 71);
-            this.uiCheckBox12.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox12.Name = "uiCheckBox12";
-            this.uiCheckBox12.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox12.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox12.TabIndex = 63;
-            this.uiCheckBox12.Text = "12";
-            // 
-            // uiCheckBox11
-            // 
-            this.uiCheckBox11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox11.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox11.Location = new System.Drawing.Point(122, 71);
-            this.uiCheckBox11.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox11.Name = "uiCheckBox11";
-            this.uiCheckBox11.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox11.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox11.TabIndex = 62;
-            this.uiCheckBox11.Text = "11";
-            // 
-            // uiCheckBox10
-            // 
-            this.uiCheckBox10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox10.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox10.Location = new System.Drawing.Point(62, 71);
-            this.uiCheckBox10.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox10.Name = "uiCheckBox10";
-            this.uiCheckBox10.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox10.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox10.TabIndex = 61;
-            this.uiCheckBox10.Text = "10";
-            // 
-            // uiCheckBox9
-            // 
-            this.uiCheckBox9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox9.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox9.Location = new System.Drawing.Point(3, 71);
-            this.uiCheckBox9.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox9.Name = "uiCheckBox9";
-            this.uiCheckBox9.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox9.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox9.TabIndex = 60;
-            this.uiCheckBox9.Text = "9";
-            // 
-            // uiCheckBox8
-            // 
-            this.uiCheckBox8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox8.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox8.Location = new System.Drawing.Point(416, 30);
-            this.uiCheckBox8.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox8.Name = "uiCheckBox8";
-            this.uiCheckBox8.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox8.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox8.TabIndex = 59;
-            this.uiCheckBox8.Text = "8";
-            // 
-            // uiCheckBox7
-            // 
-            this.uiCheckBox7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox7.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox7.Location = new System.Drawing.Point(357, 30);
-            this.uiCheckBox7.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox7.Name = "uiCheckBox7";
-            this.uiCheckBox7.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox7.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox7.TabIndex = 58;
-            this.uiCheckBox7.Text = "7";
-            // 
-            // uiCheckBox6
-            // 
-            this.uiCheckBox6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox6.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox6.Location = new System.Drawing.Point(298, 30);
-            this.uiCheckBox6.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox6.Name = "uiCheckBox6";
-            this.uiCheckBox6.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox6.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox6.TabIndex = 57;
-            this.uiCheckBox6.Text = "6";
-            // 
-            // uiCheckBox5
-            // 
-            this.uiCheckBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox5.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox5.Location = new System.Drawing.Point(239, 30);
-            this.uiCheckBox5.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox5.Name = "uiCheckBox5";
-            this.uiCheckBox5.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox5.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox5.TabIndex = 56;
-            this.uiCheckBox5.Text = "5";
-            // 
-            // uiCheckBox4
-            // 
-            this.uiCheckBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox4.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox4.Location = new System.Drawing.Point(180, 30);
-            this.uiCheckBox4.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox4.Name = "uiCheckBox4";
-            this.uiCheckBox4.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox4.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox4.TabIndex = 55;
-            this.uiCheckBox4.Text = "4";
-            // 
-            // uiCheckBox3
-            // 
-            this.uiCheckBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox3.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox3.Location = new System.Drawing.Point(121, 30);
-            this.uiCheckBox3.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox3.Name = "uiCheckBox3";
-            this.uiCheckBox3.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox3.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox3.TabIndex = 54;
-            this.uiCheckBox3.Text = "3";
-            // 
-            // uiCheckBox2
-            // 
-            this.uiCheckBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox2.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox2.Location = new System.Drawing.Point(62, 30);
-            this.uiCheckBox2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox2.Name = "uiCheckBox2";
-            this.uiCheckBox2.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox2.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox2.TabIndex = 53;
-            this.uiCheckBox2.Text = "2";
-            // 
-            // uiCheckBox1
-            // 
-            this.uiCheckBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox1.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox1.Location = new System.Drawing.Point(3, 30);
-            this.uiCheckBox1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox1.Name = "uiCheckBox1";
-            this.uiCheckBox1.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox1.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox1.TabIndex = 52;
-            this.uiCheckBox1.Text = "1";
             // 
             // uiGroupBox2
             // 
@@ -687,7 +424,7 @@
             // uiLine9
             // 
             this.uiLine9.BackColor = System.Drawing.Color.Transparent;
-            this.uiLine9.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiLine9.Font = new System.Drawing.Font("宋体", 12F);
             this.uiLine9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine9.Location = new System.Drawing.Point(4, 128);
             this.uiLine9.MinimumSize = new System.Drawing.Size(16, 16);
@@ -700,7 +437,7 @@
             // uiLine2
             // 
             this.uiLine2.BackColor = System.Drawing.Color.Transparent;
-            this.uiLine2.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiLine2.Font = new System.Drawing.Font("宋体", 12F);
             this.uiLine2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiLine2.Location = new System.Drawing.Point(4, 38);
             this.uiLine2.MinimumSize = new System.Drawing.Size(16, 16);
@@ -713,7 +450,7 @@
             // uiAvatar1
             // 
             this.uiAvatar1.AvatarSize = 55;
-            this.uiAvatar1.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiAvatar1.Font = new System.Drawing.Font("宋体", 12F);
             this.uiAvatar1.Location = new System.Drawing.Point(4, 64);
             this.uiAvatar1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiAvatar1.Name = "uiAvatar1";
@@ -733,7 +470,7 @@
             this.groupSnList.MinimumSize = new System.Drawing.Size(1, 1);
             this.groupSnList.Name = "groupSnList";
             this.groupSnList.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.groupSnList.Size = new System.Drawing.Size(640, 110);
+            this.groupSnList.Size = new System.Drawing.Size(809, 110);
             this.groupSnList.TabIndex = 98;
             this.groupSnList.Text = "SN List";
             this.groupSnList.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -753,7 +490,7 @@
             // lineLen
             // 
             this.lineLen.BackColor = System.Drawing.Color.Transparent;
-            this.lineLen.Font = new System.Drawing.Font("SimSun", 12F);
+            this.lineLen.Font = new System.Drawing.Font("宋体", 12F);
             this.lineLen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.lineLen.Location = new System.Drawing.Point(4, 45);
             this.lineLen.MinimumSize = new System.Drawing.Size(16, 16);
@@ -783,10 +520,10 @@
             // 
             // titlePanel8
             // 
-            this.titlePanel8.Controls.Add(this.uiLabel7);
+            this.titlePanel8.Controls.Add(this.labMaster);
             this.titlePanel8.Controls.Add(this.switchCom7);
             this.titlePanel8.Controls.Add(this.ledCom7);
-            this.titlePanel8.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel8.Location = new System.Drawing.Point(821, 216);
             this.titlePanel8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel8.MinimumSize = new System.Drawing.Size(1, 1);
@@ -798,19 +535,19 @@
             this.titlePanel8.Text = "Master Channels (6)";
             this.titlePanel8.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiLabel7
+            // labMaster
             // 
-            this.uiLabel7.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLabel7.Location = new System.Drawing.Point(4, 46);
-            this.uiLabel7.Name = "uiLabel7";
-            this.uiLabel7.Size = new System.Drawing.Size(48, 23);
-            this.uiLabel7.TabIndex = 1;
-            this.uiLabel7.Text = "COM 7";
+            this.labMaster.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labMaster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.labMaster.Location = new System.Drawing.Point(4, 46);
+            this.labMaster.Name = "labMaster";
+            this.labMaster.Size = new System.Drawing.Size(48, 23);
+            this.labMaster.TabIndex = 1;
+            this.labMaster.Text = "COM 7";
             // 
             // switchCom7
             // 
-            this.switchCom7.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.switchCom7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.switchCom7.Location = new System.Drawing.Point(82, 40);
             this.switchCom7.MinimumSize = new System.Drawing.Size(1, 1);
             this.switchCom7.Name = "switchCom7";
@@ -831,9 +568,9 @@
             // 
             this.titlePanel6.Controls.Add(this.txtsn6);
             this.titlePanel6.Controls.Add(this.uiListBox6);
-            this.titlePanel6.Controls.Add(this.uiLabel6);
+            this.titlePanel6.Controls.Add(this.labCH6);
             this.titlePanel6.Controls.Add(this.ledCom6);
-            this.titlePanel6.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel6.Location = new System.Drawing.Point(1594, 470);
             this.titlePanel6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel6.MinimumSize = new System.Drawing.Size(1, 1);
@@ -865,7 +602,7 @@
             // 
             this.uiListBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiListBox6.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox6.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox6.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox6.Location = new System.Drawing.Point(7, 114);
@@ -878,15 +615,15 @@
             this.uiListBox6.TabIndex = 10;
             this.uiListBox6.Text = "uiListBox6";
             // 
-            // uiLabel6
+            // labCH6
             // 
-            this.uiLabel6.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLabel6.Location = new System.Drawing.Point(11, 45);
-            this.uiLabel6.Name = "uiLabel6";
-            this.uiLabel6.Size = new System.Drawing.Size(64, 23);
-            this.uiLabel6.TabIndex = 5;
-            this.uiLabel6.Text = "COM 6";
+            this.labCH6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labCH6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.labCH6.Location = new System.Drawing.Point(11, 45);
+            this.labCH6.Name = "labCH6";
+            this.labCH6.Size = new System.Drawing.Size(136, 23);
+            this.labCH6.TabIndex = 5;
+            this.labCH6.Text = "COM 6";
             // 
             // ledCom6
             // 
@@ -901,9 +638,9 @@
             // 
             this.titlePanel5.Controls.Add(this.txtsn5);
             this.titlePanel5.Controls.Add(this.uiListBox5);
-            this.titlePanel5.Controls.Add(this.uiLabel5);
+            this.titlePanel5.Controls.Add(this.labCH5);
             this.titlePanel5.Controls.Add(this.ledCom5);
-            this.titlePanel5.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel5.Location = new System.Drawing.Point(1277, 470);
             this.titlePanel5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel5.MinimumSize = new System.Drawing.Size(1, 1);
@@ -935,7 +672,7 @@
             // 
             this.uiListBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiListBox5.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox5.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox5.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox5.Location = new System.Drawing.Point(7, 114);
@@ -948,15 +685,15 @@
             this.uiListBox5.TabIndex = 9;
             this.uiListBox5.Text = "uiListBox5";
             // 
-            // uiLabel5
+            // labCH5
             // 
-            this.uiLabel5.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLabel5.Location = new System.Drawing.Point(8, 48);
-            this.uiLabel5.Name = "uiLabel5";
-            this.uiLabel5.Size = new System.Drawing.Size(64, 23);
-            this.uiLabel5.TabIndex = 3;
-            this.uiLabel5.Text = "COM 5";
+            this.labCH5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labCH5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.labCH5.Location = new System.Drawing.Point(8, 48);
+            this.labCH5.Name = "labCH5";
+            this.labCH5.Size = new System.Drawing.Size(132, 23);
+            this.labCH5.TabIndex = 3;
+            this.labCH5.Text = "COM 5";
             // 
             // ledCom5
             // 
@@ -971,9 +708,9 @@
             // 
             this.titlePanel4.Controls.Add(this.txtsn4);
             this.titlePanel4.Controls.Add(this.uiListBox4);
-            this.titlePanel4.Controls.Add(this.uiLabel4);
+            this.titlePanel4.Controls.Add(this.labCH4);
             this.titlePanel4.Controls.Add(this.ledCom4);
-            this.titlePanel4.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel4.Location = new System.Drawing.Point(960, 470);
             this.titlePanel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel4.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1005,7 +742,7 @@
             // 
             this.uiListBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiListBox4.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox4.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox4.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox4.Location = new System.Drawing.Point(7, 114);
@@ -1018,15 +755,15 @@
             this.uiListBox4.TabIndex = 8;
             this.uiListBox4.Text = "uiListBox4";
             // 
-            // uiLabel4
+            // labCH4
             // 
-            this.uiLabel4.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLabel4.Location = new System.Drawing.Point(7, 48);
-            this.uiLabel4.Name = "uiLabel4";
-            this.uiLabel4.Size = new System.Drawing.Size(64, 23);
-            this.uiLabel4.TabIndex = 7;
-            this.uiLabel4.Text = "COM 4";
+            this.labCH4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labCH4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.labCH4.Location = new System.Drawing.Point(7, 48);
+            this.labCH4.Name = "labCH4";
+            this.labCH4.Size = new System.Drawing.Size(135, 23);
+            this.labCH4.TabIndex = 7;
+            this.labCH4.Text = "COM 4";
             // 
             // ledCom4
             // 
@@ -1041,9 +778,9 @@
             // 
             this.titlePanel3.Controls.Add(this.txtsn3);
             this.titlePanel3.Controls.Add(this.uiListBox3);
-            this.titlePanel3.Controls.Add(this.uiLabel3);
+            this.titlePanel3.Controls.Add(this.labCH3);
             this.titlePanel3.Controls.Add(this.ledCom3);
-            this.titlePanel3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel3.Location = new System.Drawing.Point(643, 470);
             this.titlePanel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel3.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1075,7 +812,7 @@
             // 
             this.uiListBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiListBox3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox3.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox3.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox3.Location = new System.Drawing.Point(7, 113);
@@ -1088,15 +825,15 @@
             this.uiListBox3.TabIndex = 6;
             this.uiListBox3.Text = "uiListBox3";
             // 
-            // uiLabel3
+            // labCH3
             // 
-            this.uiLabel3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLabel3.Location = new System.Drawing.Point(8, 48);
-            this.uiLabel3.Name = "uiLabel3";
-            this.uiLabel3.Size = new System.Drawing.Size(64, 23);
-            this.uiLabel3.TabIndex = 5;
-            this.uiLabel3.Text = "COM 3";
+            this.labCH3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labCH3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.labCH3.Location = new System.Drawing.Point(8, 48);
+            this.labCH3.Name = "labCH3";
+            this.labCH3.Size = new System.Drawing.Size(143, 23);
+            this.labCH3.TabIndex = 5;
+            this.labCH3.Text = "COM 3";
             // 
             // ledCom3
             // 
@@ -1111,9 +848,9 @@
             // 
             this.titlePanel2.Controls.Add(this.txtsn2);
             this.titlePanel2.Controls.Add(this.uiListBox2);
-            this.titlePanel2.Controls.Add(this.uiLabel2);
+            this.titlePanel2.Controls.Add(this.labCH2);
             this.titlePanel2.Controls.Add(this.ledCom2);
-            this.titlePanel2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel2.Location = new System.Drawing.Point(326, 470);
             this.titlePanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel2.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1145,7 +882,7 @@
             // 
             this.uiListBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiListBox2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox2.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox2.Location = new System.Drawing.Point(7, 113);
@@ -1158,15 +895,15 @@
             this.uiListBox2.TabIndex = 5;
             this.uiListBox2.Text = "uiListBox2";
             // 
-            // uiLabel2
+            // labCH2
             // 
-            this.uiLabel2.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLabel2.Location = new System.Drawing.Point(7, 48);
-            this.uiLabel2.Name = "uiLabel2";
-            this.uiLabel2.Size = new System.Drawing.Size(50, 23);
-            this.uiLabel2.TabIndex = 3;
-            this.uiLabel2.Text = "COM 2";
+            this.labCH2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labCH2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.labCH2.Location = new System.Drawing.Point(7, 48);
+            this.labCH2.Name = "labCH2";
+            this.labCH2.Size = new System.Drawing.Size(50, 23);
+            this.labCH2.TabIndex = 3;
+            this.labCH2.Text = "COM 2";
             // 
             // ledCom2
             // 
@@ -1182,8 +919,8 @@
             this.titlePanel1.Controls.Add(this.ledCom1);
             this.titlePanel1.Controls.Add(this.txtsn1);
             this.titlePanel1.Controls.Add(this.uiListBox1);
-            this.titlePanel1.Controls.Add(this.uiLabel1);
-            this.titlePanel1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titlePanel1.Controls.Add(this.labCH1);
+            this.titlePanel1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel1.Location = new System.Drawing.Point(9, 470);
             this.titlePanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titlePanel1.MinimumSize = new System.Drawing.Size(1, 1);
@@ -1225,7 +962,7 @@
             this.uiListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.uiListBox1.FillColor = System.Drawing.Color.White;
-            this.uiListBox1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiListBox1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiListBox1.ItemSelectForeColor = System.Drawing.Color.White;
             this.uiListBox1.Location = new System.Drawing.Point(7, 113);
@@ -1239,15 +976,15 @@
             this.uiListBox1.TabIndex = 3;
             this.uiListBox1.Text = "uiListBox1";
             // 
-            // uiLabel1
+            // labCH1
             // 
-            this.uiLabel1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLabel1.Location = new System.Drawing.Point(4, 46);
-            this.uiLabel1.Name = "uiLabel1";
-            this.uiLabel1.Size = new System.Drawing.Size(48, 23);
-            this.uiLabel1.TabIndex = 1;
-            this.uiLabel1.Text = "COM 1";
+            this.labCH1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labCH1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.labCH1.Location = new System.Drawing.Point(4, 46);
+            this.labCH1.Name = "labCH1";
+            this.labCH1.Size = new System.Drawing.Size(48, 23);
+            this.labCH1.TabIndex = 1;
+            this.labCH1.Text = "COM 1";
             // 
             // uiPipe1
             // 
@@ -1256,7 +993,7 @@
             this.uiPipe1.Direction = Sunny.UI.UILine.LineDirection.Vertical;
             this.uiPipe1.FlowColor = System.Drawing.Color.SkyBlue;
             this.uiPipe1.FlowSpeed = 10;
-            this.uiPipe1.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiPipe1.Font = new System.Drawing.Font("宋体", 12F);
             this.uiPipe1.Location = new System.Drawing.Point(158, 349);
             this.uiPipe1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPipe1.Name = "uiPipe1";
@@ -1276,7 +1013,7 @@
             this.uiPipe11.FlowColor = System.Drawing.Color.SkyBlue;
             this.uiPipe11.FlowDirection = Sunny.UI.UIPipe.UIFlowDirection.Reverse;
             this.uiPipe11.FlowSpeed = 10;
-            this.uiPipe11.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiPipe11.Font = new System.Drawing.Font("宋体", 12F);
             this.uiPipe11.Location = new System.Drawing.Point(158, 349);
             this.uiPipe11.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPipe11.Name = "uiPipe11";
@@ -1296,7 +1033,7 @@
             this.uiPipe19.Direction = Sunny.UI.UILine.LineDirection.Vertical;
             this.uiPipe19.FlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.uiPipe19.FlowSpeed = 10;
-            this.uiPipe19.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiPipe19.Font = new System.Drawing.Font("宋体", 12F);
             this.uiPipe19.Location = new System.Drawing.Point(477, 359);
             this.uiPipe19.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPipe19.Name = "uiPipe19";
@@ -1316,7 +1053,7 @@
             this.uiPipe8.Direction = Sunny.UI.UILine.LineDirection.Vertical;
             this.uiPipe8.FlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.uiPipe8.FlowSpeed = 10;
-            this.uiPipe8.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiPipe8.Font = new System.Drawing.Font("宋体", 12F);
             this.uiPipe8.Location = new System.Drawing.Point(932, 304);
             this.uiPipe8.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPipe8.Name = "uiPipe8";
@@ -1332,7 +1069,7 @@
             // ConnectitonStatusV5
             // 
             this.ConnectitonStatusV5.Active = true;
-            this.ConnectitonStatusV5.Font = new System.Drawing.Font("SimSun", 12F);
+            this.ConnectitonStatusV5.Font = new System.Drawing.Font("宋体", 12F);
             this.ConnectitonStatusV5.Location = new System.Drawing.Point(1382, 409);
             this.ConnectitonStatusV5.MinimumSize = new System.Drawing.Size(1, 1);
             this.ConnectitonStatusV5.Name = "ConnectitonStatusV5";
@@ -1349,7 +1086,7 @@
             this.uiPipe4.Direction = Sunny.UI.UILine.LineDirection.Vertical;
             this.uiPipe4.FlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.uiPipe4.FlowSpeed = 10;
-            this.uiPipe4.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiPipe4.Font = new System.Drawing.Font("宋体", 12F);
             this.uiPipe4.Location = new System.Drawing.Point(1415, 359);
             this.uiPipe4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPipe4.Name = "uiPipe4";
@@ -1369,7 +1106,7 @@
             this.uiPipe3.Direction = Sunny.UI.UILine.LineDirection.Vertical;
             this.uiPipe3.FlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.uiPipe3.FlowSpeed = 10;
-            this.uiPipe3.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiPipe3.Font = new System.Drawing.Font("宋体", 12F);
             this.uiPipe3.Location = new System.Drawing.Point(1099, 359);
             this.uiPipe3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPipe3.Name = "uiPipe3";
@@ -1389,7 +1126,7 @@
             this.uiPipe2.Direction = Sunny.UI.UILine.LineDirection.Vertical;
             this.uiPipe2.FlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.uiPipe2.FlowSpeed = 10;
-            this.uiPipe2.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiPipe2.Font = new System.Drawing.Font("宋体", 12F);
             this.uiPipe2.Location = new System.Drawing.Point(777, 359);
             this.uiPipe2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPipe2.Name = "uiPipe2";
@@ -1404,150 +1141,523 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.uiIntegerUpDown1);
-            this.tabPage2.Controls.Add(this.uiLine1);
-            this.tabPage2.Controls.Add(this.uiTitlePanel1);
+            this.tabPage2.Controls.Add(this.uiGroupBox5);
+            this.tabPage2.Controls.Add(this.uiGroupBox1);
             this.tabPage2.Controls.Add(this.uiGroupBox4);
             this.tabPage2.Controls.Add(this.menuStrip1);
             this.tabPage2.Location = new System.Drawing.Point(0, 40);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1727, 1012);
+            this.tabPage2.Size = new System.Drawing.Size(1930, 1012);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Setting";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // uiGroupBox5
+            // 
+            this.uiGroupBox5.Controls.Add(this.uiTitlePanel2);
+            this.uiGroupBox5.Controls.Add(this.uiTitlePanel1);
+            this.uiGroupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.uiGroupBox5.Location = new System.Drawing.Point(1010, 86);
+            this.uiGroupBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox5.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox5.Name = "uiGroupBox5";
+            this.uiGroupBox5.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox5.Size = new System.Drawing.Size(516, 407);
+            this.uiGroupBox5.TabIndex = 106;
+            this.uiGroupBox5.Text = "基础设定";
+            this.uiGroupBox5.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // uiTitlePanel2
+            // 
+            this.uiTitlePanel2.Controls.Add(this.readTimeout);
+            this.uiTitlePanel2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTitlePanel2.Location = new System.Drawing.Point(22, 56);
+            this.uiTitlePanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel2.Name = "uiTitlePanel2";
+            this.uiTitlePanel2.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel2.ShowText = false;
+            this.uiTitlePanel2.Size = new System.Drawing.Size(167, 92);
+            this.uiTitlePanel2.TabIndex = 104;
+            this.uiTitlePanel2.Text = "读取超时(S)";
+            this.uiTitlePanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // readTimeout
+            // 
+            this.readTimeout.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.readTimeout.Font = new System.Drawing.Font("宋体", 12F);
+            this.readTimeout.Location = new System.Drawing.Point(5, 46);
+            this.readTimeout.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.readTimeout.Maximum = 60D;
+            this.readTimeout.MaxLength = 6;
+            this.readTimeout.Minimum = 1D;
+            this.readTimeout.MinimumSize = new System.Drawing.Size(100, 0);
+            this.readTimeout.Name = "readTimeout";
+            this.readTimeout.Padding = new System.Windows.Forms.Padding(5);
+            this.readTimeout.ShowText = false;
+            this.readTimeout.Size = new System.Drawing.Size(150, 29);
+            this.readTimeout.TabIndex = 104;
+            this.readTimeout.Text = "20";
+            this.readTimeout.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.readTimeout.Value = 20;
+            // 
             // uiTitlePanel1
             // 
-            this.uiTitlePanel1.Controls.Add(this.uiSwitch1);
-            this.uiTitlePanel1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTitlePanel1.Location = new System.Drawing.Point(13, 457);
+            this.uiTitlePanel1.Controls.Add(this.switchMesNgLock);
+            this.uiTitlePanel1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTitlePanel1.Location = new System.Drawing.Point(332, 59);
             this.uiTitlePanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanel1.Name = "uiTitlePanel1";
             this.uiTitlePanel1.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
             this.uiTitlePanel1.ShowText = false;
-            this.uiTitlePanel1.Size = new System.Drawing.Size(316, 89);
+            this.uiTitlePanel1.Size = new System.Drawing.Size(167, 89);
             this.uiTitlePanel1.TabIndex = 103;
             this.uiTitlePanel1.Text = "NG MES 锁码";
             this.uiTitlePanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiSwitch1
+            // switchMesNgLock
             // 
-            this.uiSwitch1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.uiSwitch1.Location = new System.Drawing.Point(41, 50);
-            this.uiSwitch1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch1.Name = "uiSwitch1";
-            this.uiSwitch1.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch1.TabIndex = 0;
-            this.uiSwitch1.Text = "uiSwitch1";
+            this.switchMesNgLock.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.switchMesNgLock.Location = new System.Drawing.Point(4, 50);
+            this.switchMesNgLock.MinimumSize = new System.Drawing.Size(1, 1);
+            this.switchMesNgLock.Name = "switchMesNgLock";
+            this.switchMesNgLock.Size = new System.Drawing.Size(145, 29);
+            this.switchMesNgLock.TabIndex = 0;
+            this.switchMesNgLock.Text = "uiSwitch1";
+            // 
+            // uiGroupBox1
+            // 
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox16);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox15);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox14);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox13);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox12);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox11);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox10);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox9);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox8);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox7);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox6);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox5);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox4);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox3);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox2);
+            this.uiGroupBox1.Controls.Add(this.uiCheckBox1);
+            this.uiGroupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.uiGroupBox1.Location = new System.Drawing.Point(486, 86);
+            this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox1.Name = "uiGroupBox1";
+            this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox1.Size = new System.Drawing.Size(516, 407);
+            this.uiGroupBox1.TabIndex = 105;
+            this.uiGroupBox1.Text = "MCU 继电器控制（DO）";
+            this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // uiCheckBox16
+            // 
+            this.uiCheckBox16.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox16.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox16.Location = new System.Drawing.Point(416, 71);
+            this.uiCheckBox16.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox16.Name = "uiCheckBox16";
+            this.uiCheckBox16.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox16.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox16.TabIndex = 67;
+            this.uiCheckBox16.Text = "16";
+            // 
+            // uiCheckBox15
+            // 
+            this.uiCheckBox15.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox15.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox15.Location = new System.Drawing.Point(357, 71);
+            this.uiCheckBox15.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox15.Name = "uiCheckBox15";
+            this.uiCheckBox15.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox15.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox15.TabIndex = 66;
+            this.uiCheckBox15.Text = "15";
+            // 
+            // uiCheckBox14
+            // 
+            this.uiCheckBox14.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox14.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox14.Location = new System.Drawing.Point(298, 71);
+            this.uiCheckBox14.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox14.Name = "uiCheckBox14";
+            this.uiCheckBox14.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox14.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox14.TabIndex = 65;
+            this.uiCheckBox14.Text = "14";
+            // 
+            // uiCheckBox13
+            // 
+            this.uiCheckBox13.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox13.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox13.Location = new System.Drawing.Point(239, 71);
+            this.uiCheckBox13.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox13.Name = "uiCheckBox13";
+            this.uiCheckBox13.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox13.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox13.TabIndex = 64;
+            this.uiCheckBox13.Text = "13";
+            // 
+            // uiCheckBox12
+            // 
+            this.uiCheckBox12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox12.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox12.Location = new System.Drawing.Point(180, 71);
+            this.uiCheckBox12.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox12.Name = "uiCheckBox12";
+            this.uiCheckBox12.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox12.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox12.TabIndex = 63;
+            this.uiCheckBox12.Text = "12";
+            // 
+            // uiCheckBox11
+            // 
+            this.uiCheckBox11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox11.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox11.Location = new System.Drawing.Point(122, 71);
+            this.uiCheckBox11.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox11.Name = "uiCheckBox11";
+            this.uiCheckBox11.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox11.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox11.TabIndex = 62;
+            this.uiCheckBox11.Text = "11";
+            // 
+            // uiCheckBox10
+            // 
+            this.uiCheckBox10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox10.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox10.Location = new System.Drawing.Point(62, 71);
+            this.uiCheckBox10.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox10.Name = "uiCheckBox10";
+            this.uiCheckBox10.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox10.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox10.TabIndex = 61;
+            this.uiCheckBox10.Text = "10";
+            // 
+            // uiCheckBox9
+            // 
+            this.uiCheckBox9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox9.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox9.Location = new System.Drawing.Point(3, 71);
+            this.uiCheckBox9.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox9.Name = "uiCheckBox9";
+            this.uiCheckBox9.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox9.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox9.TabIndex = 60;
+            this.uiCheckBox9.Text = "9";
+            // 
+            // uiCheckBox8
+            // 
+            this.uiCheckBox8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox8.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox8.Location = new System.Drawing.Point(416, 30);
+            this.uiCheckBox8.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox8.Name = "uiCheckBox8";
+            this.uiCheckBox8.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox8.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox8.TabIndex = 59;
+            this.uiCheckBox8.Text = "8";
+            // 
+            // uiCheckBox7
+            // 
+            this.uiCheckBox7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox7.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox7.Location = new System.Drawing.Point(357, 30);
+            this.uiCheckBox7.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox7.Name = "uiCheckBox7";
+            this.uiCheckBox7.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox7.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox7.TabIndex = 58;
+            this.uiCheckBox7.Text = "7";
+            // 
+            // uiCheckBox6
+            // 
+            this.uiCheckBox6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox6.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox6.Location = new System.Drawing.Point(298, 30);
+            this.uiCheckBox6.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox6.Name = "uiCheckBox6";
+            this.uiCheckBox6.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox6.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox6.TabIndex = 57;
+            this.uiCheckBox6.Text = "6";
+            // 
+            // uiCheckBox5
+            // 
+            this.uiCheckBox5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox5.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox5.Location = new System.Drawing.Point(239, 30);
+            this.uiCheckBox5.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox5.Name = "uiCheckBox5";
+            this.uiCheckBox5.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox5.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox5.TabIndex = 56;
+            this.uiCheckBox5.Text = "5";
+            // 
+            // uiCheckBox4
+            // 
+            this.uiCheckBox4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox4.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox4.Location = new System.Drawing.Point(180, 30);
+            this.uiCheckBox4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox4.Name = "uiCheckBox4";
+            this.uiCheckBox4.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox4.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox4.TabIndex = 55;
+            this.uiCheckBox4.Text = "4";
+            // 
+            // uiCheckBox3
+            // 
+            this.uiCheckBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox3.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox3.Location = new System.Drawing.Point(121, 30);
+            this.uiCheckBox3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox3.Name = "uiCheckBox3";
+            this.uiCheckBox3.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox3.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox3.TabIndex = 54;
+            this.uiCheckBox3.Text = "3";
+            // 
+            // uiCheckBox2
+            // 
+            this.uiCheckBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox2.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox2.Location = new System.Drawing.Point(62, 30);
+            this.uiCheckBox2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox2.Name = "uiCheckBox2";
+            this.uiCheckBox2.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox2.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox2.TabIndex = 53;
+            this.uiCheckBox2.Text = "2";
+            // 
+            // uiCheckBox1
+            // 
+            this.uiCheckBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox1.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox1.Location = new System.Drawing.Point(3, 30);
+            this.uiCheckBox1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox1.Name = "uiCheckBox1";
+            this.uiCheckBox1.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox1.Size = new System.Drawing.Size(59, 35);
+            this.uiCheckBox1.TabIndex = 52;
+            this.uiCheckBox1.Text = "1";
             // 
             // uiGroupBox4
             // 
-            this.uiGroupBox4.Controls.Add(this.uiCheckBox27);
-            this.uiGroupBox4.Controls.Add(this.uiCheckBox28);
-            this.uiGroupBox4.Controls.Add(this.uiCheckBox29);
-            this.uiGroupBox4.Controls.Add(this.uiCheckBox30);
-            this.uiGroupBox4.Controls.Add(this.uiCheckBox31);
-            this.uiGroupBox4.Controls.Add(this.uiCheckBox32);
+            this.uiGroupBox4.Controls.Add(this.cobChannelMaster);
+            this.uiGroupBox4.Controls.Add(this.uiCheckBox17);
+            this.uiGroupBox4.Controls.Add(this.cobChannel6);
+            this.uiGroupBox4.Controls.Add(this.cobChannel5);
+            this.uiGroupBox4.Controls.Add(this.cobChannel4);
+            this.uiGroupBox4.Controls.Add(this.cobChannel3);
+            this.uiGroupBox4.Controls.Add(this.cobChannel2);
+            this.uiGroupBox4.Controls.Add(this.cobChannel1);
+            this.uiGroupBox4.Controls.Add(this.checkBoxChannel6);
+            this.uiGroupBox4.Controls.Add(this.checkBoxChannel5);
+            this.uiGroupBox4.Controls.Add(this.checkBoxChannel4);
+            this.uiGroupBox4.Controls.Add(this.checkBoxChannel3);
+            this.uiGroupBox4.Controls.Add(this.checkBoxChannel2);
+            this.uiGroupBox4.Controls.Add(this.checkBoxChannel1);
             this.uiGroupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.uiGroupBox4.Location = new System.Drawing.Point(13, 86);
             this.uiGroupBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox4.Name = "uiGroupBox4";
             this.uiGroupBox4.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox4.Size = new System.Drawing.Size(507, 329);
+            this.uiGroupBox4.Size = new System.Drawing.Size(465, 407);
             this.uiGroupBox4.TabIndex = 101;
             this.uiGroupBox4.Text = "Channels  Setting";
             this.uiGroupBox4.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // uiCheckBox27
+            // cobChannelMaster
             // 
-            this.uiCheckBox27.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox27.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox27.Location = new System.Drawing.Point(3, 288);
-            this.uiCheckBox27.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox27.Name = "uiCheckBox27";
-            this.uiCheckBox27.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox27.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox27.TabIndex = 57;
-            this.uiCheckBox27.Text = "6";
+            this.cobChannelMaster.FormattingEnabled = true;
+            this.cobChannelMaster.Location = new System.Drawing.Point(97, 190);
+            this.cobChannelMaster.Name = "cobChannelMaster";
+            this.cobChannelMaster.Size = new System.Drawing.Size(115, 28);
+            this.cobChannelMaster.TabIndex = 65;
             // 
-            // uiCheckBox28
+            // uiCheckBox17
             // 
-            this.uiCheckBox28.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox28.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox28.Location = new System.Drawing.Point(3, 247);
-            this.uiCheckBox28.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox28.Name = "uiCheckBox28";
-            this.uiCheckBox28.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox28.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox28.TabIndex = 56;
-            this.uiCheckBox28.Text = "5";
+            this.uiCheckBox17.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox17.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiCheckBox17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox17.Location = new System.Drawing.Point(34, 187);
+            this.uiCheckBox17.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox17.Name = "uiCheckBox17";
+            this.uiCheckBox17.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.uiCheckBox17.Size = new System.Drawing.Size(57, 33);
+            this.uiCheckBox17.TabIndex = 64;
+            this.uiCheckBox17.Text = "MCU";
             // 
-            // uiCheckBox29
+            // cobChannel6
             // 
-            this.uiCheckBox29.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox29.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox29.Location = new System.Drawing.Point(3, 206);
-            this.uiCheckBox29.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox29.Name = "uiCheckBox29";
-            this.uiCheckBox29.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox29.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox29.TabIndex = 55;
-            this.uiCheckBox29.Text = "4";
+            this.cobChannel6.FormattingEnabled = true;
+            this.cobChannel6.Location = new System.Drawing.Point(316, 302);
+            this.cobChannel6.Name = "cobChannel6";
+            this.cobChannel6.Size = new System.Drawing.Size(106, 28);
+            this.cobChannel6.TabIndex = 63;
             // 
-            // uiCheckBox30
+            // cobChannel5
             // 
-            this.uiCheckBox30.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox30.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox30.Location = new System.Drawing.Point(3, 165);
-            this.uiCheckBox30.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox30.Name = "uiCheckBox30";
-            this.uiCheckBox30.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox30.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox30.TabIndex = 54;
-            this.uiCheckBox30.Text = "3";
+            this.cobChannel5.FormattingEnabled = true;
+            this.cobChannel5.Location = new System.Drawing.Point(316, 259);
+            this.cobChannel5.Name = "cobChannel5";
+            this.cobChannel5.Size = new System.Drawing.Size(106, 28);
+            this.cobChannel5.TabIndex = 62;
             // 
-            // uiCheckBox31
+            // cobChannel4
             // 
-            this.uiCheckBox31.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox31.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox31.Location = new System.Drawing.Point(3, 124);
-            this.uiCheckBox31.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox31.Name = "uiCheckBox31";
-            this.uiCheckBox31.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox31.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox31.TabIndex = 53;
-            this.uiCheckBox31.Text = "2";
+            this.cobChannel4.FormattingEnabled = true;
+            this.cobChannel4.Location = new System.Drawing.Point(316, 216);
+            this.cobChannel4.Name = "cobChannel4";
+            this.cobChannel4.Size = new System.Drawing.Size(106, 28);
+            this.cobChannel4.TabIndex = 61;
             // 
-            // uiCheckBox32
+            // cobChannel3
             // 
-            this.uiCheckBox32.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox32.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiCheckBox32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox32.Location = new System.Drawing.Point(3, 83);
-            this.uiCheckBox32.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox32.Name = "uiCheckBox32";
-            this.uiCheckBox32.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox32.Size = new System.Drawing.Size(59, 35);
-            this.uiCheckBox32.TabIndex = 52;
-            this.uiCheckBox32.Text = "1";
+            this.cobChannel3.FormattingEnabled = true;
+            this.cobChannel3.Location = new System.Drawing.Point(316, 173);
+            this.cobChannel3.Name = "cobChannel3";
+            this.cobChannel3.Size = new System.Drawing.Size(106, 28);
+            this.cobChannel3.TabIndex = 60;
+            // 
+            // cobChannel2
+            // 
+            this.cobChannel2.FormattingEnabled = true;
+            this.cobChannel2.Location = new System.Drawing.Point(316, 130);
+            this.cobChannel2.Name = "cobChannel2";
+            this.cobChannel2.Size = new System.Drawing.Size(106, 28);
+            this.cobChannel2.TabIndex = 59;
+            // 
+            // cobChannel1
+            // 
+            this.cobChannel1.FormattingEnabled = true;
+            this.cobChannel1.Location = new System.Drawing.Point(316, 87);
+            this.cobChannel1.Name = "cobChannel1";
+            this.cobChannel1.Size = new System.Drawing.Size(106, 28);
+            this.cobChannel1.TabIndex = 58;
+            // 
+            // checkBoxChannel6
+            // 
+            this.checkBoxChannel6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxChannel6.Font = new System.Drawing.Font("宋体", 12F);
+            this.checkBoxChannel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.checkBoxChannel6.Location = new System.Drawing.Point(262, 304);
+            this.checkBoxChannel6.MinimumSize = new System.Drawing.Size(1, 1);
+            this.checkBoxChannel6.Name = "checkBoxChannel6";
+            this.checkBoxChannel6.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.checkBoxChannel6.Size = new System.Drawing.Size(46, 35);
+            this.checkBoxChannel6.TabIndex = 57;
+            this.checkBoxChannel6.Text = "6";
+            // 
+            // checkBoxChannel5
+            // 
+            this.checkBoxChannel5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxChannel5.Font = new System.Drawing.Font("宋体", 12F);
+            this.checkBoxChannel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.checkBoxChannel5.Location = new System.Drawing.Point(262, 261);
+            this.checkBoxChannel5.MinimumSize = new System.Drawing.Size(1, 1);
+            this.checkBoxChannel5.Name = "checkBoxChannel5";
+            this.checkBoxChannel5.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.checkBoxChannel5.Size = new System.Drawing.Size(46, 35);
+            this.checkBoxChannel5.TabIndex = 56;
+            this.checkBoxChannel5.Text = "5";
+            // 
+            // checkBoxChannel4
+            // 
+            this.checkBoxChannel4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxChannel4.Font = new System.Drawing.Font("宋体", 12F);
+            this.checkBoxChannel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.checkBoxChannel4.Location = new System.Drawing.Point(262, 218);
+            this.checkBoxChannel4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.checkBoxChannel4.Name = "checkBoxChannel4";
+            this.checkBoxChannel4.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.checkBoxChannel4.Size = new System.Drawing.Size(46, 35);
+            this.checkBoxChannel4.TabIndex = 55;
+            this.checkBoxChannel4.Text = "4";
+            // 
+            // checkBoxChannel3
+            // 
+            this.checkBoxChannel3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxChannel3.Font = new System.Drawing.Font("宋体", 12F);
+            this.checkBoxChannel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.checkBoxChannel3.Location = new System.Drawing.Point(262, 175);
+            this.checkBoxChannel3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.checkBoxChannel3.Name = "checkBoxChannel3";
+            this.checkBoxChannel3.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.checkBoxChannel3.Size = new System.Drawing.Size(46, 35);
+            this.checkBoxChannel3.TabIndex = 54;
+            this.checkBoxChannel3.Text = "3";
+            // 
+            // checkBoxChannel2
+            // 
+            this.checkBoxChannel2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxChannel2.Font = new System.Drawing.Font("宋体", 12F);
+            this.checkBoxChannel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.checkBoxChannel2.Location = new System.Drawing.Point(262, 132);
+            this.checkBoxChannel2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.checkBoxChannel2.Name = "checkBoxChannel2";
+            this.checkBoxChannel2.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.checkBoxChannel2.Size = new System.Drawing.Size(46, 35);
+            this.checkBoxChannel2.TabIndex = 53;
+            this.checkBoxChannel2.Text = "2";
+            // 
+            // checkBoxChannel1
+            // 
+            this.checkBoxChannel1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxChannel1.Font = new System.Drawing.Font("宋体", 12F);
+            this.checkBoxChannel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.checkBoxChannel1.Location = new System.Drawing.Point(262, 89);
+            this.checkBoxChannel1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.checkBoxChannel1.Name = "checkBoxChannel1";
+            this.checkBoxChannel1.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.checkBoxChannel1.Size = new System.Drawing.Size(46, 35);
+            this.checkBoxChannel1.TabIndex = 52;
+            this.checkBoxChannel1.Text = "1";
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.saveToolStripMenuItem});
+            this.saveToolStripMenuItem,
+            this.refreshToolStripMenuItem,
+            this.reloadToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1727, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1930, 32);
             this.menuStrip1.TabIndex = 102;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // uiContextMenuStrip1
+            // 
+            this.uiContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.uiContextMenuStrip1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiContextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.uiContextMenuStrip1.Name = "uiContextMenuStrip1";
+            this.uiContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // fileToolStripMenuItem
             // 
@@ -1555,77 +1665,54 @@
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
             this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Image = global::LeakTestSystem.Properties.Resources.baocun;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(63, 28);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // saveToolStripMenuItem
             // 
+            this.saveToolStripMenuItem.Image = global::LeakTestSystem.Properties.Resources.shujubao;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(71, 28);
             this.saveToolStripMenuItem.Text = "Save";
             // 
-            // uiContextMenuStrip1
+            // refreshToolStripMenuItem
             // 
-            this.uiContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.uiContextMenuStrip1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiContextMenuStrip1.Name = "uiContextMenuStrip1";
-            this.uiContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.refreshToolStripMenuItem.Image = global::LeakTestSystem.Properties.Resources.shujukaifa;
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(88, 28);
+            this.refreshToolStripMenuItem.Text = "Refresh";
             // 
-            // uiIntegerUpDown1
+            // reloadToolStripMenuItem
             // 
-            this.uiIntegerUpDown1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiIntegerUpDown1.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiIntegerUpDown1.Location = new System.Drawing.Point(679, 402);
-            this.uiIntegerUpDown1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiIntegerUpDown1.Maximum = 6D;
-            this.uiIntegerUpDown1.MaxLength = 6;
-            this.uiIntegerUpDown1.Minimum = 1D;
-            this.uiIntegerUpDown1.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiIntegerUpDown1.Name = "uiIntegerUpDown1";
-            this.uiIntegerUpDown1.Padding = new System.Windows.Forms.Padding(5);
-            this.uiIntegerUpDown1.ShowText = false;
-            this.uiIntegerUpDown1.Size = new System.Drawing.Size(150, 29);
-            this.uiIntegerUpDown1.TabIndex = 104;
-            this.uiIntegerUpDown1.Text = "6";
-            this.uiIntegerUpDown1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.uiIntegerUpDown1.Value = 6;
-            // 
-            // uiLine1
-            // 
-            this.uiLine1.BackColor = System.Drawing.Color.Transparent;
-            this.uiLine1.Font = new System.Drawing.Font("SimSun", 12F);
-            this.uiLine1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiLine1.Location = new System.Drawing.Point(553, 99);
-            this.uiLine1.MinimumSize = new System.Drawing.Size(16, 16);
-            this.uiLine1.Name = "uiLine1";
-            this.uiLine1.Size = new System.Drawing.Size(118, 20);
-            this.uiLine1.TabIndex = 105;
-            this.uiLine1.Text = "超时设定";
-            this.uiLine1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.reloadToolStripMenuItem.Image = global::LeakTestSystem.Properties.Resources.dianliu;
+            this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(85, 28);
+            this.reloadToolStripMenuItem.Text = "Reload";
             // 
             // FrmMaster
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1727, 1087);
+            this.ClientSize = new System.Drawing.Size(1930, 1087);
             this.Controls.Add(this.uiTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -1637,9 +1724,7 @@
             this.uiTabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.uiGroupBox3.ResumeLayout(false);
-            this.uiTitlePanel3.ResumeLayout(false);
             this.uiTitlePanel9.ResumeLayout(false);
-            this.uiGroupBox1.ResumeLayout(false);
             this.uiGroupBox2.ResumeLayout(false);
             this.groupSnList.ResumeLayout(false);
             this.titlePanel8.ResumeLayout(false);
@@ -1651,7 +1736,10 @@
             this.titlePanel1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.uiGroupBox5.ResumeLayout(false);
+            this.uiTitlePanel2.ResumeLayout(false);
             this.uiTitlePanel1.ResumeLayout(false);
+            this.uiGroupBox1.ResumeLayout(false);
             this.uiGroupBox4.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -1670,8 +1758,6 @@
         private Sunny.UI.UIValve ConnectitonStatusV1;
         private Sunny.UI.UIPipe uiPipe8;
         private Sunny.UI.UILedBulb ledCom7;
-        private Sunny.UI.UITitlePanel uiTitlePanel3;
-        private Sunny.UI.UIIntegerUpDown IntegerUpDownChannels;
         private Sunny.UI.UILedBulb ledCom1;
         private Sunny.UI.UILedBulb ledCom6;
         private Sunny.UI.UIGroupBox groupSnList;
@@ -1683,6 +1769,78 @@
         private Sunny.UI.UILedBulb ledCom4;
         private Sunny.UI.UILedBulb ledCom5;
         private Sunny.UI.UITitlePanel uiTitlePanel9;
+        private Sunny.UI.UIGroupBox uiGroupBox2;
+        private Sunny.UI.UIRadioButton RadioDebugMode;
+        private Sunny.UI.UIRadioButton RadioBtnProductionMode;
+        private Sunny.UI.UITextBox txtEmp;
+        private Sunny.UI.UISwitch switchMES;
+        private Sunny.UI.UILine uiLine9;
+        private Sunny.UI.UILine uiLine2;
+        private Sunny.UI.UIAvatar uiAvatar1;
+        private Sunny.UI.UITitlePanel titlePanel8;
+        private Sunny.UI.UILabel labMaster;
+        private Sunny.UI.UISwitch switchCom7;
+        private Sunny.UI.UITitlePanel titlePanel6;
+        private Sunny.UI.UITextBox txtsn6;
+        private Sunny.UI.UIListBox uiListBox6;
+        private Sunny.UI.UILabel labCH6;
+        private Sunny.UI.UITitlePanel titlePanel5;
+        private Sunny.UI.UITextBox txtsn5;
+        private Sunny.UI.UIListBox uiListBox5;
+        private Sunny.UI.UILabel labCH5;
+        private Sunny.UI.UITitlePanel titlePanel4;
+        private Sunny.UI.UITextBox txtsn4;
+        private Sunny.UI.UIListBox uiListBox4;
+        private Sunny.UI.UILabel labCH4;
+        private Sunny.UI.UITitlePanel titlePanel3;
+        private Sunny.UI.UITextBox txtsn3;
+        private Sunny.UI.UIListBox uiListBox3;
+        private Sunny.UI.UILabel labCH3;
+        private Sunny.UI.UITitlePanel titlePanel2;
+        private Sunny.UI.UITextBox txtsn2;
+        private Sunny.UI.UIListBox uiListBox2;
+        private Sunny.UI.UILabel labCH2;
+        private Sunny.UI.UITitlePanel titlePanel1;
+        private Sunny.UI.UITextBox txtsn1;
+        private Sunny.UI.UIListBox uiListBox1;
+        private Sunny.UI.UILabel labCH1;
+        private Sunny.UI.UIValve ConnectitonStatusV2;
+        private Sunny.UI.UIPipe uiPipe19;
+        private Sunny.UI.UIValve ConnectitonStatusV6;
+        private Sunny.UI.UIPipe uiPipe18;
+        private Sunny.UI.UIValve ConnectitonStatusV4;
+        private Sunny.UI.UIValve ConnectitonStatusV3;
+        private Sunny.UI.UIValve ConnectitonStatusV5;
+        private Sunny.UI.UIPipe uiPipe4;
+        private Sunny.UI.UIPipe uiPipe3;
+        private Sunny.UI.UIPipe uiPipe2;
+        private Sunny.UI.UIGroupBox uiGroupBox3;
+        private Sunny.UI.UIRichTextBox uiRichTextBox1;
+        private Sunny.UI.UIGroupBox uiGroupBox4;
+        private Sunny.UI.UICheckBox checkBoxChannel6;
+        private Sunny.UI.UICheckBox checkBoxChannel5;
+        private Sunny.UI.UICheckBox checkBoxChannel4;
+        private Sunny.UI.UICheckBox checkBoxChannel3;
+        private Sunny.UI.UICheckBox checkBoxChannel2;
+        private Sunny.UI.UICheckBox checkBoxChannel1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private Sunny.UI.UITitlePanel uiTitlePanel1;
+        private Sunny.UI.UISwitch switchMesNgLock;
+        private Sunny.UI.UIIntegerUpDown readTimeout;
+        private Sunny.UI.UITitlePanel uiTitlePanel2;
+        private System.Windows.Forms.ComboBox cobChannel2;
+        private System.Windows.Forms.ComboBox cobChannel1;
+        private System.Windows.Forms.ComboBox cobChannelMaster;
+        private Sunny.UI.UICheckBox uiCheckBox17;
+        private System.Windows.Forms.ComboBox cobChannel6;
+        private System.Windows.Forms.ComboBox cobChannel5;
+        private System.Windows.Forms.ComboBox cobChannel4;
+        private System.Windows.Forms.ComboBox cobChannel3;
         private Sunny.UI.UIGroupBox uiGroupBox1;
         private Sunny.UI.UICheckBox uiCheckBox16;
         private Sunny.UI.UICheckBox uiCheckBox15;
@@ -1700,70 +1858,9 @@
         private Sunny.UI.UICheckBox uiCheckBox3;
         private Sunny.UI.UICheckBox uiCheckBox2;
         private Sunny.UI.UICheckBox uiCheckBox1;
-        private Sunny.UI.UIGroupBox uiGroupBox2;
-        private Sunny.UI.UIRadioButton RadioDebugMode;
-        private Sunny.UI.UIRadioButton RadioBtnProductionMode;
-        private Sunny.UI.UITextBox txtEmp;
-        private Sunny.UI.UISwitch switchMES;
-        private Sunny.UI.UILine uiLine9;
-        private Sunny.UI.UILine uiLine2;
-        private Sunny.UI.UIAvatar uiAvatar1;
-        private Sunny.UI.UITitlePanel titlePanel8;
-        private Sunny.UI.UILabel uiLabel7;
-        private Sunny.UI.UISwitch switchCom7;
-        private Sunny.UI.UITitlePanel titlePanel6;
-        private Sunny.UI.UITextBox txtsn6;
-        private Sunny.UI.UIListBox uiListBox6;
-        private Sunny.UI.UILabel uiLabel6;
-        private Sunny.UI.UITitlePanel titlePanel5;
-        private Sunny.UI.UITextBox txtsn5;
-        private Sunny.UI.UIListBox uiListBox5;
-        private Sunny.UI.UILabel uiLabel5;
-        private Sunny.UI.UITitlePanel titlePanel4;
-        private Sunny.UI.UITextBox txtsn4;
-        private Sunny.UI.UIListBox uiListBox4;
-        private Sunny.UI.UILabel uiLabel4;
-        private Sunny.UI.UITitlePanel titlePanel3;
-        private Sunny.UI.UITextBox txtsn3;
-        private Sunny.UI.UIListBox uiListBox3;
-        private Sunny.UI.UILabel uiLabel3;
-        private Sunny.UI.UITitlePanel titlePanel2;
-        private Sunny.UI.UITextBox txtsn2;
-        private Sunny.UI.UIListBox uiListBox2;
-        private Sunny.UI.UILabel uiLabel2;
-        private Sunny.UI.UITitlePanel titlePanel1;
-        private Sunny.UI.UITextBox txtsn1;
-        private Sunny.UI.UIListBox uiListBox1;
-        private Sunny.UI.UILabel uiLabel1;
-        private Sunny.UI.UIValve ConnectitonStatusV2;
-        private Sunny.UI.UIPipe uiPipe19;
-        private Sunny.UI.UIValve ConnectitonStatusV6;
-        private Sunny.UI.UIPipe uiPipe18;
-        private Sunny.UI.UIValve ConnectitonStatusV4;
-        private Sunny.UI.UIValve ConnectitonStatusV3;
-        private Sunny.UI.UIValve ConnectitonStatusV5;
-        private Sunny.UI.UIPipe uiPipe4;
-        private Sunny.UI.UIPipe uiPipe3;
-        private Sunny.UI.UIPipe uiPipe2;
-        private Sunny.UI.UIGroupBox uiGroupBox3;
-        private Sunny.UI.UIRichTextBox uiRichTextBox1;
-        private Sunny.UI.UIGroupBox uiGroupBox4;
-        private Sunny.UI.UICheckBox uiCheckBox27;
-        private Sunny.UI.UICheckBox uiCheckBox28;
-        private Sunny.UI.UICheckBox uiCheckBox29;
-        private Sunny.UI.UICheckBox uiCheckBox30;
-        private Sunny.UI.UICheckBox uiCheckBox31;
-        private Sunny.UI.UICheckBox uiCheckBox32;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private Sunny.UI.UITitlePanel uiTitlePanel1;
-        private Sunny.UI.UISwitch uiSwitch1;
-        private Sunny.UI.UIIntegerUpDown uiIntegerUpDown1;
-        private Sunny.UI.UILine uiLine1;
+        private Sunny.UI.UIGroupBox uiGroupBox5;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reloadToolStripMenuItem;
     }
 }
 
