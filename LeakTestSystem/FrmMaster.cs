@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Controller;
 using LeakTestSystem.Model;
 using LeakTestSystem.Services;
 using LeakTestSystem.Services.MES;
@@ -31,6 +32,12 @@ namespace LeakTestSystem
         private int maxCount = 6;
         private readonly StringBuilder _serialBuffer = new StringBuilder();
         private readonly object _lock = new object();
+        private readonly UITextBox[] snTextBoxes;
+
+        /// <summary>
+        /// 测试记录
+        /// </summary>
+        private List<TestResult> testResults = new List<TestResult>();
 
         public FrmMaster()
         {
@@ -40,12 +47,14 @@ namespace LeakTestSystem
             this.IntegerUpDownChannels.TextChanged += IntegerUpDownChannels_TextChanged;
             this.Text += $"->(Version:{System.Windows.Forms.Application.ProductVersion})";
             //this.FrmMaster_FormClosing += FrmMaster_FormClosing;
+            snTextBoxes = new[] { txtsn1, txtsn2, txtsn3, txtsn4, txtsn5, txtsn6 };
         }
 
         private void FrmMaster_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.ShowAskDialog("您确定退出窗体吗", true);
             {
+                MES_Service.MesDisConnect();
             }
         }
 
@@ -215,7 +224,10 @@ namespace LeakTestSystem
             this.uiCheckBox15.Click += UiCheckBox_Click;
             this.uiCheckBox16.Click += UiCheckBox_Click;
             //var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
-            //getResult(0, data);
+            var data = "<04>:-0.483 PSI:(OK):-0.1521 sccm";
+            GetResult(0, data);
+            var data1 = "<03>:(AL):SEALED PART VOL TOO SMALL";
+            GetResult(1, data1);
         }
 
         private void UiCheckBox_Click(object sender, EventArgs e)
@@ -641,7 +653,7 @@ namespace LeakTestSystem
             }));
             ShowLogs(data, Color.Black);
             //var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
-            getResult(index, data);
+            GetResult(index, data);
         }
 
         private void ShowLogs(string InfoLogs, Color color)
@@ -700,56 +712,84 @@ namespace LeakTestSystem
             }
         }
 
+        private async Task GetWaitTestResult()
+        {
+        }
+
         /// <summary>
         /// 解析测试结果并显示日志
         /// </summary>
         /// <param name="index">索引，用于获取对应的SN</param>
         /// <param name="data">测试结果数据</param>
-        private void getResult(int index, string data)
+        /// <summary>
+        /// 解析测试结果并显示日志
+        /// </summary>
+        private void GetResult(int index, string data)
         {
-            var dataArry = data.Split(":");
-            if (dataArry.Length != 4)
+            string sn = GetSN(index);
+
+            if (!TestResult.TryParse(data, out TestResult result))
             {
-                if (dataArry.Length == 3)
-                {
-                    var res = dataArry[1];
-                    ShowLogs($"测试结果:SN:{getSN(index)} {res} 测试报警 {dataArry[2]} ", Color.Red);
-                }
-                ShowLogs($" 数据格式错误: {getSN(index)} {data}", Color.Red);
+                ShowLogs($"数据格式错误 SN:{sn} Data:{data}", Color.Red);
+                new pageResult("FAIL").ShowDialog();
                 return;
             }
-            var proName = dataArry[0];
-            var valve1 = dataArry[1];
-            var result = dataArry[2];
-            var value2 = dataArry[3];
-            result = result.Replace("(", "").Replace(")", "").Trim();
-            switch (result)
+
+            string msg;
+            result.channelsName = $"CH{index + 1}";
+            switch (result.testResult)
             {
                 case "OK":
-                    {
-                        ShowLogs($"测试结果:SN:{getSN(index)} {result}  proName={proName}  valve1={valve1}  value2={value2} ", Color.Green);
-                        break;
-                    }
+                    msg =
+                        $"测试结果:SN:{sn} " +
+                        $"结果:{result.testResult} " +
+                        $"通道:{result.channelsName} " +
+                        $"压力:{result.PressureValue} " +
+                        $"泄漏:{result.LeakValue}";
+
+                    ShowLogs(msg, Color.Green);
+                    new pageResult("PASS").ShowDialog();
+                    break;
+
                 case "AL":
-                    {
-                        ShowLogs($"测试结果:SN:{getSN(index)} {result} 测试报警  proName={proName}  valve1={valve1}  value2={value2} ", Color.Red);
-                        break;
-                    }
+                    msg =
+                        $"测试结果:SN:{sn} " +
+                        $"报警:{result.alarmMessage} " +
+                        $"通道:{result.channelsName}";
+                    new pageResult("FAIL").ShowDialog();
+                    ShowLogs(msg, Color.Red);
+                    break;
+
                 case "TD":
-                    {
-                        ShowLogs($"测试结果:SN:{getSN(index)} {result} 正常值泄露 NG  proName={proName}  valve1={valve1}  value2={value2} ", Color.Green);
-                        break;
-                    }
+                    msg =
+                        $"测试结果:SN:{sn} " +
+                        $"正常值泄漏NG " +
+                        $"通道:{result.channelsName} " +
+                        $"压力:{result.PressureValue} " +
+                        $"泄漏:{result.LeakValue}";
+                    new pageResult("FAIL").ShowDialog();
+                    ShowLogs(msg, Color.Orange);
+                    break;
+
                 case "RD":
-                    {
-                        ShowLogs($"测试结果:SN:{getSN(index)} {result} 负值泄露 NG proName={proName}  valve1={valve1}  value2={value2} ", Color.Green);
-                        break;
-                    }
+                    msg =
+                        $"测试结果:SN:{sn} " +
+                        $"负值泄漏NG " +
+                        $"通道:{result.channelsName} " +
+                        $"压力:{result.PressureValue} " +
+                        $"泄漏:{result.LeakValue}";
+                    new pageResult("FAIL").ShowDialog();
+                    ShowLogs(msg, Color.Orange);
+                    break;
+
                 default:
-                    {
-                        ShowLogs($"测试结果:SN:{getSN(index)} {result} 未知结果 proName={proName}  valve1={valve1}  value2={value2} ", Color.Orange);
-                        break;
-                    }
+                    msg =
+                        $"测试结果:SN:{sn} " +
+                        $"未知结果:{result.testResult} " +
+                        $"原始数据:{data}";
+                    new pageResult("FAIL").ShowDialog();
+                    ShowLogs(msg, Color.Gray);
+                    break;
             }
         }
 
@@ -758,18 +798,12 @@ namespace LeakTestSystem
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        private string getSN(int index)
+        private string GetSN(int index)
         {
-            switch (index)
-            {
-                case 0: return txtsn1.Text;
-                case 1: return txtsn2.Text;
-                case 2: return txtsn3.Text;
-                case 3: return txtsn4.Text;
-                case 4: return txtsn5.Text;
-                case 5: return txtsn6.Text;
-                default: return string.Empty;
-            }
+            if (index < 0 || index >= snTextBoxes.Length)
+                return string.Empty;
+
+            return snTextBoxes[index].Text.Trim();
         }
     }
 }

@@ -115,6 +115,8 @@
             this.uiPipe3 = new Sunny.UI.UIPipe();
             this.uiPipe2 = new Sunny.UI.UIPipe();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.uiTitlePanel1 = new Sunny.UI.UITitlePanel();
+            this.uiSwitch1 = new Sunny.UI.UISwitch();
             this.uiGroupBox4 = new Sunny.UI.UIGroupBox();
             this.uiCheckBox27 = new Sunny.UI.UICheckBox();
             this.uiCheckBox28 = new Sunny.UI.UICheckBox();
@@ -122,15 +124,15 @@
             this.uiCheckBox30 = new Sunny.UI.UICheckBox();
             this.uiCheckBox31 = new Sunny.UI.UICheckBox();
             this.uiCheckBox32 = new Sunny.UI.UICheckBox();
-            this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uiTitlePanel1 = new Sunny.UI.UITitlePanel();
-            this.uiSwitch1 = new Sunny.UI.UISwitch();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip(this.components);
+            this.uiIntegerUpDown1 = new Sunny.UI.UIIntegerUpDown();
+            this.uiLine1 = new Sunny.UI.UILine();
             this.uiTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.uiGroupBox3.SuspendLayout();
@@ -147,9 +149,9 @@
             this.titlePanel2.SuspendLayout();
             this.titlePanel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.uiTitlePanel1.SuspendLayout();
             this.uiGroupBox4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.uiTitlePanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // uiTabControl1
@@ -1402,6 +1404,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.uiIntegerUpDown1);
+            this.tabPage2.Controls.Add(this.uiLine1);
             this.tabPage2.Controls.Add(this.uiTitlePanel1);
             this.tabPage2.Controls.Add(this.uiGroupBox4);
             this.tabPage2.Controls.Add(this.menuStrip1);
@@ -1411,6 +1415,31 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Setting";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // uiTitlePanel1
+            // 
+            this.uiTitlePanel1.Controls.Add(this.uiSwitch1);
+            this.uiTitlePanel1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTitlePanel1.Location = new System.Drawing.Point(13, 457);
+            this.uiTitlePanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel1.Name = "uiTitlePanel1";
+            this.uiTitlePanel1.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel1.ShowText = false;
+            this.uiTitlePanel1.Size = new System.Drawing.Size(316, 89);
+            this.uiTitlePanel1.TabIndex = 103;
+            this.uiTitlePanel1.Text = "NG MES 锁码";
+            this.uiTitlePanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiSwitch1
+            // 
+            this.uiSwitch1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.uiSwitch1.Location = new System.Drawing.Point(41, 50);
+            this.uiSwitch1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch1.Name = "uiSwitch1";
+            this.uiSwitch1.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch1.TabIndex = 0;
+            this.uiSwitch1.Text = "uiSwitch1";
             // 
             // uiGroupBox4
             // 
@@ -1509,13 +1538,6 @@
             this.uiCheckBox32.TabIndex = 52;
             this.uiCheckBox32.Text = "1";
             // 
-            // uiContextMenuStrip1
-            // 
-            this.uiContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.uiContextMenuStrip1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiContextMenuStrip1.Name = "uiContextMenuStrip1";
-            this.uiContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1537,54 +1559,68 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.newToolStripMenuItem.Text = "New";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.saveToolStripMenuItem.Text = "Save";
             // 
-            // newToolStripMenuItem
+            // uiContextMenuStrip1
             // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newToolStripMenuItem.Text = "New";
+            this.uiContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.uiContextMenuStrip1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiContextMenuStrip1.Name = "uiContextMenuStrip1";
+            this.uiContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // openToolStripMenuItem
+            // uiIntegerUpDown1
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.uiIntegerUpDown1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uiIntegerUpDown1.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiIntegerUpDown1.Location = new System.Drawing.Point(679, 402);
+            this.uiIntegerUpDown1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiIntegerUpDown1.Maximum = 6D;
+            this.uiIntegerUpDown1.MaxLength = 6;
+            this.uiIntegerUpDown1.Minimum = 1D;
+            this.uiIntegerUpDown1.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiIntegerUpDown1.Name = "uiIntegerUpDown1";
+            this.uiIntegerUpDown1.Padding = new System.Windows.Forms.Padding(5);
+            this.uiIntegerUpDown1.ShowText = false;
+            this.uiIntegerUpDown1.Size = new System.Drawing.Size(150, 29);
+            this.uiIntegerUpDown1.TabIndex = 104;
+            this.uiIntegerUpDown1.Text = "6";
+            this.uiIntegerUpDown1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiIntegerUpDown1.Value = 6;
             // 
-            // exitToolStripMenuItem
+            // uiLine1
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // uiTitlePanel1
-            // 
-            this.uiTitlePanel1.Controls.Add(this.uiSwitch1);
-            this.uiTitlePanel1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTitlePanel1.Location = new System.Drawing.Point(13, 457);
-            this.uiTitlePanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTitlePanel1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiTitlePanel1.Name = "uiTitlePanel1";
-            this.uiTitlePanel1.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
-            this.uiTitlePanel1.ShowText = false;
-            this.uiTitlePanel1.Size = new System.Drawing.Size(218, 89);
-            this.uiTitlePanel1.TabIndex = 103;
-            this.uiTitlePanel1.Text = "NG MES 锁码";
-            this.uiTitlePanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiSwitch1
-            // 
-            this.uiSwitch1.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.uiSwitch1.Location = new System.Drawing.Point(41, 50);
-            this.uiSwitch1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch1.Name = "uiSwitch1";
-            this.uiSwitch1.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch1.TabIndex = 0;
-            this.uiSwitch1.Text = "uiSwitch1";
+            this.uiLine1.BackColor = System.Drawing.Color.Transparent;
+            this.uiLine1.Font = new System.Drawing.Font("SimSun", 12F);
+            this.uiLine1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiLine1.Location = new System.Drawing.Point(553, 99);
+            this.uiLine1.MinimumSize = new System.Drawing.Size(16, 16);
+            this.uiLine1.Name = "uiLine1";
+            this.uiLine1.Size = new System.Drawing.Size(118, 20);
+            this.uiLine1.TabIndex = 105;
+            this.uiLine1.Text = "超时设定";
+            this.uiLine1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FrmMaster
             // 
@@ -1615,10 +1651,10 @@
             this.titlePanel1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.uiTitlePanel1.ResumeLayout(false);
             this.uiGroupBox4.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.uiTitlePanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1726,6 +1762,8 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private Sunny.UI.UITitlePanel uiTitlePanel1;
         private Sunny.UI.UISwitch uiSwitch1;
+        private Sunny.UI.UIIntegerUpDown uiIntegerUpDown1;
+        private Sunny.UI.UILine uiLine1;
     }
 }
 
