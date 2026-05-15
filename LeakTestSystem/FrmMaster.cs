@@ -449,8 +449,8 @@ namespace LeakTestSystem
                             this.ShowWaitForm("启动测试...请等待...");
                             // 如果要继续扫下一批，记得清空
 
-                            Thread.Sleep(1000);
-                            this.HideWaitForm();
+                            //Thread.Sleep(1000);
+                            //this.HideWaitForm();
                             //开启继电器
                             modbusIo.SetRelay(1, 0, true); // 举例：触发继电器1
                             ShowLogs("启动测试...请等待...", Color.Black);
@@ -458,8 +458,8 @@ namespace LeakTestSystem
                         }
                         else
                         {
-                            this.ShowErrorNotifier("请先打开COM7");
-                            ShowLogs("请先打开COM7", Color.Red);
+                            this.ShowErrorNotifier($"请先打开MCU 串口 {_config.masterComName}");
+                            ShowLogs($"请先打开MCU 串口 {_config.masterComName}", Color.Red);
                         }
                         txtMasterInput.Clear();
                     }
@@ -701,6 +701,7 @@ namespace LeakTestSystem
                 else
                 {
                     modbusIo.SetRelay(1, 0, false); // 举例：关闭继电器1
+                    this.HideWaitForm();
                     string data = port.ReadExisting();
 
                     lock (_lock)
