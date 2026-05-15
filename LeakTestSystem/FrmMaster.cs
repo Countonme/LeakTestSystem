@@ -430,12 +430,15 @@ namespace LeakTestSystem
                     }
                     snList.Add(new ScanModel { serialNumber = barcode, model = flagProductionModel });
                     // 👉 按当前数量安全赋值
-                    if (snList.Count > 0) txtsn1.Text = snList[0].serialNumber;
-                    if (snList.Count > 1) txtsn2.Text = snList[1].serialNumber;
-                    if (snList.Count > 2) txtsn3.Text = snList[2].serialNumber;
-                    if (snList.Count > 3) txtsn4.Text = snList[3].serialNumber;
-                    if (snList.Count > 4) txtsn5.Text = snList[4].serialNumber;
-                    if (snList.Count > 5) txtsn6.Text = snList[5].serialNumber;
+                    var index= snList.Count - 1;
+                   var indexCount= _config.GetEnableChannelIndex(_config, index)-1;
+                    WriteSnToTextBox(indexCount, snList[index].serialNumber);
+                    //if (snList.Count > 0) txtsn1.Text = snList[0].serialNumber;
+                    //if (snList.Count > 1) txtsn2.Text = snList[1].serialNumber;
+                    //if (snList.Count > 2) txtsn3.Text = snList[2].serialNumber;
+                    //if (snList.Count > 3) txtsn4.Text = snList[3].serialNumber;
+                    //if (snList.Count > 4) txtsn5.Text = snList[4].serialNumber;
+                    //if (snList.Count > 5) txtsn6.Text = snList[5].serialNumber;
 
                     // 👉 满6个再处理
                     if (snList.Count == maxCount)
@@ -454,14 +457,16 @@ namespace LeakTestSystem
                             //开启继电器
                             modbusIo.SetRelay(1, 0, true); // 举例：触发继电器1
                             ShowLogs("启动测试...请等待...", Color.Black);
-                            snList.Clear();
+                           
                         }
                         else
                         {
                             this.ShowErrorNotifier($"请先打开MCU 串口 {_config.masterComName}");
                             ShowLogs($"请先打开MCU 串口 {_config.masterComName}", Color.Red);
                         }
-                        txtMasterInput.Clear();
+                        snList.Clear();
+                        txtMasterInput.SelectAll();
+                        txtMasterInput.Focus();
                     }
                 }
 
@@ -752,6 +757,19 @@ namespace LeakTestSystem
             return -1;
         }
 
+
+        private void WriteSnToTextBox(int index,string text)
+        {
+            switch (index)
+            {
+                case 0: txtsn1.Text=(text); break;
+                case 1: txtsn2.Text=(text); break;
+                case 2: txtsn3.Text=(text); break;
+                case 3: txtsn4.Text=(text); break;
+                case 4: txtsn5.Text=(text); break;
+                case 5: txtsn6.Text=(text); break;
+            }
+        }   
         private void HandleNormalSerial(int index, byte[] data)
         {
             string text = Encoding.ASCII.GetString(data);

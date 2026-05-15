@@ -108,5 +108,39 @@ namespace LeakTestSystem.Model
 
             return count;
         }
+
+        public string GetEnableChannelName(SettingConfig config, int index)
+        {
+            var enableChannels = new List<string>();
+
+            if (config.channel1Status) enableChannels.Add("channel1");
+            if (config.channel2Status) enableChannels.Add("channel2");
+            if (config.channel3Status) enableChannels.Add("channel3");
+            if (config.channel4Status) enableChannels.Add("channel4");
+            if (config.channel5Status) enableChannels.Add("channel5");
+            if (config.channel6Status) enableChannels.Add("channel6");
+
+            if (index < 0 || index >= enableChannels.Count)
+                return null;
+
+            return enableChannels[index];
+        }
+
+        public int GetEnableChannelIndex(SettingConfig config, int index)
+        {
+            var enableChannels = new List<int>();
+
+            if (config.channel1Status) enableChannels.Add(1);
+            if (config.channel2Status) enableChannels.Add(2);
+            if (config.channel3Status) enableChannels.Add(3);
+            if (config.channel4Status) enableChannels.Add(4);
+            if (config.channel5Status) enableChannels.Add(5);
+            if (config.channel6Status) enableChannels.Add(6);
+
+            if (index < 0 || index >= enableChannels.Count)
+                return -1;
+
+            return enableChannels[index];
+        }
     }
 }
