@@ -63,32 +63,42 @@ namespace LeakTestSystem
 
         private void SwitchCom7_Click(object sender, EventArgs e)
         {
-            if (switchCom7.Active)
+            try
             {
-                // 1. 判断是否存在 COM1~COM7
-                if (!CheckCom1To7Exists())
+                if (switchCom7.Active)
                 {
-                    MessageBox.Show("未检测到完整 COM1~COM7");
-                    switchCom7.Active = false;
-                    return;
+                    // 1. 判断是否存在 COM1~COM7
+                    if (!CheckCom1To7Exists())
+                    {
+                        MessageBox.Show("未检测到完整 COM ");
+                        switchCom7.Active = false;
+                        return;
+                    }
+
+                    // 2. 初始化
+                    InitAllPorts();
+
+                    // 3. 打开所有串口
+                    OpenAllPorts();
+
+                    // 4. 重点：COM7 初始化 Modbus
+                    modbusIo = new ModbusIoController(serialPort7);
+
+                    this.ShowSuccessNotifier("所有串口已打开，Modbus已就绪");
                 }
-
-                // 2. 初始化
-                InitAllPorts();
-
-                // 3. 打开所有串口
-                OpenAllPorts();
-
-                // 4. 重点：COM7 初始化 Modbus
-                modbusIo = new ModbusIoController(serialPort7);
-
-                this.ShowSuccessNotifier("所有串口已打开，Modbus已就绪");
+                else
+                {
+                    CloseAllPorts();
+                    this.ShowSuccessNotifier("所有串口已关闭");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                CloseAllPorts();
-                this.ShowSuccessNotifier("所有串口已关闭");
+                switchCom7.Active = false;
+                ShowLogs(ex.Message,Color.Red);
+                this.ShowErrorNotifier(ex.Message);
             }
+         
         }
 
         private bool CheckCom1To7Exists()
@@ -116,36 +126,37 @@ namespace LeakTestSystem
             if (_config.channel1Status)
             {
                 serialPort1 = new SerialPort(_config.channel1ComName, 9600);
+                serialPort1.DataReceived += Serial_DataReceived;
             }
             if (_config.channel2Status)
             {
                 serialPort2 = new SerialPort(_config.channel2ComName, 9600);
+                serialPort2.DataReceived += Serial_DataReceived;
             }
             if (_config.channel3Status)
             {
                 serialPort3 = new SerialPort(_config.channel3ComName, 9600);
+                serialPort3.DataReceived += Serial_DataReceived;
             }
             if (_config.channel4Status)
             {
                 serialPort4 = new SerialPort(_config.channel4ComName, 9600);
+                serialPort4.DataReceived += Serial_DataReceived;
             }
             if (_config.channel5Status)
             {
                 serialPort5 = new SerialPort(_config.channel5ComName, 9600);
+                serialPort5.DataReceived += Serial_DataReceived;
             }
             if (_config.channel6Status)
             {
                 serialPort6 = new SerialPort(_config.channel6ComName, 9600);
+                serialPort6.DataReceived += Serial_DataReceived;
             }
             // COM7 = Modbus RTU
             serialPort7 = new SerialPort(_config.masterComName, 115200);
             // 统一绑定事件（关键）
-            serialPort1.DataReceived += Serial_DataReceived;
-            serialPort2.DataReceived += Serial_DataReceived;
-            serialPort3.DataReceived += Serial_DataReceived;
-            serialPort4.DataReceived += Serial_DataReceived;
-            serialPort5.DataReceived += Serial_DataReceived;
-            serialPort6.DataReceived += Serial_DataReceived;
+  
             serialPort7.DataReceived += Serial_DataReceived;
         }
 
@@ -162,12 +173,31 @@ namespace LeakTestSystem
 
         private void OpenAllPorts()
         {
-            TryOpen(serialPort1);
-            TryOpen(serialPort2);
-            TryOpen(serialPort3);
-            TryOpen(serialPort4);
-            TryOpen(serialPort5);
-            TryOpen(serialPort6);
+            if(_config.channel1Status)
+            {
+                TryOpen(serialPort1);
+            }
+            if(_config.channel2Status)
+            {
+                TryOpen(serialPort2);
+            }
+            if(_config.channel3Status)
+            {
+                TryOpen(serialPort3);
+            }
+            if(_config.channel4Status)
+            {
+                TryOpen(serialPort4);
+            }
+            if(_config.channel5Status)
+            {
+                TryOpen(serialPort5);
+            }
+            if(_config.channel6Status)
+            {
+                TryOpen(serialPort6);
+            }
+           
             TryOpen(serialPort7); // Modbus RTU
         }
 
@@ -445,6 +475,7 @@ namespace LeakTestSystem
                     {
                         if (serialPort7 != null && serialPort7.IsOpen)
                         {
+                            resultList.Clear();
                             // this.ShowErrorNotifier("已扫满6个");
                             modbusIo.SetRelay(1, 0, false);
                             ShowLogs("初始化继电器", Color.Black);
@@ -726,14 +757,14 @@ namespace LeakTestSystem
                             // 删除已处理数据
                             _serialBuffer.Remove(0, endIndex + 2);
 
-                            int index = GetPortIndex(port);
+                           // int index = GetPortIndex(port);
 
                             this.BeginInvoke(new Action(() =>
                             {
                                 this.ShowInfoTip(oneMessage);
                             }));
 
-                            HandleNormalSerial(index, oneMessage);
+                            HandleNormalSerial(port.PortName, oneMessage);
                         }
                     }
                 }
@@ -788,10 +819,10 @@ namespace LeakTestSystem
             }));
         }
 
-        private void HandleNormalSerial(int index, string data)
+        private void HandleNormalSerial(string comName , string data)
         {
             string text = (data);
-
+            var index = _config.GetEnableChannelIndexByCom(comName);
             this.Invoke(new Action(() =>
             {
                 switch (index)
@@ -865,8 +896,28 @@ namespace LeakTestSystem
             }
         }
 
-        private async Task GetWaitTestResult()
+        private List<TestResult> resultList = new List<TestResult>();
+        private void AddTestHistory( string sn, TestResult result, string status,string message)
         {
+            result.testResult = status;
+            resultList.Add(result);
+            ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}",  Color.Red);
+            if (resultList.Count==_config.GetEnableChannelCount(_config))
+            {
+                // 处理测试历史记录
+               var Count= resultList.Select(e => e.testResult = "NG").Count();
+                if(Count>0)
+                {
+                    // 处理NG结果
+                    new pageResult("FAIL").ShowDialog();
+                    resultList.Clear();
+                    return;
+                }
+
+                new pageResult("PASS").ShowDialog();
+                resultList.Clear();
+                return;
+            }
         }
 
         /// <summary>
@@ -884,15 +935,21 @@ namespace LeakTestSystem
             if (!TestResult.TryParse(data, out TestResult result))
             {
                 ShowLogs($"数据格式错误 SN:{sn} Data:{data}", Color.Red);
+                result.serialNumber = sn;
+                result.channelsName = $"CH{index + 1}";
+                resultList.Add(result);
                 new pageResult("FAIL").ShowDialog();
                 return;
             }
 
             string msg;
+            result.serialNumber = sn;
             result.channelsName = $"CH{index + 1}";
+
             switch (result.testResult)
             {
                 case "OK":
+
                     msg =
                         $"测试结果:SN:{sn} " +
                         $"结果:{result.testResult} " +
@@ -900,52 +957,59 @@ namespace LeakTestSystem
                         $"压力:{result.PressureValue} " +
                         $"泄漏:{result.LeakValue}";
 
+                    AddTestHistory(sn, result, "OK", msg);
+
                     ShowLogs(msg, Color.Green);
-                    new pageResult("PASS").ShowDialog();
                     break;
 
                 case "AL":
+
                     msg =
                         $"测试结果:SN:{sn} " +
                         $"报警:{result.alarmMessage} " +
                         $"通道:{result.channelsName}";
-                    new pageResult("FAIL").ShowDialog();
+
+                    AddTestHistory(sn, result, "NG", msg);
                     ShowLogs(msg, Color.Red);
                     break;
 
                 case "TD":
+
                     msg =
                         $"测试结果:SN:{sn} " +
                         $"正常值泄漏NG " +
                         $"通道:{result.channelsName} " +
                         $"压力:{result.PressureValue} " +
                         $"泄漏:{result.LeakValue}";
-                    new pageResult("FAIL").ShowDialog();
+
+                    AddTestHistory(sn, result, "NG", msg);
                     ShowLogs(msg, Color.Orange);
                     break;
 
                 case "RD":
+
                     msg =
                         $"测试结果:SN:{sn} " +
                         $"负值泄漏NG " +
                         $"通道:{result.channelsName} " +
                         $"压力:{result.PressureValue} " +
                         $"泄漏:{result.LeakValue}";
-                    new pageResult("FAIL").ShowDialog();
+
+                    AddTestHistory(sn, result, "NG", msg);
                     ShowLogs(msg, Color.Orange);
                     break;
 
                 default:
+
                     msg =
                         $"测试结果:SN:{sn} " +
                         $"未知结果:{result.testResult} " +
                         $"原始数据:{data}";
-                    new pageResult("FAIL").ShowDialog();
+                    AddTestHistory(sn, result, "NG", msg);
                     ShowLogs(msg, Color.Gray);
                     break;
             }
         }
-
         /// <summary>
         /// 获取SN，根据index返回对应的文本框内容
         /// </summary>

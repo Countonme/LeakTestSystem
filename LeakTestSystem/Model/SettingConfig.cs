@@ -142,5 +142,49 @@ namespace LeakTestSystem.Model
 
             return enableChannels[index];
         }
+        public int GetEnableChannelIndexByCom(string comName)
+        {
+            var channels = new List<(string com, int index)>
+    {
+        (channel1ComName, 1),
+        (channel2ComName, 2),
+        (channel3ComName, 3),
+        (channel4ComName, 4),
+        (channel5ComName, 5),
+        (channel6ComName, 6),
+    };
+
+            int enableIndex = 0;
+
+            foreach (var ch in channels)
+            {
+                if (!string.IsNullOrEmpty(ch.com))
+                {
+                    if (IsEnabled(ch.index))
+                    {
+                        enableIndex++;
+
+                        if (ch.com == comName)
+                            return enableIndex - 1; // 从0开始
+                    }
+                }
+            }
+
+            return -1;
+        }
+
+        private bool IsEnabled(int index)
+        {
+            switch( index) 
+            {
+                case 1:return channel1Status;
+                case 2:return channel2Status;
+                case 3:return channel3Status;
+                case 4:return channel4Status;
+                case 5:return channel5Status;
+                case 6:return channel6Status;
+                default: return false;
+            };
+        }
     }
 }
