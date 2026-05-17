@@ -138,6 +138,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Lib\Saject\SajetConnect.ini" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -154,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="hangyu.ico" />
+    <Content Include="Lib\Saject\SajetConnect.dll" />
     <None Include="Resources\dianliu.png" />
     <None Include="Resources\shujukaifa.png" />
   </ItemGroup>
