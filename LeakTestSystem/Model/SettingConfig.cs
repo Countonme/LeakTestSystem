@@ -93,8 +93,10 @@ namespace LeakTestSystem.Model
         /// MES NG 锁码
         /// </summary>
         public bool mesNgLock { get; set; }
-
-
+        /// <summary>
+        /// SN length
+        /// </summary>
+        public int snLength { get; set; } = 6;  
         public int GetEnableChannelCount(SettingConfig config)
         {
             int count = 0;
@@ -107,6 +109,21 @@ namespace LeakTestSystem.Model
             if (config.channel6Status) count++;
 
             return count;
+        }
+
+
+        public int GetChannelIndexByComName(SettingConfig config, string comName)
+        {
+            var enableChannels = new List<string>();
+
+            if (config.channel1ComName==comName) return 0;
+            if (config.channel2ComName==comName) return 1;
+            if (config.channel3ComName==comName) return 2;
+            if (config.channel4ComName==comName) return 3;
+            if (config.channel5ComName==comName) return 4;
+            if (config.channel6ComName==comName) return 5;
+
+            return -1;
         }
 
         public string GetEnableChannelName(SettingConfig config, int index)
@@ -145,14 +162,14 @@ namespace LeakTestSystem.Model
         public int GetEnableChannelIndexByCom(string comName)
         {
             var channels = new List<(string com, int index)>
-    {
-        (channel1ComName, 1),
-        (channel2ComName, 2),
-        (channel3ComName, 3),
-        (channel4ComName, 4),
-        (channel5ComName, 5),
-        (channel6ComName, 6),
-    };
+            {
+                (channel1ComName, 0),
+                (channel2ComName, 1),
+                (channel3ComName, 2),
+                (channel4ComName, 3),
+                (channel5ComName, 4),
+                (channel6ComName, 5),
+            };
 
             int enableIndex = 0;
 
@@ -175,16 +192,17 @@ namespace LeakTestSystem.Model
 
         private bool IsEnabled(int index)
         {
-            switch( index) 
+            switch (index)
             {
-                case 1:return channel1Status;
-                case 2:return channel2Status;
-                case 3:return channel3Status;
-                case 4:return channel4Status;
-                case 5:return channel5Status;
-                case 6:return channel6Status;
+                case 0: return channel1Status;
+                case 1: return channel2Status;
+                case 2: return channel3Status;
+                case 3: return channel4Status;
+                case 4: return channel5Status;
+                case 5: return channel6Status;
                 default: return false;
-            };
+            }
+            ;
         }
     }
 }

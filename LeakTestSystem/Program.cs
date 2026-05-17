@@ -1,9 +1,10 @@
-﻿using Controller;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Controller;
+using LeakTestSystem.Controller;
 
 namespace LeakTestSystem
 {
@@ -18,6 +19,7 @@ namespace LeakTestSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new pageResult("PASS"));
+            //Application.Run(new FrmSN(6,3,false));
             Application.Run(new FrmMaster());
         }
     }

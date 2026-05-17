@@ -60,6 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\FrmSN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controller\FrmSN.Designer.cs">
+      <DependentUpon>FrmSN.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller\pageResult.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,9 @@
     <Compile Include="Services\MES\MES_Service.cs" />
     <Compile Include="Services\ModbusIoController.cs" />
     <Compile Include="Services\Sys_User.cs" />
+    <EmbeddedResource Include="Controller\FrmSN.resx">
+      <DependentUpon>FrmSN.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controller\pageResult.resx">
       <DependentUpon>pageResult.cs</DependentUpon>
     </EmbeddedResource>

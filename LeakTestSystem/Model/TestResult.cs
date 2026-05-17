@@ -83,55 +83,48 @@ namespace LeakTestSystem.Model
 
             input = input.Trim();
 
-            // ⭐ OK 数据（支持负数）
-            string okPattern =
+            // ⭐ 统一结构（兼容缺字段）
+            string pattern =
                 @"<(?<programNo>\d+)>:" +
-                @"(?<pressure>-?[\d.]+)\s(?<pressureUnit>\w+):" +
-                @"\((?<status>OK|TD|RD|NG)\):" +
-                @"(?<flow>-?[\d.]+)\s(?<flowUnit>\w+)";
+                @"(?<pressure>-?[\d.]+)?\s*(?<pressureUnit>\w+)?:?" +
+                @"\((?<status>OK|TD|RD|NG|AL)\):" +
+                @"(?<payload>.*)";
 
-            // ⭐ AL 数据
-            string alarmPattern =
-                @"<(?<programNo>\d+)>:" +
-                @"\((?<status>AL)\):" +
-                @"(?<message>.+)";
+            Match match = Regex.Match(input, pattern);
 
-            Match match = Regex.Match(input, okPattern);
+            if (!match.Success)
+                return false;
 
-            if (match.Success)
+            string status = match.Groups["status"].Value;
+            string payload = match.Groups["payload"].Value;
+
+            result = new TestResult
             {
-                result = new TestResult
-                {
-                    rawData = input,
-                    programNo = match.Groups["programNo"].Value,
-                    testResult = match.Groups["status"].Value,
+                rawData = input,
+                programNo = match.Groups["programNo"].Value,
+                testResult = status
+            };
 
-                    PressureValue =
-                        $"{match.Groups["pressure"].Value} {match.Groups["pressureUnit"].Value}",
-
-                    LeakValue =
-                        $"{match.Groups["flow"].Value} {match.Groups["flowUnit"].Value}"
-                };
-
-                return true;
+            // ⭐ pressure（可能不存在）
+            if (match.Groups["pressure"].Success)
+            {
+                result.PressureValue =
+                    $"{match.Groups["pressure"].Value} {match.Groups["pressureUnit"].Value}".Trim();
             }
 
-            match = Regex.Match(input, alarmPattern);
-
-            if (match.Success)
+            // ⭐ 根据状态处理 payload
+            if (status == "OK" || status == "TD" || status == "RD")
             {
-                result = new TestResult
-                {
-                    rawData = input,
-                    programNo = match.Groups["programNo"].Value,
-                    testResult = match.Groups["status"].Value,
-                    alarmMessage = match.Groups["message"].Value
-                };
-
-                return true;
+                // OK类：payload是流量
+                result.LeakValue = payload.Trim();
+            }
+            else
+            {
+                // NG / AL：payload是错误信息
+                result.alarmMessage = payload.Trim();
             }
 
-            return false;
+            return true;
         }
     }
 }

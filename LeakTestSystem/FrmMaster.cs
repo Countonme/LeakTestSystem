@@ -9,11 +9,13 @@ using System.IO.Ports;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controller;
+using LeakTestSystem.Controller;
 using LeakTestSystem.Model;
 using LeakTestSystem.Services;
 using LeakTestSystem.Services.MES;
@@ -32,10 +34,20 @@ namespace LeakTestSystem
         private bool flagProductionModel;
         private List<ScanModel> snList = new List<ScanModel>();
         private int maxCount = 6;
+        private readonly string PASS = "PASS";
+        private readonly string FAIL = "FAIL";
+        private readonly string Testing = "Testing ...";
         private readonly StringBuilder _serialBuffer = new StringBuilder();
         private readonly object _lock = new object();
+        private readonly object _logLock = new object();
+        private readonly Dictionary<string, StringBuilder> _buffers = new Dictionary<string, StringBuilder>();
         private readonly UITextBox[] snTextBoxes;
+        private readonly UILedDisplay[] _uiLedDisplaysArry;
+        private readonly UIListBox[] _uiListBoxesArray;
         private SettingConfig _config = new SettingConfig();
+        private FrmSN _frmSn;
+        private readonly Dictionary<object, Color> _itemColorMap = new Dictionary<object, Color>();
+
         /// <summary>
         /// 测试记录
         /// </summary>
@@ -49,6 +61,25 @@ namespace LeakTestSystem
             this.Text += $"->(Version:{System.Windows.Forms.Application.ProductVersion})";
             //this.FrmMaster_FormClosing += FrmMaster_FormClosing;
             snTextBoxes = new[] { txtsn1, txtsn2, txtsn3, txtsn4, txtsn5, txtsn6 };
+            _uiLedDisplaysArry = new[] { uiLedDisplay1, uiLedDisplay2, uiLedDisplay3, uiLedDisplay4, uiLedDisplay5, uiLedDisplay6 };
+            _uiListBoxesArray = new[] { uiListBox1, uiListBox2, uiListBox3, uiListBox4, uiListBox5, uiListBox6 };
+            foreach (var lb in _uiListBoxesArray)
+            {
+                //lb.DrawMode = DrawMode.OwnerDrawFixed;
+                lb.DrawItem += ListBox_DrawItem;
+            }
+            //this.Shown += FrmMaster_Shown1;
+
+        }
+
+        private void FrmMaster_Shown1(object sender, EventArgs e)
+        {
+            StartSN();
+            //var data = "<04>:-0.483 PSI:(OK):-0.1521 sccm";
+
+            //HandleNormalSerial("COM1", data);
+            //data = "<04>:-0.483 PSI:(AL):-0.1521 sccm";
+            //HandleNormalSerial("COM2", data);
         }
 
         private void FrmMaster_FormClosing(object sender, FormClosingEventArgs e)
@@ -84,7 +115,17 @@ namespace LeakTestSystem
                     // 4. 重点：COM7 初始化 Modbus
                     modbusIo = new ModbusIoController(serialPort7);
 
-                    this.ShowSuccessNotifier("所有串口已打开，Modbus已就绪");
+                    this.ShowSuccessNotifier("所有串口已打开，Modbus已就绪 ...");
+                    // ⭐ 关键修复
+                    Task.Run(() =>
+                    {
+                        Thread.Sleep(3000);
+
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            StartSN();
+                        }));
+                    });
                 }
                 else
                 {
@@ -95,10 +136,10 @@ namespace LeakTestSystem
             catch (Exception ex)
             {
                 switchCom7.Active = false;
-                ShowLogs(ex.Message,Color.Red);
+                ShowLogs(ex.Message, Color.Red);
                 this.ShowErrorNotifier(ex.Message);
             }
-         
+
         }
 
         private bool CheckCom1To7Exists()
@@ -156,7 +197,7 @@ namespace LeakTestSystem
             // COM7 = Modbus RTU
             serialPort7 = new SerialPort(_config.masterComName, 115200);
             // 统一绑定事件（关键）
-  
+
             serialPort7.DataReceived += Serial_DataReceived;
         }
 
@@ -173,31 +214,31 @@ namespace LeakTestSystem
 
         private void OpenAllPorts()
         {
-            if(_config.channel1Status)
+            if (_config.channel1Status)
             {
                 TryOpen(serialPort1);
             }
-            if(_config.channel2Status)
+            if (_config.channel2Status)
             {
                 TryOpen(serialPort2);
             }
-            if(_config.channel3Status)
+            if (_config.channel3Status)
             {
                 TryOpen(serialPort3);
             }
-            if(_config.channel4Status)
+            if (_config.channel4Status)
             {
                 TryOpen(serialPort4);
             }
-            if(_config.channel5Status)
+            if (_config.channel5Status)
             {
                 TryOpen(serialPort5);
             }
-            if(_config.channel6Status)
+            if (_config.channel6Status)
             {
                 TryOpen(serialPort6);
             }
-           
+
             TryOpen(serialPort7); // Modbus RTU
         }
 
@@ -265,6 +306,7 @@ namespace LeakTestSystem
             this.uiCheckBox16.Click += UiCheckBox_Click;
             //var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
             //var data = "<04>:-0.483 PSI:(OK):-0.1521 sccm";
+
             //GetResult(0, data);
             //var data1 = "<03>:(AL):SEALED PART VOL TOO SMALL";
             //GetResult(1, data1);
@@ -272,6 +314,9 @@ namespace LeakTestSystem
             this.refreshToolStripMenuItem.Click += RefreshToolStripMenuItem_Click;
             this.reloadToolStripMenuItem.Click += ReloadToolStripMenuItem_Click;
             LoadConfig();
+            InitUIDisplay("N/A", Color.Yellow);
+            //StartSN();
+            //InitUIDisplay("N/A", 0, Color.Black);
         }
         /// <summary>
         /// 重新加载配方
@@ -282,7 +327,7 @@ namespace LeakTestSystem
         {
             LoadConfig();
             initTitlePanelColor();
- 
+
         }
 
         /// <summary>
@@ -319,7 +364,8 @@ namespace LeakTestSystem
                 channel5Status = checkBoxChannel5.Checked,
                 channel6Status = checkBoxChannel6.Checked,
                 readTimeout = readTimeout.Value,
-                mesNgLock = switchMesNgLock.Active
+                mesNgLock = switchMesNgLock.Active,
+                snLength = snCheckLen.Value
             };
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(conf, Newtonsoft.Json.Formatting.Indented);
             string path = Path.Combine(Application.StartupPath, "config.json");
@@ -363,6 +409,7 @@ namespace LeakTestSystem
                 labMaster.Text = _config.masterComName;
                 switchMesNgLock.Active = _config.mesNgLock;
                 maxCount = _config.GetEnableChannelCount(_config);
+                snCheckLen.Value = _config.snLength;
                 titlePanel8.Text = $"Master Channels ({maxCount})";
             }
             this.ShowSuccessNotifier("配置已加载...");
@@ -444,6 +491,10 @@ namespace LeakTestSystem
             if (e.KeyCode == Keys.Enter)
             {
                 string barcode = txtMasterInput.Text.Trim();
+                if (barcode.Length == snLen.Left)
+                {
+                    this.HideWaitForm();
+                }
 
                 if (!string.IsNullOrEmpty(barcode))
                 {
@@ -460,8 +511,8 @@ namespace LeakTestSystem
                     }
                     snList.Add(new ScanModel { serialNumber = barcode, model = flagProductionModel });
                     // 👉 按当前数量安全赋值
-                    var index= snList.Count - 1;
-                   var indexCount= _config.GetEnableChannelIndex(_config, index)-1;
+                    var index = snList.Count - 1;
+                    var indexCount = _config.GetEnableChannelIndex(_config, index) - 1;
                     WriteSnToTextBox(indexCount, snList[index].serialNumber);
                     //if (snList.Count > 0) txtsn1.Text = snList[0].serialNumber;
                     //if (snList.Count > 1) txtsn2.Text = snList[1].serialNumber;
@@ -477,18 +528,17 @@ namespace LeakTestSystem
                         {
                             resultList.Clear();
                             // this.ShowErrorNotifier("已扫满6个");
-                            modbusIo.SetRelay(1, 0, false);
-                            ShowLogs("初始化继电器", Color.Black);
+
                             // 这里可以做提交逻辑
                             this.ShowWaitForm("启动测试...请等待...");
                             // 如果要继续扫下一批，记得清空
 
                             //Thread.Sleep(1000);
                             //this.HideWaitForm();
-                            //开启继电器
-                            modbusIo.SetRelay(1, 0, true); // 举例：触发继电器1
+
+                            StartTesting();
                             ShowLogs("启动测试...请等待...", Color.Black);
-                           
+
                         }
                         else
                         {
@@ -496,14 +546,117 @@ namespace LeakTestSystem
                             ShowLogs($"请先打开MCU 串口 {_config.masterComName}", Color.Red);
                         }
                         snList.Clear();
-                        txtMasterInput.SelectAll();
                         txtMasterInput.Focus();
+                        txtMasterInput.SelectAll();
+
                     }
                 }
 
                 e.SuppressKeyPress = true;
             }
         }
+
+        private void StartTesting()
+        {
+            InitUIDisplay("N/A", Color.Yellow);
+            //开启继电器
+            if (_config.channel1Status)
+            {
+                modbusIo.SetRelay(1, 0, false);
+                Thread.Sleep(100);
+                ShowLogs("初始化继电器 1", Color.Black);
+                modbusIo.SetRelay(1, 0, true); // 举例：触发继电器1
+                InitUIDisplay(Testing, 0, Color.Blue);
+            }
+            if (_config.channel2Status)
+            {
+                modbusIo.SetRelay(1, 2, false);
+                Thread.Sleep(100);
+                ShowLogs("初始化继电器 2", Color.Black);
+                modbusIo.SetRelay(1, 2, true); // 举例：触发继电器1
+                InitUIDisplay(Testing, 1, Color.Blue);
+            }
+            if (_config.channel3Status)
+            {
+                modbusIo.SetRelay(1, 4, false);
+                Thread.Sleep(100);
+                ShowLogs("初始化继电器 3", Color.Black);
+                modbusIo.SetRelay(1, 4, true); // 举例：触发继电器1
+                InitUIDisplay(Testing, 2, Color.Blue);
+            }
+            if (_config.channel4Status)
+            {
+                modbusIo.SetRelay(1, 6, false);
+                Thread.Sleep(100);
+                ShowLogs("初始化继电器 4", Color.Black);
+                modbusIo.SetRelay(1, 6, true); // 举例：触发继电器1
+                InitUIDisplay(Testing, 3, Color.Blue);
+            }
+            if (_config.channel5Status)
+            {
+                modbusIo.SetRelay(1, 8, false);
+                Thread.Sleep(100);
+                ShowLogs("初始化继电器 5", Color.Black);
+                modbusIo.SetRelay(1, 8, true); // 举例：触发继电器1
+                InitUIDisplay(Testing, 4, Color.Blue);
+            }
+            if (_config.channel6Status)
+            {
+                modbusIo.SetRelay(1, 10, false);
+                Thread.Sleep(100);
+                ShowLogs("初始化继电器 6", Color.Black);
+                modbusIo.SetRelay(1, 10, true); // 举例：触发继电器1
+                InitUIDisplay(Testing, 5, Color.Blue);
+            }
+
+        }
+        /// <summary>
+        /// 停止测试，关闭所有继电器，并隐藏等待界面
+        /// </summary>
+        private void StopTesting()
+        {
+            this.HideWaitForm();
+            //开启继电器
+            if (_config.channel1Status)
+            {
+                modbusIo.SetRelay(1, 0, false);
+                Thread.Sleep(100);
+                ShowLogs("关闭继电器 1", Color.Black);
+            }
+            if (_config.channel2Status)
+            {
+                modbusIo.SetRelay(1, 2, false);
+                Thread.Sleep(100);
+                ShowLogs("关闭继电器 2", Color.Black);
+            }
+            if (_config.channel3Status)
+            {
+                modbusIo.SetRelay(1, 4, false);
+                Thread.Sleep(100);
+                ShowLogs("关闭继电器 3", Color.Black);
+            }
+            if (_config.channel4Status)
+            {
+                modbusIo.SetRelay(1, 6, false);
+                Thread.Sleep(100);
+                ShowLogs("关闭继电器 4", Color.Black);
+            }
+            if (_config.channel5Status)
+            {
+                modbusIo.SetRelay(1, 8, false);
+                Thread.Sleep(100);
+                ShowLogs("关闭继电器 5", Color.Black);
+            }
+            if (_config.channel6Status)
+            {
+                modbusIo.SetRelay(1, 10, false);
+                Thread.Sleep(100);
+                ShowLogs("关闭继电器 6", Color.Black);
+            }
+
+        }
+
+
 
         private void TxtMasterInput_TextChanged(object sender, EventArgs e)
         {
@@ -706,7 +859,74 @@ namespace LeakTestSystem
         {
             return SerialPort.GetPortNames().Contains(comName);
         }
+        /// <summary>
+        /// Handles the DataReceived event of the serial port, which occurs when data is received through the port.
+        /// </summary>
+        /// <remarks>This method is typically used to process incoming serial data asynchronously. Ensure
+        /// that any UI updates are marshaled to the UI thread, as this event is raised on a non-UI thread.</remarks>
+        /// <param name="sender">The source of the event, typically the SerialPort instance that received data.</param>
+        /// <param name="e">A SerialDataReceivedEventArgs object that contains the event data.</param>
+        //private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        //{
+        //    var port = sender as SerialPort;
+        //    if (port == null) return;
 
+        //    try
+        //    {
+        //        //int index = GetPortIndex(port);
+
+        //        // COM7 = Modbus
+        //        if (port == serialPort7)
+        //        {
+        //            // HandleModbus(buffer);
+        //            byte[] data = new byte[port.BytesToRead];
+        //            port.Read(data, 0, data.Length);
+
+        //            string hex = BitConverter.ToString(data).Replace("-", " ");
+        //            ShowLogs($"MCU COM7 收到数据: {hex}", Color.Blue);
+        //            // ShowLogs($"MCU COM7 收到数据: {port.ReadExisting()}", Color.Blue);
+        //        }
+        //        else
+        //        {
+        //            //modbusIo.SetRelay(1, 0, false); // 举例：关闭继电器1
+        //            this.HideWaitForm();
+        //            StopTesting();
+        //            string data = port.ReadExisting();
+
+        //            lock (_lock)
+        //            {
+        //                _serialBuffer.Append(data);
+
+        //                // 判断是否收到完整包
+        //                while (_serialBuffer.ToString().Contains("\r\n"))
+        //                {
+        //                    string allData = _serialBuffer.ToString();
+
+        //                    int endIndex = allData.IndexOf("\r\n");
+
+        //                    // 取一包完整数据
+        //                    string oneMessage = allData.Substring(0, endIndex);
+
+        //                    // 删除已处理数据
+        //                    _serialBuffer.Remove(0, endIndex + 2);
+
+        //                    // int index = GetPortIndex(port);
+
+        //                    this.BeginInvoke(new Action(() =>
+        //                    {
+        //                        this.ShowInfoTip(oneMessage);
+        //                    }));
+
+        //                    HandleNormalSerial(port.PortName, oneMessage);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.Message);
+        //    }
+        //}
         /// <summary>
         /// Handles the DataReceived event of the serial port, which occurs when data is received through the port.
         /// </summary>
@@ -721,202 +941,443 @@ namespace LeakTestSystem
 
             try
             {
-                //int index = GetPortIndex(port);
-
-                // COM7 = Modbus
-                if (port == serialPort7)
+                if (port != serialPort7)
                 {
-                    // HandleModbus(buffer);
+                    StopTesting();
                     byte[] data = new byte[port.BytesToRead];
-                    port.Read(data, 0, data.Length);
+                    ShowLogs($"收到串口 {port.PortName} 的数据: {data}", Color.Yellow);
 
-                    string hex = BitConverter.ToString(data).Replace("-", " ");
-                    ShowLogs($"MCU COM7 收到数据: {hex}", Color.Blue);
-                    // ShowLogs($"MCU COM7 收到数据: {port.ReadExisting()}", Color.Blue);
-                }
-                else
-                {
-                    modbusIo.SetRelay(1, 0, false); // 举例：关闭继电器1
-                    this.HideWaitForm();
-                    string data = port.ReadExisting();
+                    int len = port.Read(data, 0, data.Length);
+
+                    if (len <= 0)
+                        return;
+
+                    string text = Encoding.ASCII.GetString(data, 0, len);
 
                     lock (_lock)
                     {
-                        _serialBuffer.Append(data);
-
-                        // 判断是否收到完整包
-                        while (_serialBuffer.ToString().Contains("\r\n"))
+                        if (!_buffers.ContainsKey(port.PortName))
                         {
-                            string allData = _serialBuffer.ToString();
+                            _buffers[port.PortName] = new StringBuilder();
+                        }
 
-                            int endIndex = allData.IndexOf("\r\n");
+                        var buffer = _buffers[port.PortName];
 
-                            // 取一包完整数据
-                            string oneMessage = allData.Substring(0, endIndex);
+                        buffer.Append(text);
 
-                            // 删除已处理数据
-                            _serialBuffer.Remove(0, endIndex + 2);
+                        while (true)
+                        {
+                            string all = buffer.ToString();
 
-                           // int index = GetPortIndex(port);
+                            int idx = all.IndexOf("\r\n");
 
-                            this.BeginInvoke(new Action(() =>
-                            {
-                                this.ShowInfoTip(oneMessage);
-                            }));
+                            if (idx < 0)
+                                break;
 
-                            HandleNormalSerial(port.PortName, oneMessage);
+                            string msg = all.Substring(0, idx);
+
+                            buffer.Remove(0, idx + 2);
+
+                            HandleNormalSerial(port.PortName, msg);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex);
+                ShowLogs($"读取串口 {port.PortName} 数据失败: {ex.Message}", Color.Red);
             }
         }
 
-        private int GetPortIndex(SerialPort port)
-        {
-            if (port == serialPort1) return 0;
-            if (port == serialPort2) return 1;
-            if (port == serialPort3) return 2;
-            if (port == serialPort4) return 3;
-            if (port == serialPort5) return 4;
-            if (port == serialPort6) return 5;
-            if (port == serialPort7) return 6;
 
-            return -1;
-        }
-
-
-        private void WriteSnToTextBox(int index,string text)
+        private void WriteSnToTextBox(int index, string text)
         {
             switch (index)
             {
-                case 0: txtsn1.Text=(text); break;
-                case 1: txtsn2.Text=(text); break;
-                case 2: txtsn3.Text=(text); break;
-                case 3: txtsn4.Text=(text); break;
-                case 4: txtsn5.Text=(text); break;
-                case 5: txtsn6.Text=(text); break;
+                case 0: txtsn1.Text = (text); break;
+                case 1: txtsn2.Text = (text); break;
+                case 2: txtsn3.Text = (text); break;
+                case 3: txtsn4.Text = (text); break;
+                case 4: txtsn5.Text = (text); break;
+                case 5: txtsn6.Text = (text); break;
             }
-        }   
-        private void HandleNormalSerial(int index, byte[] data)
-        {
-            string text = Encoding.ASCII.GetString(data);
-
-            this.Invoke(new Action(() =>
-            {
-                switch (index)
-                {
-                    case 0: uiListBox1.Items.Add(text); break;
-                    case 1: uiListBox2.Items.Add(text); break;
-                    case 2: uiListBox3.Items.Add(text); break;
-                    case 3: uiListBox4.Items.Add(text); break;
-                    case 4: uiListBox5.Items.Add(text); break;
-                    case 5: uiListBox6.Items.Add(text); break;
-                }
-            }));
         }
 
-        private void HandleNormalSerial(string comName , string data)
-        {
-            string text = (data);
-            var index = _config.GetEnableChannelIndexByCom(comName);
-            this.Invoke(new Action(() =>
-            {
-                switch (index)
-                {
-                    case 0: uiListBox1.Items.Add(text); break;
-                    case 1: uiListBox2.Items.Add(text); break;
-                    case 2: uiListBox3.Items.Add(text); break;
-                    case 3: uiListBox4.Items.Add(text); break;
-                    case 4: uiListBox5.Items.Add(text); break;
-                    case 5: uiListBox6.Items.Add(text); break;
-                }
-            }));
-            ShowLogs(data, Color.Black);
-            //var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
-            GetResult(index, data);
-        }
 
-        private void ShowLogs(string InfoLogs, Color color)
+        //private void HandleNormalSerial(string comName, string data)
+        //{
+        //    string text = (data);
+        //    var index = _config.GetChannelIndexByComName(_config, comName);
+        //    var listBox = _uiListBoxesArray[index];
+
+        //    // 插入到第一行
+        //    listBox.Items.Insert(0, text);
+
+        //    // 超过9条则删除最后一条
+        //    while (listBox.Items.Count > 9)
+        //    {
+        //        listBox.Items.RemoveAt(listBox.Items.Count - 1);
+        //    }
+        //    ShowLogs(data, Color.Black);
+        //    //var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
+        //    GetResult(index, data, comName);
+        //}
+
+        private void HandleNormalSerial(string comName, string data)
         {
-            // 1. 如果日志太长，清空内容（保留你原有的逻辑）
-            if (uiRichTextBox1.Text.Length > 1024)
+            string text = data;
+
+            var index = _config.GetChannelIndexByComName(_config, comName);
+            var listBox = _uiListBoxesArray[index];
+
+            Color color = data.Contains("(OK)") ? Color.LimeGreen : Color.Red;
+
+            // ⭐ 保存颜色映射
+            _itemColorMap[text] = color;
+
+            listBox.Items.Insert(0, text);
+
+            while (listBox.Items.Count > 9)
             {
-                uiRichTextBox1.Clear();
+                var removeItem = listBox.Items[listBox.Items.Count - 1];
+
+                _itemColorMap.Remove(removeItem);
+
+                listBox.Items.RemoveAt(listBox.Items.Count - 1);
             }
 
-            // 2. 构建要显示的字符串
-            string msg = $"{DateTime.Now:HH:mm:ss} - {InfoLogs}";
+            ShowLogs(data, color);
+            GetResult(index, data, comName);
+        }
+        private void ListBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
 
-            // 3. 【关键步骤】记录追加前的光标位置（也就是新文本开始的位置）
-            int startIndex = uiRichTextBox1.TextLength;
+            var listBox = sender as ListBox;
+            string text = listBox.Items[e.Index].ToString();
 
-            // 4. 追加文本（暂时不换行，或者先追加，后面一起处理）
-            uiRichTextBox1.AppendText(msg);
+            Color color = Color.Red;
 
-            // 5. 【关键步骤】确定选中的长度
-            // 我们需要选中从 startIndex 开始，到文本结束的部分
-            // 注意：这里我们不需要手动加 Environment.NewLine，因为 AppendText 后光标已经在末尾
-            int length = uiRichTextBox1.TextLength - startIndex;
+            if (_itemColorMap.TryGetValue(text, out var c))
+            {
+                color = c;
+            }
 
-            // 6. 【核心】设置颜色
-            uiRichTextBox1.Select(startIndex, length); // 选中刚写入的内容
-            uiRichTextBox1.SelectionColor = color;     // 设置颜色
-            uiRichTextBox1.SelectionBackColor = uiRichTextBox1.BackColor; // 确保背景色不变
+            e.DrawBackground();
 
-            // 7. 【关键步骤】添加换行符（为了下一行日志能正常换行）
-            // 注意：换行符不能带颜色，所以必须在设置完颜色后单独追加
-            uiRichTextBox1.AppendText(Environment.NewLine);
+            using (Brush brush = new SolidBrush(color))
+            {
+                e.Graphics.DrawString(text, e.Font, brush, e.Bounds);
+            }
 
-            // 8. 取消选中状态（将光标移到最后，避免界面上有一块蓝/红背景选中效果）
-            uiRichTextBox1.Select(uiRichTextBox1.TextLength, 0);
+            e.DrawFocusRectangle();
+        }
+        //private void HandleNormalSerial(string comName, string data)
+        //{
+        //    string text = data;
 
-            // 9. 自动滚动到底部
-            uiRichTextBox1.ScrollToCaret();
+        //    var index = _config.GetChannelIndexByComName(_config, comName);
+        //    var listBox = _uiListBoxesArray[index];
 
-            // --- 下面是你的文件保存逻辑 ---
+        //    // 判断状态
+        //    Color color = Color.Red;
+
+        //    if (data.Contains("(OK)"))
+        //    {
+        //        color = Color.LimeGreen;
+
+        //    }
+        //    else 
+        //    {
+        //        color = Color.Red;
+        //    }
+
+        //    // 插入到第一行
+        //    listBox.Items.Insert(0, text);
+
+        //    while (listBox.Items.Count > 9)
+        //    {
+        //        listBox.Items.RemoveAt(listBox.Items.Count - 1);
+        //    }
+
+        //    ShowLogs(data, color);
+
+        //    GetResult(index, data, comName);
+        //}
+        //private void ShowLogs(string InfoLogs, Color color)
+        //{
+        //    // 1. 如果日志太长，清空内容（保留你原有的逻辑）
+        //    if (uiRichTextBox1.Text.Length > 1024)
+        //    {
+        //        uiRichTextBox1.Clear();
+        //    }
+
+        //    // 2. 构建要显示的字符串
+        //    string msg = $"{DateTime.Now:HH:mm:ss} - {InfoLogs}";
+
+        //    // 3. 【关键步骤】记录追加前的光标位置（也就是新文本开始的位置）
+        //    int startIndex = uiRichTextBox1.TextLength;
+
+        //    // 4. 追加文本（暂时不换行，或者先追加，后面一起处理）
+        //    uiRichTextBox1.AppendText(msg);
+
+        //    // 5. 【关键步骤】确定选中的长度
+        //    // 我们需要选中从 startIndex 开始，到文本结束的部分
+        //    // 注意：这里我们不需要手动加 Environment.NewLine，因为 AppendText 后光标已经在末尾
+        //    int length = uiRichTextBox1.TextLength - startIndex;
+
+        //    // 6. 【核心】设置颜色
+        //    uiRichTextBox1.Select(startIndex, length); // 选中刚写入的内容
+        //    uiRichTextBox1.SelectionColor = color;     // 设置颜色
+        //    uiRichTextBox1.SelectionBackColor = uiRichTextBox1.BackColor; // 确保背景色不变
+
+        //    // 7. 【关键步骤】添加换行符（为了下一行日志能正常换行）
+        //    // 注意：换行符不能带颜色，所以必须在设置完颜色后单独追加
+        //    uiRichTextBox1.AppendText(Environment.NewLine);
+
+        //    // 8. 取消选中状态（将光标移到最后，避免界面上有一块蓝/红背景选中效果）
+        //    uiRichTextBox1.Select(uiRichTextBox1.TextLength, 0);
+
+        //    // 9. 自动滚动到底部
+        //    uiRichTextBox1.ScrollToCaret();
+
+        //    // --- 下面是你的文件保存逻辑 ---
+        //    try
+        //    {
+        //        string path = Path.Combine(System.Windows.Forms.Application.StartupPath, "Logs", DateTime.Now.ToString("yyyyMM"));
+        //        if (!Directory.Exists(path))
+        //        {
+        //            Directory.CreateDirectory(path);
+        //        }
+        //        string logFilePath = Path.Combine(path, $"{DateTime.Now:yyyyMMdd}.log");
+        //        // 写入文件时不需要颜色，直接写原始文本即可
+        //        File.AppendAllText(logFilePath, msg + Environment.NewLine);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // 简单的异常处理，防止日志写入失败导致程序崩溃
+        //        MessageBox.Show($"写入日志失败: {ex.Message}");
+        //    }
+        //}
+
+
+        private void ShowLogs(string infoLogs, Color color)
+        {
             try
             {
-                string path = Path.Combine(System.Windows.Forms.Application.StartupPath, "Logs", DateTime.Now.ToString("yyyyMM"));
-                if (!Directory.Exists(path))
+                string msg = $"{DateTime.Now:HH:mm:ss.fff} - {infoLogs}";
+
+                // UI线程安全
+                if (uiRichTextBox1.InvokeRequired)
                 {
-                    Directory.CreateDirectory(path);
+                    uiRichTextBox1.BeginInvoke(new Action(() =>
+                    {
+                        AppendLogToUi(msg, color);
+                    }));
                 }
-                string logFilePath = Path.Combine(path, $"{DateTime.Now:yyyyMMdd}.log");
-                // 写入文件时不需要颜色，直接写原始文本即可
-                File.AppendAllText(logFilePath, msg + Environment.NewLine);
+                else
+                {
+                    AppendLogToUi(msg, color);
+                }
+
+                // 写日志文件
+                WriteLog(msg);
             }
-            catch (Exception ex)
+            catch
             {
-                // 简单的异常处理，防止日志写入失败导致程序崩溃
-                MessageBox.Show($"写入日志失败: {ex.Message}");
+                // 日志系统不要抛异常
             }
         }
 
-        private List<TestResult> resultList = new List<TestResult>();
-        private void AddTestHistory( string sn, TestResult result, string status,string message)
+        private void AppendLogToUi(string msg, Color color)
         {
-            result.testResult = status;
-            resultList.Add(result);
-            ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}",  Color.Red);
-            if (resultList.Count==_config.GetEnableChannelCount(_config))
+            try
             {
-                // 处理测试历史记录
-               var Count= resultList.Select(e => e.testResult = "NG").Count();
-                if(Count>0)
+                // 控制最大长度
+                if (uiRichTextBox1.TextLength > 1024 * 500)
                 {
-                    // 处理NG结果
-                    new pageResult("FAIL").ShowDialog();
-                    resultList.Clear();
-                    return;
+                    uiRichTextBox1.Clear();
                 }
 
-                new pageResult("PASS").ShowDialog();
-                resultList.Clear();
+                uiRichTextBox1.SuspendLayout();
+
+                int start = uiRichTextBox1.TextLength;
+
+                uiRichTextBox1.AppendText(msg);
+
+                uiRichTextBox1.Select(start, msg.Length);
+
+                uiRichTextBox1.SelectionColor = color;
+                uiRichTextBox1.SelectionBackColor = uiRichTextBox1.BackColor;
+
+                uiRichTextBox1.AppendText(Environment.NewLine);
+
+                uiRichTextBox1.SelectionLength = 0;
+                uiRichTextBox1.ScrollToCaret();
+
+                uiRichTextBox1.ResumeLayout();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void WriteLog(string msg)
+        {
+            try
+            {
+                string dir = Path.Combine(
+                    Application.StartupPath,
+                    "Logs",
+                    DateTime.Now.ToString("yyyyMM"));
+
+                Directory.CreateDirectory(dir);
+
+                string filePath = Path.Combine(
+                    dir,
+                    $"{DateTime.Now:yyyyMMdd}.log");
+
+                lock (_logLock)
+                {
+                    FileStream fs = new FileStream(
+                       filePath,
+                       FileMode.Append,
+                       FileAccess.Write,
+                       FileShare.ReadWrite);
+
+                    StreamWriter sw = new StreamWriter(fs);
+
+                    sw.WriteLine(msg);
+                }
+            }
+            catch
+            {
+                // 不弹窗
+            }
+        }
+        //private List<string> GetSnFromUser()
+        //{
+        //    _frmSn = new FrmSN(
+        //        _config.GetEnableChannelCount(_config),
+        //        _config.snLength,
+        //        switchMES.Active);
+
+        //    _frmSn.ShowDialog(); // 等待用户输入
+
+        //    return _frmSn.GetAllSN();
+        //}
+
+        private List<string> GetSnFromUser()
+        {
+            _frmSn = new FrmSN(
+               _config.GetEnableChannelCount(_config),
+               _config.snLength,
+               switchMES.Active);
+
+            _frmSn.ShowDialog();
+
+            return _frmSn.GetAllSN();
+        }
+        private void StartSN()
+        {
+            var snLists = GetSnFromUser();
+
+            if (!_frmSn.IsAllOk())
+            {
+                this.ShowErrorNotifier("SN未全部校验通过");
                 return;
+            }
+
+            if (snLists.Any(string.IsNullOrWhiteSpace))
+            {
+                this.ShowErrorNotifier("存在空SN");
+                return;
+            }
+
+            snLists.ForEach(s =>
+            {
+                this.snList.Add(new ScanModel
+                {
+                    serialNumber = s,
+                    model = flagProductionModel
+                });
+                // 👉 按当前数量安全赋值
+                var index = snList.Count - 1;
+                var indexCount = _config.GetEnableChannelIndex(_config, index) - 1;
+                WriteSnToTextBox(indexCount, this.snList[index].serialNumber);
+            });
+
+            if (this.snList.Count == maxCount)
+            {
+                if (serialPort7 == null || !serialPort7.IsOpen)
+                {
+                    this.ShowErrorNotifier($"请先打开MCU串口 {_config.masterComName}");
+                    return;
+                }
+                this.ShowAskDialog("队列条码已经准备好，您确定要启动测试吗？", true);
+                {
+                    resultList.Clear();
+                    this.ShowWaitForm("启动测试...请等待...");
+                    ShowLogs("启动测试...请等待...", Color.Black);
+                    StartTesting();
+                    // ⭐ 关键修复
+                    Task.Run(() =>
+                    {
+                        Thread.Sleep(3000);
+
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            StartSN();
+                        }));
+                    });
+                };
+         
+            }
+
+        }
+        private List<TestResult> resultList = new List<TestResult>();
+        private void AddTestHistory(string sn, TestResult result, string status, string message)
+        {
+            var index = _config.GetChannelIndexByComName(_config, result.comName);
+            ShowLogs($"ComName:{result.comName} ComIndex{index} TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.Red);
+
+            if (status == "OK")
+            {
+                InitUIDisplay(PASS, index, Color.Green);
+            }
+            else
+            {
+                InitUIDisplay(FAIL, index, Color.Red);
+            }
+            result.testResult = status;
+            resultList.Add(result);
+            ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.Red);
+            if (resultList.Count == _config.GetEnableChannelCount(_config))
+            {
+                bool hasNg = resultList.Any(e => e.testResult == "NG");
+
+                if (hasNg)
+                {
+                    new pageResult("FAIL").ShowDialog();
+                }
+                else
+                {
+                    new pageResult("PASS").ShowDialog();
+                }
+
+                resultList.Clear();
+                // ⭐ 关键修复
+                Task.Run(() =>
+                {
+                    Thread.Sleep(3000);
+
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        StartSN();
+                    }));
+                });
             }
         }
 
@@ -928,87 +1389,100 @@ namespace LeakTestSystem
         /// <summary>
         /// 解析测试结果并显示日志
         /// </summary>
-        private void GetResult(int index, string data)
+        private void GetResult(int index, string data, string comName)
         {
-            string sn = GetSN(index);
-
-            if (!TestResult.TryParse(data, out TestResult result))
+            try
             {
-                ShowLogs($"数据格式错误 SN:{sn} Data:{data}", Color.Red);
+                string sn = GetSN(index);
+
+                if (!TestResult.TryParse(data, out TestResult result))
+                {
+                    ShowLogs($"数据格式错误 SN:{sn} Data:{data}", Color.Red);
+                    result.serialNumber = sn;
+                    result.comName = comName;
+                    result.channelsName = $"CH{index + 1}";
+                    resultList.Add(result);
+                    AddTestHistory(sn, result, "NG", "数据格式错误");
+                    return;
+                }
+
+
+                string msg;
                 result.serialNumber = sn;
+                result.comName = comName;
                 result.channelsName = $"CH{index + 1}";
-                resultList.Add(result);
-                new pageResult("FAIL").ShowDialog();
-                return;
+
+                switch (result.testResult)
+                {
+                    case "OK":
+
+                        msg =
+                            $"测试结果:SN:{sn} " +
+                            $"结果:{result.testResult} " +
+                            $"通道:{result.channelsName} " +
+                            $"压力:{result.PressureValue} " +
+                            $"泄漏:{result.LeakValue}";
+
+                        AddTestHistory(sn, result, "OK", msg);
+
+                        ShowLogs(msg, Color.Green);
+                        break;
+
+                    case "AL":
+
+                        msg =
+                            $"测试结果:SN:{sn} " +
+                            $"报警:{result.alarmMessage} " +
+                            $"通道:{result.channelsName}";
+
+                        AddTestHistory(sn, result, "NG", msg);
+                        ShowLogs(msg, Color.Red);
+                        break;
+
+                    case "TD":
+
+                        msg =
+                            $"测试结果:SN:{sn} " +
+                            $"正常值泄漏NG " +
+                            $"通道:{result.channelsName} " +
+                            $"压力:{result.PressureValue} " +
+                            $"泄漏:{result.LeakValue}";
+
+                        AddTestHistory(sn, result, "NG", msg);
+                        ShowLogs(msg, Color.Orange);
+                        break;
+
+                    case "RD":
+
+                        msg =
+                            $"测试结果:SN:{sn} " +
+                            $"负值泄漏NG " +
+                            $"通道:{result.channelsName} " +
+                            $"压力:{result.PressureValue} " +
+                            $"泄漏:{result.LeakValue}";
+
+                        AddTestHistory(sn, result, "NG", msg);
+                        ShowLogs(msg, Color.Orange);
+                        break;
+
+                    default:
+
+                        msg =
+                            $"测试结果:SN:{sn} " +
+                            $"未知结果:{result.testResult} " +
+                            $"原始数据:{data}";
+                        AddTestHistory(sn, result, "NG", msg);
+                        ShowLogs(msg, Color.Gray);
+                        break;
+                }
             }
-
-            string msg;
-            result.serialNumber = sn;
-            result.channelsName = $"CH{index + 1}";
-
-            switch (result.testResult)
+            catch (Exception ex)
             {
-                case "OK":
 
-                    msg =
-                        $"测试结果:SN:{sn} " +
-                        $"结果:{result.testResult} " +
-                        $"通道:{result.channelsName} " +
-                        $"压力:{result.PressureValue} " +
-                        $"泄漏:{result.LeakValue}";
-
-                    AddTestHistory(sn, result, "OK", msg);
-
-                    ShowLogs(msg, Color.Green);
-                    break;
-
-                case "AL":
-
-                    msg =
-                        $"测试结果:SN:{sn} " +
-                        $"报警:{result.alarmMessage} " +
-                        $"通道:{result.channelsName}";
-
-                    AddTestHistory(sn, result, "NG", msg);
-                    ShowLogs(msg, Color.Red);
-                    break;
-
-                case "TD":
-
-                    msg =
-                        $"测试结果:SN:{sn} " +
-                        $"正常值泄漏NG " +
-                        $"通道:{result.channelsName} " +
-                        $"压力:{result.PressureValue} " +
-                        $"泄漏:{result.LeakValue}";
-
-                    AddTestHistory(sn, result, "NG", msg);
-                    ShowLogs(msg, Color.Orange);
-                    break;
-
-                case "RD":
-
-                    msg =
-                        $"测试结果:SN:{sn} " +
-                        $"负值泄漏NG " +
-                        $"通道:{result.channelsName} " +
-                        $"压力:{result.PressureValue} " +
-                        $"泄漏:{result.LeakValue}";
-
-                    AddTestHistory(sn, result, "NG", msg);
-                    ShowLogs(msg, Color.Orange);
-                    break;
-
-                default:
-
-                    msg =
-                        $"测试结果:SN:{sn} " +
-                        $"未知结果:{result.testResult} " +
-                        $"原始数据:{data}";
-                    AddTestHistory(sn, result, "NG", msg);
-                    ShowLogs(msg, Color.Gray);
-                    break;
+                ShowLogs($"处理测试结果时发生异常: {ex.Message}", Color.Red);
             }
+
+
         }
         /// <summary>
         /// 获取SN，根据index返回对应的文本框内容
@@ -1021,6 +1495,47 @@ namespace LeakTestSystem
                 return string.Empty;
 
             return snTextBoxes[index].Text.Trim();
+        }
+
+        /// <summary>
+        /// 初始化状态   
+        /// </summary>
+        private void InitUIDisplay(string value)
+        {
+            //var value =String.Empty ;
+            _uiLedDisplaysArry.ForEach(e =>
+            {
+                e.Text = value;
+                e.ForeColor = Color.Black;
+            });
+
+        }
+        /// <summary>
+        /// 初始化 LED 显示状态
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="index"></param>
+        /// <param name="color"></param>
+        private void InitUIDisplay(string value, int index, Color color)
+        {
+            //var value =String.Empty ;
+            _uiLedDisplaysArry[index].Text = value;
+            _uiLedDisplaysArry[index].ForeColor = color;
+
+        }
+
+        /// <summary>
+        /// 初始化状态   
+        /// </summary>
+        private void InitUIDisplay(string value, Color color)
+        {
+            //var value =String.Empty ;
+            _uiLedDisplaysArry.ForEach(e =>
+            {
+                e.Text = value;
+                e.ForeColor = color;
+            });
+
         }
     }
 }

@@ -58,31 +58,36 @@
             this.switchCom7 = new Sunny.UI.UISwitch();
             this.ledCom7 = new Sunny.UI.UILedBulb();
             this.titlePanel6 = new Sunny.UI.UITitlePanel();
+            this.uiLedDisplay6 = new Sunny.UI.UILedDisplay();
             this.txtsn6 = new Sunny.UI.UITextBox();
-            this.uiListBox6 = new Sunny.UI.UIListBox();
             this.labCH6 = new Sunny.UI.UILabel();
             this.ledCom6 = new Sunny.UI.UILedBulb();
             this.titlePanel5 = new Sunny.UI.UITitlePanel();
+            this.uiLedDisplay5 = new Sunny.UI.UILedDisplay();
             this.txtsn5 = new Sunny.UI.UITextBox();
             this.uiListBox5 = new Sunny.UI.UIListBox();
             this.labCH5 = new Sunny.UI.UILabel();
             this.ledCom5 = new Sunny.UI.UILedBulb();
             this.titlePanel4 = new Sunny.UI.UITitlePanel();
+            this.uiLedDisplay4 = new Sunny.UI.UILedDisplay();
             this.txtsn4 = new Sunny.UI.UITextBox();
             this.uiListBox4 = new Sunny.UI.UIListBox();
             this.labCH4 = new Sunny.UI.UILabel();
             this.ledCom4 = new Sunny.UI.UILedBulb();
             this.titlePanel3 = new Sunny.UI.UITitlePanel();
+            this.uiLedDisplay3 = new Sunny.UI.UILedDisplay();
             this.txtsn3 = new Sunny.UI.UITextBox();
             this.uiListBox3 = new Sunny.UI.UIListBox();
             this.labCH3 = new Sunny.UI.UILabel();
             this.ledCom3 = new Sunny.UI.UILedBulb();
             this.titlePanel2 = new Sunny.UI.UITitlePanel();
+            this.uiLedDisplay2 = new Sunny.UI.UILedDisplay();
             this.txtsn2 = new Sunny.UI.UITextBox();
             this.uiListBox2 = new Sunny.UI.UIListBox();
             this.labCH2 = new Sunny.UI.UILabel();
             this.ledCom2 = new Sunny.UI.UILedBulb();
             this.titlePanel1 = new Sunny.UI.UITitlePanel();
+            this.uiLedDisplay1 = new Sunny.UI.UILedDisplay();
             this.ledCom1 = new Sunny.UI.UILedBulb();
             this.txtsn1 = new Sunny.UI.UITextBox();
             this.uiListBox1 = new Sunny.UI.UIListBox();
@@ -95,7 +100,7 @@
             this.uiPipe4 = new Sunny.UI.UIPipe();
             this.uiPipe3 = new Sunny.UI.UIPipe();
             this.uiPipe2 = new Sunny.UI.UIPipe();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.snLen = new System.Windows.Forms.TabPage();
             this.uiGroupBox5 = new Sunny.UI.UIGroupBox();
             this.uiTitlePanel2 = new Sunny.UI.UITitlePanel();
             this.readTimeout = new Sunny.UI.UIIntegerUpDown();
@@ -135,6 +140,8 @@
             this.checkBoxChannel1 = new Sunny.UI.UICheckBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip(this.components);
+            this.uiTitlePanel3 = new Sunny.UI.UITitlePanel();
+            this.snCheckLen = new Sunny.UI.UIIntegerUpDown();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -142,6 +149,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uiListBox6 = new Sunny.UI.UIListBox();
             this.uiTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.uiGroupBox3.SuspendLayout();
@@ -155,19 +163,20 @@
             this.titlePanel3.SuspendLayout();
             this.titlePanel2.SuspendLayout();
             this.titlePanel1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.snLen.SuspendLayout();
             this.uiGroupBox5.SuspendLayout();
             this.uiTitlePanel2.SuspendLayout();
             this.uiTitlePanel1.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.uiTitlePanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // uiTabControl1
             // 
             this.uiTabControl1.Controls.Add(this.tabPage1);
-            this.uiTabControl1.Controls.Add(this.tabPage2);
+            this.uiTabControl1.Controls.Add(this.snLen);
             this.uiTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.uiTabControl1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -300,12 +309,12 @@
             this.uiPipe18.Active = true;
             this.uiPipe18.BackColor = System.Drawing.Color.Transparent;
             this.uiPipe18.Direction = Sunny.UI.UILine.LineDirection.Vertical;
-            this.uiPipe18.FlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.uiPipe18.FlowColor = System.Drawing.Color.SkyBlue;
             this.uiPipe18.FlowInterval = 16;
             this.uiPipe18.FlowSize = 28;
             this.uiPipe18.FlowSpeed = 12;
             this.uiPipe18.Font = new System.Drawing.Font("宋体", 12F);
-            this.uiPipe18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.uiPipe18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.uiPipe18.Location = new System.Drawing.Point(1746, 349);
             this.uiPipe18.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPipe18.Name = "uiPipe18";
@@ -357,7 +366,7 @@
             this.uiGroupBox2.Controls.Add(this.RadioDebugMode);
             this.uiGroupBox2.Controls.Add(this.RadioBtnProductionMode);
             this.uiGroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiGroupBox2.Location = new System.Drawing.Point(329, 40);
+            this.uiGroupBox2.Location = new System.Drawing.Point(329, 41);
             this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox2.Name = "uiGroupBox2";
@@ -474,6 +483,7 @@
             this.groupSnList.TabIndex = 98;
             this.groupSnList.Text = "SN List";
             this.groupSnList.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.groupSnList.Visible = false;
             // 
             // btnReSet
             // 
@@ -566,8 +576,9 @@
             // 
             // titlePanel6
             // 
-            this.titlePanel6.Controls.Add(this.txtsn6);
             this.titlePanel6.Controls.Add(this.uiListBox6);
+            this.titlePanel6.Controls.Add(this.uiLedDisplay6);
+            this.titlePanel6.Controls.Add(this.txtsn6);
             this.titlePanel6.Controls.Add(this.labCH6);
             this.titlePanel6.Controls.Add(this.ledCom6);
             this.titlePanel6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -581,6 +592,16 @@
             this.titlePanel6.TabIndex = 9;
             this.titlePanel6.Text = "Channels(6)";
             this.titlePanel6.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiLedDisplay6
+            // 
+            this.uiLedDisplay6.BackColor = System.Drawing.Color.Black;
+            this.uiLedDisplay6.ForeColor = System.Drawing.Color.Lime;
+            this.uiLedDisplay6.Location = new System.Drawing.Point(77, 37);
+            this.uiLedDisplay6.Name = "uiLedDisplay6";
+            this.uiLedDisplay6.Size = new System.Drawing.Size(190, 34);
+            this.uiLedDisplay6.TabIndex = 11;
+            this.uiLedDisplay6.Text = "PASS";
             // 
             // txtsn6
             // 
@@ -597,23 +618,6 @@
             this.txtsn6.TabIndex = 5;
             this.txtsn6.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtsn6.Watermark = "";
-            // 
-            // uiListBox6
-            // 
-            this.uiListBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiListBox6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiListBox6.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.uiListBox6.ItemSelectForeColor = System.Drawing.Color.White;
-            this.uiListBox6.Location = new System.Drawing.Point(7, 114);
-            this.uiListBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiListBox6.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiListBox6.Name = "uiListBox6";
-            this.uiListBox6.Padding = new System.Windows.Forms.Padding(2);
-            this.uiListBox6.ShowText = false;
-            this.uiListBox6.Size = new System.Drawing.Size(296, 190);
-            this.uiListBox6.TabIndex = 10;
-            this.uiListBox6.Text = "uiListBox6";
             // 
             // labCH6
             // 
@@ -636,6 +640,7 @@
             // 
             // titlePanel5
             // 
+            this.titlePanel5.Controls.Add(this.uiLedDisplay5);
             this.titlePanel5.Controls.Add(this.txtsn5);
             this.titlePanel5.Controls.Add(this.uiListBox5);
             this.titlePanel5.Controls.Add(this.labCH5);
@@ -651,6 +656,16 @@
             this.titlePanel5.TabIndex = 8;
             this.titlePanel5.Text = "Channels(5)";
             this.titlePanel5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiLedDisplay5
+            // 
+            this.uiLedDisplay5.BackColor = System.Drawing.Color.Black;
+            this.uiLedDisplay5.ForeColor = System.Drawing.Color.Lime;
+            this.uiLedDisplay5.Location = new System.Drawing.Point(75, 37);
+            this.uiLedDisplay5.Name = "uiLedDisplay5";
+            this.uiLedDisplay5.Size = new System.Drawing.Size(190, 34);
+            this.uiLedDisplay5.TabIndex = 9;
+            this.uiLedDisplay5.Text = "PASS";
             // 
             // txtsn5
             // 
@@ -706,6 +721,7 @@
             // 
             // titlePanel4
             // 
+            this.titlePanel4.Controls.Add(this.uiLedDisplay4);
             this.titlePanel4.Controls.Add(this.txtsn4);
             this.titlePanel4.Controls.Add(this.uiListBox4);
             this.titlePanel4.Controls.Add(this.labCH4);
@@ -721,6 +737,16 @@
             this.titlePanel4.TabIndex = 7;
             this.titlePanel4.Text = "Channels(4)";
             this.titlePanel4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiLedDisplay4
+            // 
+            this.uiLedDisplay4.BackColor = System.Drawing.Color.Black;
+            this.uiLedDisplay4.ForeColor = System.Drawing.Color.Lime;
+            this.uiLedDisplay4.Location = new System.Drawing.Point(75, 38);
+            this.uiLedDisplay4.Name = "uiLedDisplay4";
+            this.uiLedDisplay4.Size = new System.Drawing.Size(190, 34);
+            this.uiLedDisplay4.TabIndex = 8;
+            this.uiLedDisplay4.Text = "PASS";
             // 
             // txtsn4
             // 
@@ -776,6 +802,7 @@
             // 
             // titlePanel3
             // 
+            this.titlePanel3.Controls.Add(this.uiLedDisplay3);
             this.titlePanel3.Controls.Add(this.txtsn3);
             this.titlePanel3.Controls.Add(this.uiListBox3);
             this.titlePanel3.Controls.Add(this.labCH3);
@@ -791,6 +818,16 @@
             this.titlePanel3.TabIndex = 6;
             this.titlePanel3.Text = "Channels(3)";
             this.titlePanel3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiLedDisplay3
+            // 
+            this.uiLedDisplay3.BackColor = System.Drawing.Color.Black;
+            this.uiLedDisplay3.ForeColor = System.Drawing.Color.Lime;
+            this.uiLedDisplay3.Location = new System.Drawing.Point(75, 38);
+            this.uiLedDisplay3.Name = "uiLedDisplay3";
+            this.uiLedDisplay3.Size = new System.Drawing.Size(190, 34);
+            this.uiLedDisplay3.TabIndex = 7;
+            this.uiLedDisplay3.Text = "PASS";
             // 
             // txtsn3
             // 
@@ -829,9 +866,9 @@
             // 
             this.labCH3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labCH3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.labCH3.Location = new System.Drawing.Point(8, 48);
+            this.labCH3.Location = new System.Drawing.Point(8, 45);
             this.labCH3.Name = "labCH3";
-            this.labCH3.Size = new System.Drawing.Size(143, 23);
+            this.labCH3.Size = new System.Drawing.Size(82, 26);
             this.labCH3.TabIndex = 5;
             this.labCH3.Text = "COM 3";
             // 
@@ -846,6 +883,7 @@
             // 
             // titlePanel2
             // 
+            this.titlePanel2.Controls.Add(this.uiLedDisplay2);
             this.titlePanel2.Controls.Add(this.txtsn2);
             this.titlePanel2.Controls.Add(this.uiListBox2);
             this.titlePanel2.Controls.Add(this.labCH2);
@@ -861,6 +899,16 @@
             this.titlePanel2.TabIndex = 5;
             this.titlePanel2.Text = "Channels(2)";
             this.titlePanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiLedDisplay2
+            // 
+            this.uiLedDisplay2.BackColor = System.Drawing.Color.Black;
+            this.uiLedDisplay2.ForeColor = System.Drawing.Color.Lime;
+            this.uiLedDisplay2.Location = new System.Drawing.Point(63, 37);
+            this.uiLedDisplay2.Name = "uiLedDisplay2";
+            this.uiLedDisplay2.Size = new System.Drawing.Size(190, 34);
+            this.uiLedDisplay2.TabIndex = 6;
+            this.uiLedDisplay2.Text = "PASS";
             // 
             // txtsn2
             // 
@@ -916,6 +964,7 @@
             // 
             // titlePanel1
             // 
+            this.titlePanel1.Controls.Add(this.uiLedDisplay1);
             this.titlePanel1.Controls.Add(this.ledCom1);
             this.titlePanel1.Controls.Add(this.txtsn1);
             this.titlePanel1.Controls.Add(this.uiListBox1);
@@ -931,6 +980,16 @@
             this.titlePanel1.TabIndex = 4;
             this.titlePanel1.Text = "Channels (1)";
             this.titlePanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiLedDisplay1
+            // 
+            this.uiLedDisplay1.BackColor = System.Drawing.Color.Black;
+            this.uiLedDisplay1.ForeColor = System.Drawing.Color.Lime;
+            this.uiLedDisplay1.Location = new System.Drawing.Point(79, 38);
+            this.uiLedDisplay1.Name = "uiLedDisplay1";
+            this.uiLedDisplay1.Size = new System.Drawing.Size(190, 34);
+            this.uiLedDisplay1.TabIndex = 5;
+            this.uiLedDisplay1.Text = "PASS";
             // 
             // ledCom1
             // 
@@ -1139,21 +1198,22 @@
             this.uiPipe2.Text = "uiPipe2";
             this.uiPipe2.ZoomScaleDisabled = true;
             // 
-            // tabPage2
+            // snLen
             // 
-            this.tabPage2.Controls.Add(this.uiGroupBox5);
-            this.tabPage2.Controls.Add(this.uiGroupBox1);
-            this.tabPage2.Controls.Add(this.uiGroupBox4);
-            this.tabPage2.Controls.Add(this.menuStrip1);
-            this.tabPage2.Location = new System.Drawing.Point(0, 40);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1930, 1012);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Setting";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.snLen.Controls.Add(this.uiGroupBox5);
+            this.snLen.Controls.Add(this.uiGroupBox1);
+            this.snLen.Controls.Add(this.uiGroupBox4);
+            this.snLen.Controls.Add(this.menuStrip1);
+            this.snLen.Location = new System.Drawing.Point(0, 40);
+            this.snLen.Name = "snLen";
+            this.snLen.Size = new System.Drawing.Size(1930, 1012);
+            this.snLen.TabIndex = 1;
+            this.snLen.Text = "Setting";
+            this.snLen.UseVisualStyleBackColor = true;
             // 
             // uiGroupBox5
             // 
+            this.uiGroupBox5.Controls.Add(this.uiTitlePanel3);
             this.uiGroupBox5.Controls.Add(this.uiTitlePanel2);
             this.uiGroupBox5.Controls.Add(this.uiTitlePanel1);
             this.uiGroupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -1659,6 +1719,40 @@
             this.uiContextMenuStrip1.Name = "uiContextMenuStrip1";
             this.uiContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // uiTitlePanel3
+            // 
+            this.uiTitlePanel3.Controls.Add(this.snCheckLen);
+            this.uiTitlePanel3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTitlePanel3.Location = new System.Drawing.Point(22, 173);
+            this.uiTitlePanel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel3.Name = "uiTitlePanel3";
+            this.uiTitlePanel3.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel3.ShowText = false;
+            this.uiTitlePanel3.Size = new System.Drawing.Size(167, 92);
+            this.uiTitlePanel3.TabIndex = 105;
+            this.uiTitlePanel3.Text = "条码长度";
+            this.uiTitlePanel3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // snCheckLen
+            // 
+            this.snCheckLen.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.snCheckLen.Font = new System.Drawing.Font("宋体", 12F);
+            this.snCheckLen.Location = new System.Drawing.Point(5, 46);
+            this.snCheckLen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.snCheckLen.Maximum = 60D;
+            this.snCheckLen.MaxLength = 6;
+            this.snCheckLen.Minimum = 1D;
+            this.snCheckLen.MinimumSize = new System.Drawing.Size(100, 0);
+            this.snCheckLen.Name = "snCheckLen";
+            this.snCheckLen.Padding = new System.Windows.Forms.Padding(5);
+            this.snCheckLen.ShowText = false;
+            this.snCheckLen.Size = new System.Drawing.Size(150, 29);
+            this.snCheckLen.TabIndex = 104;
+            this.snCheckLen.Text = "20";
+            this.snCheckLen.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.snCheckLen.Value = 20;
+            // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1709,6 +1803,23 @@
             this.reloadToolStripMenuItem.Size = new System.Drawing.Size(85, 28);
             this.reloadToolStripMenuItem.Text = "Reload";
             // 
+            // uiListBox6
+            // 
+            this.uiListBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiListBox6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiListBox6.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.uiListBox6.ItemSelectForeColor = System.Drawing.Color.White;
+            this.uiListBox6.Location = new System.Drawing.Point(5, 112);
+            this.uiListBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiListBox6.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiListBox6.Name = "uiListBox6";
+            this.uiListBox6.Padding = new System.Windows.Forms.Padding(2);
+            this.uiListBox6.ShowText = false;
+            this.uiListBox6.Size = new System.Drawing.Size(296, 190);
+            this.uiListBox6.TabIndex = 10;
+            this.uiListBox6.Text = "uiListBox6";
+            // 
             // FrmMaster
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1734,8 +1845,8 @@
             this.titlePanel3.ResumeLayout(false);
             this.titlePanel2.ResumeLayout(false);
             this.titlePanel1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.snLen.ResumeLayout(false);
+            this.snLen.PerformLayout();
             this.uiGroupBox5.ResumeLayout(false);
             this.uiTitlePanel2.ResumeLayout(false);
             this.uiTitlePanel1.ResumeLayout(false);
@@ -1743,6 +1854,7 @@
             this.uiGroupBox4.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.uiTitlePanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1750,7 +1862,7 @@
         #endregion
 
         private Sunny.UI.UITabControl uiTabControl1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage snLen;
         private Sunny.UI.UIContextMenuStrip uiContextMenuStrip1;
         private System.Windows.Forms.TabPage tabPage1;
         private Sunny.UI.UIPipe uiPipe1;
@@ -1782,7 +1894,6 @@
         private Sunny.UI.UISwitch switchCom7;
         private Sunny.UI.UITitlePanel titlePanel6;
         private Sunny.UI.UITextBox txtsn6;
-        private Sunny.UI.UIListBox uiListBox6;
         private Sunny.UI.UILabel labCH6;
         private Sunny.UI.UITitlePanel titlePanel5;
         private Sunny.UI.UITextBox txtsn5;
@@ -1861,6 +1972,15 @@
         private Sunny.UI.UIGroupBox uiGroupBox5;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reloadToolStripMenuItem;
+        private Sunny.UI.UILedDisplay uiLedDisplay1;
+        private Sunny.UI.UILedDisplay uiLedDisplay2;
+        private Sunny.UI.UILedDisplay uiLedDisplay6;
+        private Sunny.UI.UILedDisplay uiLedDisplay5;
+        private Sunny.UI.UILedDisplay uiLedDisplay4;
+        private Sunny.UI.UILedDisplay uiLedDisplay3;
+        private Sunny.UI.UITitlePanel uiTitlePanel3;
+        private Sunny.UI.UIIntegerUpDown snCheckLen;
+        private Sunny.UI.UIListBox uiListBox6;
     }
 }
 
