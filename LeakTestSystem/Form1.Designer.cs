@@ -41,9 +41,6 @@
             this.uiPipe18 = new Sunny.UI.UIPipe();
             this.ConnectitonStatusV1 = new Sunny.UI.UIValve();
             this.uiTitlePanel9 = new Sunny.UI.UITitlePanel();
-            this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
-            this.RadioDebugMode = new Sunny.UI.UIRadioButton();
-            this.RadioBtnProductionMode = new Sunny.UI.UIRadioButton();
             this.txtEmp = new Sunny.UI.UITextBox();
             this.switchMES = new Sunny.UI.UISwitch();
             this.uiLine9 = new Sunny.UI.UILine();
@@ -125,7 +122,6 @@
             this.uiCheckBox1 = new Sunny.UI.UICheckBox();
             this.uiGroupBox4 = new Sunny.UI.UIGroupBox();
             this.cobChannelMaster = new System.Windows.Forms.ComboBox();
-            this.uiCheckBox17 = new Sunny.UI.UICheckBox();
             this.cobChannel6 = new System.Windows.Forms.ComboBox();
             this.cobChannel5 = new System.Windows.Forms.ComboBox();
             this.cobChannel4 = new System.Windows.Forms.ComboBox();
@@ -150,11 +146,15 @@
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uiListBox6 = new Sunny.UI.UIListBox();
+            this.uiLine1 = new Sunny.UI.UILine();
+            this.proName = new Sunny.UI.UILine();
+            this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
+            this.RadioDebugMode = new Sunny.UI.UIRadioButton();
+            this.RadioBtnProductionMode = new Sunny.UI.UIRadioButton();
             this.uiTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.uiGroupBox3.SuspendLayout();
             this.uiTitlePanel9.SuspendLayout();
-            this.uiGroupBox2.SuspendLayout();
             this.groupSnList.SuspendLayout();
             this.titlePanel8.SuspendLayout();
             this.titlePanel6.SuspendLayout();
@@ -171,6 +171,7 @@
             this.uiGroupBox4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.uiTitlePanel3.SuspendLayout();
+            this.uiGroupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // uiTabControl1
@@ -342,7 +343,7 @@
             // 
             // uiTitlePanel9
             // 
-            this.uiTitlePanel9.Controls.Add(this.uiGroupBox2);
+            this.uiTitlePanel9.Controls.Add(this.proName);
             this.uiTitlePanel9.Controls.Add(this.txtEmp);
             this.uiTitlePanel9.Controls.Add(this.switchMES);
             this.uiTitlePanel9.Controls.Add(this.uiLine9);
@@ -356,48 +357,10 @@
             this.uiTitlePanel9.Name = "uiTitlePanel9";
             this.uiTitlePanel9.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
             this.uiTitlePanel9.ShowText = false;
-            this.uiTitlePanel9.Size = new System.Drawing.Size(1888, 154);
+            this.uiTitlePanel9.Size = new System.Drawing.Size(1888, 193);
             this.uiTitlePanel9.TabIndex = 11;
             this.uiTitlePanel9.Text = "MES";
             this.uiTitlePanel9.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiGroupBox2
-            // 
-            this.uiGroupBox2.Controls.Add(this.RadioDebugMode);
-            this.uiGroupBox2.Controls.Add(this.RadioBtnProductionMode);
-            this.uiGroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiGroupBox2.Location = new System.Drawing.Point(329, 41);
-            this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiGroupBox2.Name = "uiGroupBox2";
-            this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox2.Size = new System.Drawing.Size(248, 110);
-            this.uiGroupBox2.TabIndex = 97;
-            this.uiGroupBox2.Text = "作业模式";
-            this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // RadioDebugMode
-            // 
-            this.RadioDebugMode.Checked = true;
-            this.RadioDebugMode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.RadioDebugMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.RadioDebugMode.Location = new System.Drawing.Point(106, 36);
-            this.RadioDebugMode.MinimumSize = new System.Drawing.Size(1, 1);
-            this.RadioDebugMode.Name = "RadioDebugMode";
-            this.RadioDebugMode.Size = new System.Drawing.Size(105, 29);
-            this.RadioDebugMode.TabIndex = 3;
-            this.RadioDebugMode.Text = "调试模式";
-            // 
-            // RadioBtnProductionMode
-            // 
-            this.RadioBtnProductionMode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.RadioBtnProductionMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.RadioBtnProductionMode.Location = new System.Drawing.Point(3, 36);
-            this.RadioBtnProductionMode.MinimumSize = new System.Drawing.Size(1, 1);
-            this.RadioBtnProductionMode.Name = "RadioBtnProductionMode";
-            this.RadioBtnProductionMode.Size = new System.Drawing.Size(105, 29);
-            this.RadioBtnProductionMode.TabIndex = 2;
-            this.RadioBtnProductionMode.Text = "生产模式";
             // 
             // txtEmp
             // 
@@ -1213,6 +1176,7 @@
             // 
             // uiGroupBox5
             // 
+            this.uiGroupBox5.Controls.Add(this.uiGroupBox2);
             this.uiGroupBox5.Controls.Add(this.uiTitlePanel3);
             this.uiGroupBox5.Controls.Add(this.uiTitlePanel2);
             this.uiGroupBox5.Controls.Add(this.uiTitlePanel1);
@@ -1231,7 +1195,7 @@
             // 
             this.uiTitlePanel2.Controls.Add(this.readTimeout);
             this.uiTitlePanel2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTitlePanel2.Location = new System.Drawing.Point(22, 56);
+            this.uiTitlePanel2.Location = new System.Drawing.Point(27, 172);
             this.uiTitlePanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanel2.Name = "uiTitlePanel2";
@@ -1265,7 +1229,7 @@
             // 
             this.uiTitlePanel1.Controls.Add(this.switchMesNgLock);
             this.uiTitlePanel1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTitlePanel1.Location = new System.Drawing.Point(332, 59);
+            this.uiTitlePanel1.Location = new System.Drawing.Point(327, 172);
             this.uiTitlePanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanel1.Name = "uiTitlePanel1";
@@ -1525,8 +1489,8 @@
             // 
             // uiGroupBox4
             // 
+            this.uiGroupBox4.Controls.Add(this.uiLine1);
             this.uiGroupBox4.Controls.Add(this.cobChannelMaster);
-            this.uiGroupBox4.Controls.Add(this.uiCheckBox17);
             this.uiGroupBox4.Controls.Add(this.cobChannel6);
             this.uiGroupBox4.Controls.Add(this.cobChannel5);
             this.uiGroupBox4.Controls.Add(this.cobChannel4);
@@ -1557,19 +1521,6 @@
             this.cobChannelMaster.Name = "cobChannelMaster";
             this.cobChannelMaster.Size = new System.Drawing.Size(115, 28);
             this.cobChannelMaster.TabIndex = 65;
-            // 
-            // uiCheckBox17
-            // 
-            this.uiCheckBox17.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox17.Font = new System.Drawing.Font("宋体", 12F);
-            this.uiCheckBox17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox17.Location = new System.Drawing.Point(34, 187);
-            this.uiCheckBox17.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox17.Name = "uiCheckBox17";
-            this.uiCheckBox17.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.uiCheckBox17.Size = new System.Drawing.Size(57, 33);
-            this.uiCheckBox17.TabIndex = 64;
-            this.uiCheckBox17.Text = "MCU";
             // 
             // cobChannel6
             // 
@@ -1723,7 +1674,7 @@
             // 
             this.uiTitlePanel3.Controls.Add(this.snCheckLen);
             this.uiTitlePanel3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTitlePanel3.Location = new System.Drawing.Point(22, 173);
+            this.uiTitlePanel3.Location = new System.Drawing.Point(27, 274);
             this.uiTitlePanel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanel3.Name = "uiTitlePanel3";
@@ -1767,19 +1718,19 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // saveToolStripMenuItem
@@ -1820,6 +1771,69 @@
             this.uiListBox6.TabIndex = 10;
             this.uiListBox6.Text = "uiListBox6";
             // 
+            // uiLine1
+            // 
+            this.uiLine1.BackColor = System.Drawing.Color.Transparent;
+            this.uiLine1.Font = new System.Drawing.Font("宋体", 12F);
+            this.uiLine1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiLine1.Location = new System.Drawing.Point(31, 193);
+            this.uiLine1.MinimumSize = new System.Drawing.Size(16, 16);
+            this.uiLine1.Name = "uiLine1";
+            this.uiLine1.Size = new System.Drawing.Size(60, 20);
+            this.uiLine1.TabIndex = 66;
+            this.uiLine1.Text = "MCU";
+            this.uiLine1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // proName
+            // 
+            this.proName.BackColor = System.Drawing.Color.Transparent;
+            this.proName.Font = new System.Drawing.Font("宋体", 12F);
+            this.proName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.proName.Location = new System.Drawing.Point(7, 169);
+            this.proName.MinimumSize = new System.Drawing.Size(16, 16);
+            this.proName.Name = "proName";
+            this.proName.Size = new System.Drawing.Size(60, 20);
+            this.proName.TabIndex = 99;
+            this.proName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // uiGroupBox2
+            // 
+            this.uiGroupBox2.Controls.Add(this.RadioDebugMode);
+            this.uiGroupBox2.Controls.Add(this.RadioBtnProductionMode);
+            this.uiGroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiGroupBox2.Location = new System.Drawing.Point(27, 37);
+            this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox2.Name = "uiGroupBox2";
+            this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox2.Size = new System.Drawing.Size(467, 110);
+            this.uiGroupBox2.TabIndex = 106;
+            this.uiGroupBox2.Text = "作业模式";
+            this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // RadioDebugMode
+            // 
+            this.RadioDebugMode.Checked = true;
+            this.RadioDebugMode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RadioDebugMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.RadioDebugMode.Location = new System.Drawing.Point(106, 36);
+            this.RadioDebugMode.MinimumSize = new System.Drawing.Size(1, 1);
+            this.RadioDebugMode.Name = "RadioDebugMode";
+            this.RadioDebugMode.Size = new System.Drawing.Size(105, 29);
+            this.RadioDebugMode.TabIndex = 3;
+            this.RadioDebugMode.Text = "调试模式";
+            // 
+            // RadioBtnProductionMode
+            // 
+            this.RadioBtnProductionMode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RadioBtnProductionMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.RadioBtnProductionMode.Location = new System.Drawing.Point(3, 36);
+            this.RadioBtnProductionMode.MinimumSize = new System.Drawing.Size(1, 1);
+            this.RadioBtnProductionMode.Name = "RadioBtnProductionMode";
+            this.RadioBtnProductionMode.Size = new System.Drawing.Size(105, 29);
+            this.RadioBtnProductionMode.TabIndex = 2;
+            this.RadioBtnProductionMode.Text = "生产模式";
+            // 
             // FrmMaster
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1836,7 +1850,6 @@
             this.tabPage1.ResumeLayout(false);
             this.uiGroupBox3.ResumeLayout(false);
             this.uiTitlePanel9.ResumeLayout(false);
-            this.uiGroupBox2.ResumeLayout(false);
             this.groupSnList.ResumeLayout(false);
             this.titlePanel8.ResumeLayout(false);
             this.titlePanel6.ResumeLayout(false);
@@ -1855,6 +1868,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.uiTitlePanel3.ResumeLayout(false);
+            this.uiGroupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1881,9 +1895,6 @@
         private Sunny.UI.UILedBulb ledCom4;
         private Sunny.UI.UILedBulb ledCom5;
         private Sunny.UI.UITitlePanel uiTitlePanel9;
-        private Sunny.UI.UIGroupBox uiGroupBox2;
-        private Sunny.UI.UIRadioButton RadioDebugMode;
-        private Sunny.UI.UIRadioButton RadioBtnProductionMode;
         private Sunny.UI.UITextBox txtEmp;
         private Sunny.UI.UISwitch switchMES;
         private Sunny.UI.UILine uiLine9;
@@ -1947,7 +1958,6 @@
         private System.Windows.Forms.ComboBox cobChannel2;
         private System.Windows.Forms.ComboBox cobChannel1;
         private System.Windows.Forms.ComboBox cobChannelMaster;
-        private Sunny.UI.UICheckBox uiCheckBox17;
         private System.Windows.Forms.ComboBox cobChannel6;
         private System.Windows.Forms.ComboBox cobChannel5;
         private System.Windows.Forms.ComboBox cobChannel4;
@@ -1981,6 +1991,11 @@
         private Sunny.UI.UITitlePanel uiTitlePanel3;
         private Sunny.UI.UIIntegerUpDown snCheckLen;
         private Sunny.UI.UIListBox uiListBox6;
+        private Sunny.UI.UILine proName;
+        private Sunny.UI.UILine uiLine1;
+        private Sunny.UI.UIGroupBox uiGroupBox2;
+        private Sunny.UI.UIRadioButton RadioDebugMode;
+        private Sunny.UI.UIRadioButton RadioBtnProductionMode;
     }
 }
 

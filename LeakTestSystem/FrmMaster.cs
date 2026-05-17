@@ -99,9 +99,10 @@ namespace LeakTestSystem
                 if (switchCom7.Active)
                 {
                     // 1. 判断是否存在 COM1~COM7
-                    if (!CheckCom1To7Exists())
+                    if (!HasRequiredComPorts())
                     {
-                        MessageBox.Show("未检测到完整 COM ");
+                        var missingPorts = GetMissingComPorts();
+                        this.ShowErrorNotifier($"未检测到以下必要的串口: {string.Join(", ", missingPorts)}");
                         switchCom7.Active = false;
                         return;
                     }
@@ -142,19 +143,30 @@ namespace LeakTestSystem
 
         }
 
-        private bool CheckCom1To7Exists()
+        /// <summary>
+        /// 判断系统是否有要使用的串口，至少要包含配方里启用的串口，否则无法正常使用
+        /// </summary>
+        /// <returns></returns>
+        private bool HasRequiredComPorts()
         {
-            var comList = SerialPort.GetPortNames();
+            return GetMissingComPorts().Count == 0;
+        }
 
-            for (int i = 1; i <= 7; i++)
-            {
-                if (!comList.Contains($"COM{i}"))
-                {
-                    return false;
-                }
-            }
+        private List<string> GetMissingComPorts()
+        {
+            var systemPorts = SerialPort.GetPortNames()
+                .Select(p => p.Trim().ToUpper())
+                .ToHashSet();
 
-            return true;
+            var requiredPorts = _config.GetEnableComList(_config)
+                .Select(p => p.Trim().ToUpper())
+                .ToList();
+
+            var missing = requiredPorts
+                .Where(p => !systemPorts.Contains(p))
+                .ToList();
+
+            return missing;
         }
 
         private void InitAllPorts()
@@ -304,6 +316,7 @@ namespace LeakTestSystem
             this.uiCheckBox14.Click += UiCheckBox_Click;
             this.uiCheckBox15.Click += UiCheckBox_Click;
             this.uiCheckBox16.Click += UiCheckBox_Click;
+            this.openToolStripMenuItem.Click += OpenToolStripMenuItem_Click;
             //var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
             //var data = "<04>:-0.483 PSI:(OK):-0.1521 sccm";
 
@@ -318,6 +331,38 @@ namespace LeakTestSystem
             //StartSN();
             //InitUIDisplay("N/A", 0, Color.Black);
         }
+
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string baseDir = Path.Combine(Application.StartupPath, "proList");
+
+            if (!Directory.Exists(baseDir))
+                Directory.CreateDirectory(baseDir);
+
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.InitialDirectory = baseDir;
+                dlg.Filter = "Config File (*.json)|*.json";
+                dlg.Title = "请选择配置文件";
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        proName.Text = dlg.FileName;
+                        // ✔ 刷新系统
+                        reloadToolStripMenuItem.PerformClick();
+
+                        this.ShowSuccessTip("加载成功");
+                    }
+                    catch (Exception ex)
+                    {
+                        this.ShowErrorDialog($"加载失败: {ex.Message}");
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// 重新加载配方
         /// </summary>
@@ -367,24 +412,45 @@ namespace LeakTestSystem
                 mesNgLock = switchMesNgLock.Active,
                 snLength = snCheckLen.Value
             };
+
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(conf, Newtonsoft.Json.Formatting.Indented);
-            string path = Path.Combine(Application.StartupPath, "config.json");
-            File.WriteAllText(path, json);
-            reloadToolStripMenuItem.PerformClick();
-            this.ShowSuccessTip("保存成功");
+
+            // ✔ 默认目录：程序根目录/proList
+            string baseDir = Path.Combine(Application.StartupPath, "proList");
+
+            if (!Directory.Exists(baseDir))
+                Directory.CreateDirectory(baseDir);
+
+            using (SaveFileDialog dlg = new SaveFileDialog())
+            {
+                dlg.InitialDirectory = baseDir;
+                dlg.Filter = "Config File (*.json)|*.json";
+                dlg.Title = "请选择保存配置文件位置";
+
+                // 默认文件名
+                dlg.FileName = "pro.json";
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllText(dlg.FileName, json);
+
+                    reloadToolStripMenuItem.PerformClick();
+                    this.ShowSuccessTip("保存成功");
+                }
+            }
         }
         /// <summary>
         /// 加载配方
         /// </summary>
         private void LoadConfig()
         {
-            if (File.Exists(Path.Combine(Application.StartupPath, "config.json")))
+            if (File.Exists(proName.Text))
             {
                 //关闭串口，避免占用无法读取配置
                 switchCom7.Active = false;
                 CloseAllPorts();
 
-                var configString = File.ReadAllText(Path.Combine(Application.StartupPath, "config.json"));
+                var configString = File.ReadAllText(proName.Text);
                 _config = JsonConvert.DeserializeObject<SettingConfig>(configString) ?? new SettingConfig();
                 cobChannelMaster.Text = _config.masterComName;
                 cobChannel1.Text = _config.channel1ComName;
@@ -411,8 +477,13 @@ namespace LeakTestSystem
                 maxCount = _config.GetEnableChannelCount(_config);
                 snCheckLen.Value = _config.snLength;
                 titlePanel8.Text = $"Master Channels ({maxCount})";
+                this.ShowSuccessNotifier("配置已加载...");
             }
-            this.ShowSuccessNotifier("配置已加载...");
+            else
+            {
+                this.ShowErrorDialog($"配置文件 {proName.Text} 不存在，请先保存配置");
+            }
+
         }
 
 
@@ -1332,8 +1403,9 @@ namespace LeakTestSystem
                             StartSN();
                         }));
                     });
-                };
-         
+                }
+                ;
+
             }
 
         }
@@ -1356,15 +1428,57 @@ namespace LeakTestSystem
             ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.Red);
             if (resultList.Count == _config.GetEnableChannelCount(_config))
             {
-                bool hasNg = resultList.Any(e => e.testResult == "NG");
+                //bool hasNg = resultList.Any(e => e.testResult == "NG");
 
-                if (hasNg)
+                //if (hasNg)
+                //{
+                //    new pageResult("FAIL").ShowDialog();
+                //}
+                //else
+                //{
+                //    new pageResult("PASS").ShowDialog();
+                //}
+                if (switchMES.Active)
                 {
-                    new pageResult("FAIL").ShowDialog();
-                }
-                else
-                {
-                    new pageResult("PASS").ShowDialog();
+                    resultList.ForEach(r =>
+                    {
+                        var rsult = r.testResult == "OK" ? PASS : FAIL;
+                        var listItem = new List<string>();
+                        listItem.Add($"PressureValue:{r.PressureValue}:{rsult}");
+                        listItem.Add($"LeakValue:{r.LeakValue}:{rsult}");
+
+                        if (switchMesNgLock.Active)
+                        {
+                            if (!MES_Service.UploadTestRecords(r.serialNumber, listItem, ref message))
+                            {
+                                this.ShowErrorDialog($" {message}");
+                                return;
+                            }
+                            if (!MES_Service.SerialNumberCorssingStationPass(r.serialNumber, ref message))
+                            {
+                                this.ShowErrorDialog($" {message}");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            if (r.testResult == "OK")
+                            {
+                                if (!MES_Service.UploadTestRecords(r.serialNumber, listItem, ref message))
+                                {
+                                    this.ShowErrorDialog($" {message}");
+                                    return;
+                                }
+                                if (!MES_Service.SerialNumberCorssingStationPass(r.serialNumber, ref message))
+                                {
+                                    this.ShowErrorDialog($" {message}");
+                                    return;
+                                }
+                            }
+
+                        }
+
+                    });
                 }
 
                 resultList.Clear();

@@ -142,7 +142,19 @@ namespace LeakTestSystem.Model
 
             return enableChannels[index];
         }
+        public List<string> GetEnableComList(SettingConfig config)
+        {
+            var enableComList = new List<string>();
 
+            if (config.channel1Status) enableComList.Add(config.channel1ComName);
+            if (config.channel2Status) enableComList.Add(config.channel2ComName);
+            if (config.channel3Status) enableComList.Add(config.channel3ComName);
+            if (config.channel4Status) enableComList.Add(config.channel4ComName);
+            if (config.channel5Status) enableComList.Add(config.channel5ComName);
+            if (config.channel6Status) enableComList.Add(config.channel6ComName);
+
+            return enableComList;
+        }
         public int GetEnableChannelIndex(SettingConfig config, int index)
         {
             var enableChannels = new List<int>();
