@@ -139,6 +139,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Lib\Saject\SajetConnect.ini" />
+    <None Include="Lib\Sop\设备操作说明书.docx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -159,5 +160,6 @@
     <None Include="Resources\dianliu.png" />
     <None Include="Resources\shujukaifa.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
