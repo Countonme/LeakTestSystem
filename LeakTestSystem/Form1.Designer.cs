@@ -52,7 +52,7 @@
             this.txtMasterInput = new Sunny.UI.UITextBox();
             this.titlePanel8 = new Sunny.UI.UITitlePanel();
             this.labMaster = new Sunny.UI.UILabel();
-            this.switchCom7 = new Sunny.UI.UISwitch();
+            this.switchMCUMaster = new Sunny.UI.UISwitch();
             this.ledCom7 = new Sunny.UI.UILedBulb();
             this.titlePanel6 = new Sunny.UI.UITitlePanel();
             this.uiLedDisplay6 = new Sunny.UI.UILedDisplay();
@@ -494,7 +494,7 @@
             // titlePanel8
             // 
             this.titlePanel8.Controls.Add(this.labMaster);
-            this.titlePanel8.Controls.Add(this.switchCom7);
+            this.titlePanel8.Controls.Add(this.switchMCUMaster);
             this.titlePanel8.Controls.Add(this.ledCom7);
             this.titlePanel8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titlePanel8.Location = new System.Drawing.Point(821, 216);
@@ -518,15 +518,15 @@
             this.labMaster.TabIndex = 1;
             this.labMaster.Text = "COM 7";
             // 
-            // switchCom7
+            // switchMCUMaster
             // 
-            this.switchCom7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.switchCom7.Location = new System.Drawing.Point(82, 40);
-            this.switchCom7.MinimumSize = new System.Drawing.Size(1, 1);
-            this.switchCom7.Name = "switchCom7";
-            this.switchCom7.Size = new System.Drawing.Size(99, 29);
-            this.switchCom7.TabIndex = 0;
-            this.switchCom7.Text = "uiSwitch7";
+            this.switchMCUMaster.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.switchMCUMaster.Location = new System.Drawing.Point(82, 40);
+            this.switchMCUMaster.MinimumSize = new System.Drawing.Size(1, 1);
+            this.switchMCUMaster.Name = "switchMCUMaster";
+            this.switchMCUMaster.Size = new System.Drawing.Size(99, 29);
+            this.switchMCUMaster.TabIndex = 0;
+            this.switchMCUMaster.Text = "uiSwitch7";
             // 
             // ledCom7
             // 
@@ -1902,7 +1902,7 @@
         private Sunny.UI.UIAvatar uiAvatar1;
         private Sunny.UI.UITitlePanel titlePanel8;
         private Sunny.UI.UILabel labMaster;
-        private Sunny.UI.UISwitch switchCom7;
+        private Sunny.UI.UISwitch switchMCUMaster;
         private Sunny.UI.UITitlePanel titlePanel6;
         private Sunny.UI.UITextBox txtsn6;
         private Sunny.UI.UILabel labCH6;

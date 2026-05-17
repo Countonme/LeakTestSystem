@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controller;
 using LeakTestSystem.Controller;
+using OfficeOpenXml;
 
 namespace LeakTestSystem
 {
@@ -18,6 +19,7 @@ namespace LeakTestSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            ExcelPackage.License.SetNonCommercialPersonal("LeakTestSystem");
             //Application.Run(new pageResult("PASS"));
             //Application.Run(new FrmSN(6,3,false));
             Application.Run(new FrmMaster());

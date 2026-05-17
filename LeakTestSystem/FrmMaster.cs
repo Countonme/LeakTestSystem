@@ -34,8 +34,8 @@ namespace LeakTestSystem
         private bool flagProductionModel;
         private List<ScanModel> snList = new List<ScanModel>();
         private int maxCount = 6;
-        private readonly string PASS = "PASS";
-        private readonly string FAIL = "FAIL";
+        private readonly string PASS = "PASS", FAIL = "FAIL";
+        private readonly string OK = "OK", NG = "NG";
         private readonly string Testing = "Testing ...";
         private readonly StringBuilder _serialBuffer = new StringBuilder();
         private readonly object _lock = new object();
@@ -57,9 +57,9 @@ namespace LeakTestSystem
         {
             InitializeComponent();
             this.Load += Form1_Load;
-            this.switchCom7.Click += SwitchCom7_Click;
+            this.switchMCUMaster.Click += SwitchMCUMaster_Click;
             this.Text += $"->(Version:{System.Windows.Forms.Application.ProductVersion})";
-            //this.FrmMaster_FormClosing += FrmMaster_FormClosing;
+            this.FormClosing += FrmMaster_FormClosing;
             snTextBoxes = new[] { txtsn1, txtsn2, txtsn3, txtsn4, txtsn5, txtsn6 };
             _uiLedDisplaysArry = new[] { uiLedDisplay1, uiLedDisplay2, uiLedDisplay3, uiLedDisplay4, uiLedDisplay5, uiLedDisplay6 };
             _uiListBoxesArray = new[] { uiListBox1, uiListBox2, uiListBox3, uiListBox4, uiListBox5, uiListBox6 };
@@ -75,11 +75,11 @@ namespace LeakTestSystem
         private void FrmMaster_Shown1(object sender, EventArgs e)
         {
             StartSN();
-            //var data = "<04>:-0.483 PSI:(OK):-0.1521 sccm";
+            var data = "<04>:-0.483 PSI:(OK):-0.1521 sccm";
 
             //HandleNormalSerial("COM1", data);
             //data = "<04>:-0.483 PSI:(AL):-0.1521 sccm";
-            //HandleNormalSerial("COM2", data);
+            HandleNormalSerial("COM2", data);
         }
 
         private void FrmMaster_FormClosing(object sender, FormClosingEventArgs e)
@@ -87,26 +87,33 @@ namespace LeakTestSystem
             this.ShowAskDialog("您确定退出窗体吗", true);
             {
                 MES_Service.MesDisConnect();
+                StopTesting();
+                CloseAllPorts();
             }
         }
 
 
-
-        private void SwitchCom7_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 切换 MCU 主控的串口连接：启用时验证 COM1~COM7、初始化并打开所有串口、在 COM7 上初始化 Modbus 并在就绪后异步启动序列号检测；禁用时关闭所有串口。
+        /// </summary>
+        /// <remarks>启用流程按序执行：检查必需串口、初始化端口、打开端口并在 COM7 上创建 ModbusIoController。就绪后通过后台任务延迟调用
+        /// StartSN。发生异常时复位开关状态、记录日志并显示错误通知。</remarks>
+        /// <param name="sender">触发事件的发送者。</param>
+        /// <param name="e">事件参数。</param>
+        private void SwitchMCUMaster_Click(object sender, EventArgs e)
         {
             try
             {
-                if (switchCom7.Active)
+                if (switchMCUMaster.Active)
                 {
-                    // 1. 判断是否存在 COM1~COM7
+                    // 1. 判断是否存在 COM List 中启用的串口，如果缺失则提示并退出
                     if (!HasRequiredComPorts())
                     {
                         var missingPorts = GetMissingComPorts();
                         this.ShowErrorNotifier($"未检测到以下必要的串口: {string.Join(", ", missingPorts)}");
-                        switchCom7.Active = false;
+                        switchMCUMaster.Active = false;
                         return;
                     }
-
                     // 2. 初始化
                     InitAllPorts();
 
@@ -136,7 +143,7 @@ namespace LeakTestSystem
             }
             catch (Exception ex)
             {
-                switchCom7.Active = false;
+                switchMCUMaster.Active = false;
                 ShowLogs(ex.Message, Color.Red);
                 this.ShowErrorNotifier(ex.Message);
             }
@@ -317,21 +324,20 @@ namespace LeakTestSystem
             this.uiCheckBox15.Click += UiCheckBox_Click;
             this.uiCheckBox16.Click += UiCheckBox_Click;
             this.openToolStripMenuItem.Click += OpenToolStripMenuItem_Click;
-            //var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
-            //var data = "<04>:-0.483 PSI:(OK):-0.1521 sccm";
-
-            //GetResult(0, data);
-            //var data1 = "<03>:(AL):SEALED PART VOL TOO SMALL";
-            //GetResult(1, data1);
             this.saveToolStripMenuItem.Click += SaveToolStripMenuItem_Click;
             this.refreshToolStripMenuItem.Click += RefreshToolStripMenuItem_Click;
             this.reloadToolStripMenuItem.Click += ReloadToolStripMenuItem_Click;
             LoadConfig();
             InitUIDisplay("N/A", Color.Yellow);
-            //StartSN();
-            //InitUIDisplay("N/A", 0, Color.Black);
-        }
 
+        }
+       /// <summary>
+       /// 显示打开文件对话框以选择并加载一个 .json 配置文件。
+       /// </summary>
+       /// <remarks>若不存在，则在 Application.StartupPath 下创建 proList 目录；选中文件后将其路径赋给 proName.Text，调用
+       /// reloadToolStripMenuItem.PerformClick() 刷新，并根据结果显示成功或错误提示。</remarks>
+       /// <param name="sender">事件的发送者。</param>
+       /// <param name="e">事件的参数。</param>
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string baseDir = Path.Combine(Application.StartupPath, "proList");
@@ -447,7 +453,7 @@ namespace LeakTestSystem
             if (File.Exists(proName.Text))
             {
                 //关闭串口，避免占用无法读取配置
-                switchCom7.Active = false;
+                switchMCUMaster.Active = false;
                 CloseAllPorts();
 
                 var configString = File.ReadAllText(proName.Text);
@@ -1053,6 +1059,16 @@ namespace LeakTestSystem
                         }
                     }
                 }
+                else
+                {
+
+                    // HandleModbus(buffer);
+                    byte[] data = new byte[port.BytesToRead];
+                    port.Read(data, 0, data.Length);
+                    string hex = BitConverter.ToString(data).Replace("-", " ");
+                    ShowLogs($"MCU 收到数据: {hex}", Color.Blue);
+                    // ShowLogs($"MCU COM7 收到数据: {port.ReadExisting()}", Color.Blue);
+                }
             }
             catch (Exception ex)
             {
@@ -1074,33 +1090,18 @@ namespace LeakTestSystem
                 case 5: txtsn6.Text = (text); break;
             }
         }
-
-
-        //private void HandleNormalSerial(string comName, string data)
-        //{
-        //    string text = (data);
-        //    var index = _config.GetChannelIndexByComName(_config, comName);
-        //    var listBox = _uiListBoxesArray[index];
-
-        //    // 插入到第一行
-        //    listBox.Items.Insert(0, text);
-
-        //    // 超过9条则删除最后一条
-        //    while (listBox.Items.Count > 9)
-        //    {
-        //        listBox.Items.RemoveAt(listBox.Items.Count - 1);
-        //    }
-        //    ShowLogs(data, Color.Black);
-        //    //var data = "<03>:10.95 kPa:(OK):0.1408 sccm";
-        //    GetResult(index, data, comName);
-        //}
-
+        /// <summary>
+        /// COM 数据处理
+        /// </summary>
+        /// <param name="comName"></param>
+        /// <param name="data"></param>
         private void HandleNormalSerial(string comName, string data)
         {
             string text = data;
 
             var index = _config.GetChannelIndexByComName(_config, comName);
             var listBox = _uiListBoxesArray[index];
+            //var listBox = _uiListBoxesArray[2];
 
             Color color = data.Contains("(OK)") ? Color.LimeGreen : Color.Red;
 
@@ -1109,7 +1110,7 @@ namespace LeakTestSystem
 
             listBox.Items.Insert(0, text);
 
-            while (listBox.Items.Count > 9)
+            while (listBox.Items.Count > 8)
             {
                 var removeItem = listBox.Items[listBox.Items.Count - 1];
 
@@ -1413,7 +1414,8 @@ namespace LeakTestSystem
         private void AddTestHistory(string sn, TestResult result, string status, string message)
         {
             var index = _config.GetChannelIndexByComName(_config, result.comName);
-            ShowLogs($"ComName:{result.comName} ComIndex{index} TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.Red);
+            WriteExcel(sn, result, status, message);
+            ShowLogs($"ComName:{result.comName} ComIndex{index} TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
 
             if (status == "OK")
             {
@@ -1425,7 +1427,7 @@ namespace LeakTestSystem
             }
             result.testResult = status;
             resultList.Add(result);
-            ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.Red);
+            ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
             if (resultList.Count == _config.GetEnableChannelCount(_config))
             {
                 //bool hasNg = resultList.Any(e => e.testResult == "NG");
@@ -1480,18 +1482,7 @@ namespace LeakTestSystem
 
                     });
                 }
-
                 resultList.Clear();
-                // ⭐ 关键修复
-                Task.Run(() =>
-                {
-                    Thread.Sleep(3000);
-
-                    this.BeginInvoke(new Action(() =>
-                    {
-                        StartSN();
-                    }));
-                });
             }
         }
 
@@ -1650,6 +1641,103 @@ namespace LeakTestSystem
                 e.ForeColor = color;
             });
 
+        }
+
+        private readonly object _excelLock = new object();
+
+        private void WriteExcel(string sn, TestResult result, string status, string message)
+        {
+            try
+            {
+                string dir = Path.Combine(Application.StartupPath, "TestExcel");
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
+
+                string filePath = Path.Combine(dir, $"{DateTime.Now:yyyyMMdd}.xlsx");
+
+                lock (_excelLock)
+                {
+                    using (var package = new OfficeOpenXml.ExcelPackage(new FileInfo(filePath)))
+                    {
+                        var sheet = package.Workbook.Worksheets.FirstOrDefault()
+                                    ?? package.Workbook.Worksheets.Add("Test");
+
+                        // =========================
+                        // 1. 初始化表头
+                        // =========================
+                        if (sheet.Dimension == null)
+                        {
+                            string[] headers =
+                            {
+                        "Time", "SN", "Channel", "Com",
+                        "Pressure", "Leak", "Result", "Message"
+                    };
+
+                            for (int i = 0; i < headers.Length; i++)
+                            {
+                                var cell = sheet.Cells[1, i + 1];
+                                cell.Value = headers[i];
+
+                                // 表头样式
+                                cell.Style.Font.Bold = true;
+                                cell.Style.Font.Size = 11;
+                                cell.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                                cell.Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+                                cell.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                cell.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(45, 85, 155));
+                                cell.Style.Font.Color.SetColor(Color.White);
+                            }
+
+                            sheet.Row(1).Height = 22;
+
+                            // 冻结首行
+                            sheet.View.FreezePanes(2, 1);
+                        }
+
+                        int row = sheet.Dimension?.Rows + 1 ?? 2;
+
+                        sheet.Cells[row, 1].Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        sheet.Cells[row, 2].Value = sn;
+                        sheet.Cells[row, 3].Value = result.channelsName;
+                        sheet.Cells[row, 4].Value = result.comName;
+                        sheet.Cells[row, 5].Value = result.PressureValue;
+                        sheet.Cells[row, 6].Value = result.LeakValue;
+                        sheet.Cells[row, 7].Value = status;
+                        sheet.Cells[row, 8].Value = message;
+
+                        // =========================
+                        // 2. 行样式（OK / NG）
+                        // =========================
+                        var rowRange = sheet.Cells[row, 1, row, 8];
+
+                        rowRange.Style.HorizontalAlignment =
+                            OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+
+                        rowRange.Style.VerticalAlignment =
+                            OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+
+                        if (status == "OK")
+                        {
+                            rowRange.Style.Font.Color.SetColor(Color.DarkGreen);
+                        }
+                        else
+                        {
+                            rowRange.Style.Font.Color.SetColor(Color.Red);
+                        }
+
+                        // =========================
+                        // 3. 自动列宽
+                        // =========================
+                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
+
+                        package.Save();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowLogs($"Excel写入失败: {ex.Message}", Color.Red);
+            }
         }
     }
 }
