@@ -1792,7 +1792,7 @@
             this.proName.Location = new System.Drawing.Point(7, 169);
             this.proName.MinimumSize = new System.Drawing.Size(16, 16);
             this.proName.Name = "proName";
-            this.proName.Size = new System.Drawing.Size(60, 20);
+            this.proName.Size = new System.Drawing.Size(1876, 20);
             this.proName.TabIndex = 99;
             this.proName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 

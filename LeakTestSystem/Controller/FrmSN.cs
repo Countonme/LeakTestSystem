@@ -128,7 +128,7 @@ namespace LeakTestSystem.Controller
                     {
                         txt.FillColor = Color.LightYellow;
 
-                        statusLabel.Text = "长度错误";
+                        statusLabel.Text = $"长度错误 SnLen:{sn.Length}  GoalLen: {_snLength}";
                         statusLabel.ForeColor = Color.DarkOrange;
 
                         return;
@@ -141,8 +141,8 @@ namespace LeakTestSystem.Controller
                         var flag = MES_Service.CheckSerialNumber(sn, ref message);
                         if (!flag)
                         {
-                            this.ShowErrorDialog(message);
-                            statusLabel.Text = "长度错误";
+                            this.ShowErrorNotifier (message);
+                            statusLabel.Text = message;
                             statusLabel.ForeColor = Color.DarkOrange;
                             return;
                         }
@@ -271,12 +271,12 @@ namespace LeakTestSystem.Controller
                 textWidth +
                 lenWidth +
                 statusWidth +
-                20;
+                5;
 
             int formHeight =
                 marginTop +
                 (count * rowHeight) +
-                30;
+                10;
 
             this.Size = new Size(formWidth, formHeight);
 

@@ -331,13 +331,13 @@ namespace LeakTestSystem
             InitUIDisplay("N/A", Color.Yellow);
 
         }
-       /// <summary>
-       /// 显示打开文件对话框以选择并加载一个 .json 配置文件。
-       /// </summary>
-       /// <remarks>若不存在，则在 Application.StartupPath 下创建 proList 目录；选中文件后将其路径赋给 proName.Text，调用
-       /// reloadToolStripMenuItem.PerformClick() 刷新，并根据结果显示成功或错误提示。</remarks>
-       /// <param name="sender">事件的发送者。</param>
-       /// <param name="e">事件的参数。</param>
+        /// <summary>
+        /// 显示打开文件对话框以选择并加载一个 .json 配置文件。
+        /// </summary>
+        /// <remarks>若不存在，则在 Application.StartupPath 下创建 proList 目录；选中文件后将其路径赋给 proName.Text，调用
+        /// reloadToolStripMenuItem.PerformClick() 刷新，并根据结果显示成功或错误提示。</remarks>
+        /// <param name="sender">事件的发送者。</param>
+        /// <param name="e">事件的参数。</param>
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string baseDir = Path.Combine(Application.StartupPath, "proList");
@@ -692,7 +692,7 @@ namespace LeakTestSystem
         /// </summary>
         private void StopTesting()
         {
-            this.HideWaitForm();
+            //this.HideWaitForm();
             //开启继电器
             if (_config.channel1Status)
             {
@@ -1313,20 +1313,11 @@ namespace LeakTestSystem
 
                 lock (_logLock)
                 {
-                    FileStream fs = new FileStream(
-                       filePath,
-                       FileMode.Append,
-                       FileAccess.Write,
-                       FileShare.ReadWrite);
-
-                    StreamWriter sw = new StreamWriter(fs);
-
-                    sw.WriteLine(msg);
+                    File.AppendAllText(filePath, msg + Environment.NewLine);
                 }
             }
             catch
             {
-                // 不弹窗
             }
         }
         //private List<string> GetSnFromUser()
@@ -1388,10 +1379,18 @@ namespace LeakTestSystem
                     this.ShowErrorNotifier($"请先打开MCU串口 {_config.masterComName}");
                     return;
                 }
-                this.ShowAskDialog("队列条码已经准备好，您确定要启动测试吗？", true);
+                this.snList.Clear();
+                resultList.Clear();
+                var result = MessageBox.Show(
+                    "队列条码已经准备好，您确定要启动测试吗？",
+                    "提示",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (result == DialogResult.Yes)
                 {
-                    resultList.Clear();
-                    this.ShowWaitForm("启动测试...请等待...");
+                    //this.ShowWaitForm("启动测试...请等待...");
                     ShowLogs("启动测试...请等待...", Color.Black);
                     StartTesting();
                     // ⭐ 关键修复
@@ -1405,7 +1404,6 @@ namespace LeakTestSystem
                         }));
                     });
                 }
-                ;
 
             }
 
