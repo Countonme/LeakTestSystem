@@ -110,6 +110,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>FrmMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\ListBoxItemModel.cs" />
     <Compile Include="Model\ScanModel.cs" />
     <Compile Include="Model\SettingConfig.cs" />
     <Compile Include="Model\TestResult.cs" />
