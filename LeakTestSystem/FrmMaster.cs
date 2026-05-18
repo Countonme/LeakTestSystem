@@ -69,17 +69,24 @@ namespace LeakTestSystem
                 lb.DrawItem += ListBox_DrawItem;
             }
             //this.Shown += FrmMaster_Shown1;
-
         }
 
         private void FrmMaster_Shown1(object sender, EventArgs e)
         {
-            StartSN();
+            //StartSN();
             var data = "<04>:-0.483 PSI:(OK):-0.1521 sccm";
 
             //HandleNormalSerial("COM1", data);
-            //data = "<04>:-0.483 PSI:(AL):-0.1521 sccm";
+            var data2 = "<04>:-0.483 PSI:(AL):-0.1521 sccm";
+            HandleNormalSerial("COM1", data);
+            HandleNormalSerial("COM3", data);
+            HandleNormalSerial("COM2", data2);
+            HandleNormalSerial("COM1", data);
             HandleNormalSerial("COM2", data);
+            HandleNormalSerial("COM3", data);
+            HandleNormalSerial("COM2", data2);
+            HandleNormalSerial("COM2", data);
+            HandleNormalSerial("COM2", data2);
         }
 
         private void FrmMaster_FormClosing(object sender, FormClosingEventArgs e)
@@ -91,7 +98,6 @@ namespace LeakTestSystem
                 CloseAllPorts();
             }
         }
-
 
         /// <summary>
         /// 切换 MCU 主控的串口连接：启用时验证 COM1~COM7、初始化并打开所有串口、在 COM7 上初始化 Modbus 并在就绪后异步启动序列号检测；禁用时关闭所有串口。
@@ -147,7 +153,6 @@ namespace LeakTestSystem
                 ShowLogs(ex.Message, Color.Red);
                 this.ShowErrorNotifier(ex.Message);
             }
-
         }
 
         /// <summary>
@@ -327,10 +332,14 @@ namespace LeakTestSystem
             this.saveToolStripMenuItem.Click += SaveToolStripMenuItem_Click;
             this.refreshToolStripMenuItem.Click += RefreshToolStripMenuItem_Click;
             this.reloadToolStripMenuItem.Click += ReloadToolStripMenuItem_Click;
-            LoadConfig();
-            InitUIDisplay("N/A", Color.Yellow);
 
+            InitUIDisplay("N/A", Color.Black);
+            //InitUIDisplay("N/A", Color.Blue);
+            //  InitUIDisplay("N/A", Color.Green);
+            //InitUIDisplay("N/A", Color.Red);
+            LoadConfig();
         }
+
         /// <summary>
         /// 显示打开文件对话框以选择并加载一个 .json 配置文件。
         /// </summary>
@@ -378,7 +387,6 @@ namespace LeakTestSystem
         {
             LoadConfig();
             initTitlePanelColor();
-
         }
 
         /// <summary>
@@ -445,6 +453,7 @@ namespace LeakTestSystem
                 }
             }
         }
+
         /// <summary>
         /// 加载配方
         /// </summary>
@@ -489,9 +498,7 @@ namespace LeakTestSystem
             {
                 this.ShowErrorDialog($"配置文件 {proName.Text} 不存在，请先保存配置");
             }
-
         }
-
 
         /// <summary>
         /// 重新加载串口
@@ -615,7 +622,6 @@ namespace LeakTestSystem
 
                             StartTesting();
                             ShowLogs("启动测试...请等待...", Color.Black);
-
                         }
                         else
                         {
@@ -625,7 +631,6 @@ namespace LeakTestSystem
                         snList.Clear();
                         txtMasterInput.Focus();
                         txtMasterInput.SelectAll();
-
                     }
                 }
 
@@ -635,6 +640,7 @@ namespace LeakTestSystem
 
         private void StartTesting()
         {
+            this.Style = UIStyle.Blue;
             InitUIDisplay("N/A", Color.Yellow);
             //开启继电器
             if (_config.channel1Status)
@@ -685,8 +691,8 @@ namespace LeakTestSystem
                 modbusIo.SetRelay(1, 10, true); // 举例：触发继电器1
                 InitUIDisplay(Testing, 5, Color.Blue);
             }
-
         }
+
         /// <summary>
         /// 停止测试，关闭所有继电器，并隐藏等待界面
         /// </summary>
@@ -730,10 +736,7 @@ namespace LeakTestSystem
                 Thread.Sleep(100);
                 ShowLogs("关闭继电器 6", Color.Black);
             }
-
         }
-
-
 
         private void TxtMasterInput_TextChanged(object sender, EventArgs e)
         {
@@ -936,6 +939,7 @@ namespace LeakTestSystem
         {
             return SerialPort.GetPortNames().Contains(comName);
         }
+
         /// <summary>
         /// Handles the DataReceived event of the serial port, which occurs when data is received through the port.
         /// </summary>
@@ -1061,7 +1065,6 @@ namespace LeakTestSystem
                 }
                 else
                 {
-
                     // HandleModbus(buffer);
                     byte[] data = new byte[port.BytesToRead];
                     port.Read(data, 0, data.Length);
@@ -1077,7 +1080,6 @@ namespace LeakTestSystem
             }
         }
 
-
         private void WriteSnToTextBox(int index, string text)
         {
             switch (index)
@@ -1090,6 +1092,7 @@ namespace LeakTestSystem
                 case 5: txtsn6.Text = (text); break;
             }
         }
+
         /// <summary>
         /// COM 数据处理
         /// </summary>
@@ -1097,54 +1100,65 @@ namespace LeakTestSystem
         /// <param name="data"></param>
         private void HandleNormalSerial(string comName, string data)
         {
-            string text = data;
-
-            var index = _config.GetChannelIndexByComName(_config, comName);
-            var listBox = _uiListBoxesArray[index];
-            //var listBox = _uiListBoxesArray[2];
-
-            Color color = data.Contains("(OK)") ? Color.LimeGreen : Color.Red;
-
-            // ⭐ 保存颜色映射
-            _itemColorMap[text] = color;
-
-            listBox.Items.Insert(0, text);
-
-            while (listBox.Items.Count > 8)
+            try
             {
-                var removeItem = listBox.Items[listBox.Items.Count - 1];
+                string text = data;
 
-                _itemColorMap.Remove(removeItem);
+                var index = _config.GetChannelIndexByComName(_config, comName);
+                var listBox = _uiListBoxesArray[index];
+                //var listBox = _uiListBoxesArray[2];
 
-                listBox.Items.RemoveAt(listBox.Items.Count - 1);
+                //Color color = data.IndexOf("(OK)") > -1 ? Color.Red : Color.LimeGreen;
+                bool isOk = data.Contains("(OK)");
+
+                Color color = isOk
+                    ? Color.LimeGreen
+                    : Color.Red;
+
+                listBox.Items.Insert(0, new ListBoxItemModel
+                {
+                    Text = data,
+                    Color = color
+                });
+
+                while (listBox.Items.Count > 6)
+                {
+                    listBox.Items.RemoveAt(listBox.Items.Count - 1);
+                }
+
+                ShowLogs(data, color);
+                GetResult(index, data, comName);
             }
-
-            ShowLogs(data, color);
-            GetResult(index, data, comName);
+            catch (Exception ex)
+            {
+                this.ShowErrorNotifier($"HandleNormalSerial {ex.Message}");
+            }
         }
+
         private void ListBox_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
 
-            var listBox = sender as ListBox;
-            string text = listBox.Items[e.Index].ToString();
+            ListBox listBox = sender as ListBox;
 
-            Color color = Color.Red;
+            var item = listBox.Items[e.Index] as ListBoxItemModel;
 
-            if (_itemColorMap.TryGetValue(text, out var c))
-            {
-                color = c;
-            }
+            if (item == null) return;
 
             e.DrawBackground();
 
-            using (Brush brush = new SolidBrush(color))
+            using (Brush brush = new SolidBrush(item.Color))
             {
-                e.Graphics.DrawString(text, e.Font, brush, e.Bounds);
+                e.Graphics.DrawString(
+                    item.Text,
+                    e.Font,
+                    brush,
+                    e.Bounds);
             }
 
             e.DrawFocusRectangle();
         }
+
         //private void HandleNormalSerial(string comName, string data)
         //{
         //    string text = data;
@@ -1160,7 +1174,7 @@ namespace LeakTestSystem
         //        color = Color.LimeGreen;
 
         //    }
-        //    else 
+        //    else
         //    {
         //        color = Color.Red;
         //    }
@@ -1233,7 +1247,6 @@ namespace LeakTestSystem
         //    }
         //}
 
-
         private void ShowLogs(string infoLogs, Color color)
         {
             try
@@ -1292,7 +1305,6 @@ namespace LeakTestSystem
             }
             catch
             {
-
             }
         }
 
@@ -1320,6 +1332,7 @@ namespace LeakTestSystem
             {
             }
         }
+
         //private List<string> GetSnFromUser()
         //{
         //    _frmSn = new FrmSN(
@@ -1343,6 +1356,7 @@ namespace LeakTestSystem
 
             return _frmSn.GetAllSN();
         }
+
         private void StartSN()
         {
             var snLists = GetSnFromUser();
@@ -1404,11 +1418,11 @@ namespace LeakTestSystem
                         }));
                     });
                 }
-
             }
-
         }
+
         private List<TestResult> resultList = new List<TestResult>();
+
         private void AddTestHistory(string sn, TestResult result, string status, string message)
         {
             var index = _config.GetChannelIndexByComName(_config, result.comName);
@@ -1428,16 +1442,17 @@ namespace LeakTestSystem
             ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
             if (resultList.Count == _config.GetEnableChannelCount(_config))
             {
-                //bool hasNg = resultList.Any(e => e.testResult == "NG");
+                bool hasNg = resultList.Any(e => e.testResult == "NG");
 
-                //if (hasNg)
-                //{
-                //    new pageResult("FAIL").ShowDialog();
-                //}
-                //else
-                //{
-                //    new pageResult("PASS").ShowDialog();
-                //}
+                if (hasNg)
+                {
+                    //new pageResult("FAIL").ShowDialog();
+                    this.Style = UIStyle.Red;
+                }
+                else
+                {
+                    //new pageResult("PASS").ShowDialog();
+                }
                 if (switchMES.Active)
                 {
                     resultList.ForEach(r =>
@@ -1475,9 +1490,7 @@ namespace LeakTestSystem
                                     return;
                                 }
                             }
-
                         }
-
                     });
                 }
                 resultList.Clear();
@@ -1508,7 +1521,6 @@ namespace LeakTestSystem
                     AddTestHistory(sn, result, "NG", "数据格式错误");
                     return;
                 }
-
 
                 string msg;
                 result.serialNumber = sn;
@@ -1581,12 +1593,10 @@ namespace LeakTestSystem
             }
             catch (Exception ex)
             {
-
                 ShowLogs($"处理测试结果时发生异常: {ex.Message}", Color.Red);
             }
-
-
         }
+
         /// <summary>
         /// 获取SN，根据index返回对应的文本框内容
         /// </summary>
@@ -1601,7 +1611,7 @@ namespace LeakTestSystem
         }
 
         /// <summary>
-        /// 初始化状态   
+        /// 初始化状态
         /// </summary>
         private void InitUIDisplay(string value)
         {
@@ -1609,10 +1619,11 @@ namespace LeakTestSystem
             _uiLedDisplaysArry.ForEach(e =>
             {
                 e.Text = value;
-                e.ForeColor = Color.Black;
+                e.ForeColor = Color.White;
+                e.BackColor = Color.Black;
             });
-
         }
+
         /// <summary>
         /// 初始化 LED 显示状态
         /// </summary>
@@ -1623,12 +1634,12 @@ namespace LeakTestSystem
         {
             //var value =String.Empty ;
             _uiLedDisplaysArry[index].Text = value;
-            _uiLedDisplaysArry[index].ForeColor = color;
-
+            _uiLedDisplaysArry[index].ForeColor = Color.White;
+            _uiLedDisplaysArry[index].LedBackColor = color;
         }
 
         /// <summary>
-        /// 初始化状态   
+        /// 初始化状态
         /// </summary>
         private void InitUIDisplay(string value, Color color)
         {
@@ -1636,9 +1647,9 @@ namespace LeakTestSystem
             _uiLedDisplaysArry.ForEach(e =>
             {
                 e.Text = value;
-                e.ForeColor = color;
+                e.ForeColor = Color.White;
+                e.LedBackColor = color;
             });
-
         }
 
         private readonly object _excelLock = new object();

@@ -21,7 +21,7 @@ namespace LeakTestSystem
             Application.SetCompatibleTextRenderingDefault(false);
             ExcelPackage.License.SetNonCommercialPersonal("LeakTestSystem");
             //Application.Run(new pageResult("PASS"));
-            //Application.Run(new FrmSN(6,3,false));
+            //Application.Run(new FrmSN(6, 3, false));
             Application.Run(new FrmMaster());
         }
     }

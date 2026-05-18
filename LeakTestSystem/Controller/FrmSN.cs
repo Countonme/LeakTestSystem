@@ -12,19 +12,28 @@ namespace LeakTestSystem.Controller
     {
         // 保存所有输入框
         private readonly List<UITextBox> _textBoxes = new List<UITextBox>();
+
         //private bool _allowClose = false;
         // 保存状态Label
         private readonly List<UILabel> _statusLabels = new List<UILabel>();
+
         private int _snLength = 0;
         private bool _mes = false;
+
         public FrmSN(int count, int snLength, bool mes)
         {
             InitializeComponent();
-            var Mode = mes ? "MES" : "Debugger";   
+            var Mode = mes ? "MES" : "Debugger";
             this.Text += $" Model:{Mode} 标准SerialNumber长度:{snLength}  ";
             InitSNInput(count);
             this._snLength = snLength;
             this._mes = mes;
+            this.Shown += OnShown;
+        }
+
+        private void OnShown(object sender, EventArgs e)
+        {
+            this.Top = 50;
         }
 
         //protected override void OnFormClosing(FormClosingEventArgs e)
@@ -141,7 +150,7 @@ namespace LeakTestSystem.Controller
                         var flag = MES_Service.CheckSerialNumber(sn, ref message);
                         if (!flag)
                         {
-                            this.ShowErrorNotifier (message);
+                            this.ShowErrorNotifier(message);
                             statusLabel.Text = message;
                             statusLabel.ForeColor = Color.DarkOrange;
                             return;
@@ -164,7 +173,7 @@ namespace LeakTestSystem.Controller
 
                     e.SuppressKeyPress = true;
 
-                  //  int currentIndex = i;
+                    //  int currentIndex = i;
 
                     // ❗ 先校验当前输入（关键修改点）
                     var sn = _textBoxes[currentIndex].Text.Trim();
@@ -300,6 +309,7 @@ namespace LeakTestSystem.Controller
         {
             return _textBoxes.Count(t => !string.IsNullOrWhiteSpace(t.Text));
         }
+
         public List<string> GetAllSN()
         {
             return _textBoxes
