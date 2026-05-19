@@ -1426,7 +1426,7 @@ namespace LeakTestSystem
         private void AddTestHistory(string sn, TestResult result, string status, string message)
         {
             var index = _config.GetChannelIndexByComName(_config, result.comName);
-            WriteExcel(sn, result, status, message);
+
             ShowLogs($"ComName:{result.comName} ComIndex{index} TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
 
             if (status == "OK")
@@ -1440,6 +1440,7 @@ namespace LeakTestSystem
             result.testResult = status;
             resultList.Add(result);
             ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
+
             if (resultList.Count == _config.GetEnableChannelCount(_config))
             {
                 bool hasNg = resultList.Any(e => e.testResult == "NG");
@@ -1453,9 +1454,9 @@ namespace LeakTestSystem
                 {
                     //new pageResult("PASS").ShowDialog();
                 }
+                var uuid = Guid.NewGuid().ToString("N");
                 if (switchMES.Active)
                 {
-                    var uuid = Guid.NewGuid();
                     int i = 0;
 
                     ShowLogs($"[MES开始] UUID:{uuid} 总数:{resultList.Count}", Color.DarkBlue);
@@ -1467,7 +1468,7 @@ namespace LeakTestSystem
                         try
                         {
                             var snresult = r.testResult == "OK" ? PASS : FAIL;
-
+                            WriteExcel(uuid, r.serialNumber, r, snresult, message);
                             ShowLogs(
                                 $"[MES处理开始] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} TestResult:{r.testResult}",
                                 Color.DarkBlue);
@@ -1506,8 +1507,8 @@ namespace LeakTestSystem
                                     ShowLogs(
                                         $"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
                                         Color.Red);
+                                    this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message});
 
-                                    this.ShowErrorDialog(message);
                                     return;
                                 }
 
@@ -1553,8 +1554,8 @@ namespace LeakTestSystem
                                         ShowLogs(
                                             $"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
                                             Color.Red);
+                                        this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message});
 
-                                        this.ShowErrorDialog(message);
                                         return;
                                     }
 
@@ -1586,6 +1587,14 @@ namespace LeakTestSystem
                     }
 
                     ShowLogs($"[MES全部完成] UUID:{uuid} 总数:{resultList.Count}", Color.Green);
+                }
+                else
+                {
+                    foreach (var r in resultList)
+                    {
+                        var snstatus = r.testResult == "OK" ? PASS : FAIL;
+                        WriteExcel(uuid, r.serialNumber, r, snstatus, message);
+                    }
                 }
                 resultList.Clear();
             }
@@ -1748,7 +1757,7 @@ namespace LeakTestSystem
 
         private readonly object _excelLock = new object();
 
-        private void WriteExcel(string sn, TestResult result, string status, string message)
+        private void WriteExcel(string uuid, string sn, TestResult result, string status, string message)
         {
             try
             {
@@ -1772,7 +1781,7 @@ namespace LeakTestSystem
                         {
                             string[] headers =
                             {
-                        "Time", "SN", "Channel", "Com",
+                       "UUID", "Time", "SN", "Channel", "Com",
                         "Pressure", "Leak", "Result", "Message"
                     };
 
@@ -1798,15 +1807,15 @@ namespace LeakTestSystem
                         }
 
                         int row = sheet.Dimension?.Rows + 1 ?? 2;
-
-                        sheet.Cells[row, 1].Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        sheet.Cells[row, 2].Value = sn;
-                        sheet.Cells[row, 3].Value = result.channelsName;
-                        sheet.Cells[row, 4].Value = result.comName;
-                        sheet.Cells[row, 5].Value = result.PressureValue;
-                        sheet.Cells[row, 6].Value = result.LeakValue;
-                        sheet.Cells[row, 7].Value = status;
-                        sheet.Cells[row, 8].Value = message;
+                        sheet.Cells[row, 1].Value = uuid;
+                        sheet.Cells[row, 2].Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        sheet.Cells[row, 3].Value = sn;
+                        sheet.Cells[row, 4].Value = result.channelsName;
+                        sheet.Cells[row, 5].Value = result.comName;
+                        sheet.Cells[row, 6].Value = result.PressureValue;
+                        sheet.Cells[row, 7].Value = result.LeakValue;
+                        sheet.Cells[row, 8].Value = status;
+                        sheet.Cells[row, 9].Value = message;
 
                         // =========================
                         // 2. 行样式（OK / NG）
@@ -1819,7 +1828,7 @@ namespace LeakTestSystem
                         rowRange.Style.VerticalAlignment =
                             OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
 
-                        if (status == "OK")
+                        if (status == PASS)
                         {
                             rowRange.Style.Font.Color.SetColor(Color.DarkGreen);
                         }
