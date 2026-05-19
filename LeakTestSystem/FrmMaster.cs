@@ -1489,7 +1489,7 @@ namespace LeakTestSystem
                                 if (!MES_Service.UploadTestRecords(r.serialNumber, listItem, ref message))
                                 {
                                     ShowLogs($"[上传测试记录失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}", Color.Red);
-
+                                    this.Style = UIStyle.Red;
                                     this.ShowErrorDialog(message);
                                     return;
                                 }
@@ -1504,10 +1504,11 @@ namespace LeakTestSystem
 
                                 if (!MES_Service.SerialNumberCorssingStationPass(r.serialNumber, ref message))
                                 {
+                                    this.Style = UIStyle.Red;
                                     ShowLogs(
                                         $"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
                                         Color.Red);
-                                    this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message});
+                                    this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
 
                                     return;
                                 }
@@ -1533,6 +1534,7 @@ namespace LeakTestSystem
 
                                     if (!MES_Service.UploadTestRecords(r.serialNumber, listItem, ref message))
                                     {
+                                        this.Style = UIStyle.Red;
                                         ShowLogs(
                                             $"[上传测试记录失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
                                             Color.Red);
@@ -1551,10 +1553,11 @@ namespace LeakTestSystem
 
                                     if (!MES_Service.SerialNumberCorssingStationPass(r.serialNumber, ref message))
                                     {
+                                        this.Style = UIStyle.Red;
                                         ShowLogs(
                                             $"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
                                             Color.Red);
-                                        this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message});
+                                        this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
 
                                         return;
                                     }
@@ -1577,6 +1580,7 @@ namespace LeakTestSystem
                         }
                         catch (Exception ex)
                         {
+                            this.Style = UIStyle.Red;
                             ShowLogs(
                                 $"[MES异常] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Exception:{ex}",
                                 Color.Red);
@@ -1584,6 +1588,7 @@ namespace LeakTestSystem
                             this.ShowErrorDialog(ex.Message);
                             return;
                         }
+                        Thread.Sleep(200);
                     }
 
                     ShowLogs($"[MES全部完成] UUID:{uuid} 总数:{resultList.Count}", Color.Green);
@@ -1596,6 +1601,7 @@ namespace LeakTestSystem
                         WriteExcel(uuid, r.serialNumber, r, snstatus, message);
                     }
                 }
+                this.Style = UIStyle.Green;
                 resultList.Clear();
             }
         }
