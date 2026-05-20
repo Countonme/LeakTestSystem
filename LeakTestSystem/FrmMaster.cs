@@ -1491,7 +1491,7 @@ namespace LeakTestSystem
                                     ShowLogs($"[上传测试记录失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}", Color.Red);
                                     this.Style = UIStyle.Red;
                                     this.ShowErrorDialog(message);
-                                    return;
+                                  //  return;
                                 }
 
                                 ShowLogs(
@@ -1510,7 +1510,7 @@ namespace LeakTestSystem
                                         Color.Red);
                                     this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
 
-                                    return;
+                                  //  return;
                                 }
 
                                 ShowLogs(
@@ -1540,7 +1540,7 @@ namespace LeakTestSystem
                                             Color.Red);
 
                                         this.ShowErrorDialog(message);
-                                        return;
+                                      //  return;
                                     }
 
                                     ShowLogs(
@@ -1586,9 +1586,9 @@ namespace LeakTestSystem
                                 Color.Red);
 
                             this.ShowErrorDialog(ex.Message);
-                            return;
+                           // return;
                         }
-                        Thread.Sleep(200);
+                        Thread.Sleep(400);
                     }
 
                     ShowLogs($"[MES全部完成] UUID:{uuid} 总数:{resultList.Count}", Color.Green);
