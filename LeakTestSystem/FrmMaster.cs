@@ -20,6 +20,7 @@ using LeakTestSystem.Model;
 using LeakTestSystem.Services;
 using LeakTestSystem.Services.MES;
 using Newtonsoft.Json;
+using SNetLogs;
 using Sunny.UI;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -424,7 +425,8 @@ namespace LeakTestSystem
                 channel6Status = checkBoxChannel6.Checked,
                 readTimeout = readTimeout.Value,
                 mesNgLock = switchMesNgLock.Active,
-                snLength = snCheckLen.Value
+                snLength = snCheckLen.Value,
+                ngCode = txtNgCode.Text
             };
 
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(conf, Newtonsoft.Json.Formatting.Indented);
@@ -492,6 +494,7 @@ namespace LeakTestSystem
                 maxCount = _config.GetEnableChannelCount(_config);
                 snCheckLen.Value = _config.snLength;
                 titlePanel8.Text = $"Master Channels ({maxCount})";
+                txtNgCode.Text = _config.ngCode;    
                 this.ShowSuccessNotifier("配置已加载...");
             }
             else
@@ -1267,7 +1270,7 @@ namespace LeakTestSystem
                 }
 
                 // 写日志文件
-                WriteLog(msg);
+                Log.Info(msg);
             }
             catch
             {
@@ -1308,30 +1311,7 @@ namespace LeakTestSystem
             }
         }
 
-        private void WriteLog(string msg)
-        {
-            try
-            {
-                string dir = Path.Combine(
-                    Application.StartupPath,
-                    "Logs",
-                    DateTime.Now.ToString("yyyyMM"));
 
-                Directory.CreateDirectory(dir);
-
-                string filePath = Path.Combine(
-                    dir,
-                    $"{DateTime.Now:yyyyMMdd}.log");
-
-                lock (_logLock)
-                {
-                    File.AppendAllText(filePath, msg + Environment.NewLine);
-                }
-            }
-            catch
-            {
-            }
-        }
 
         //private List<string> GetSnFromUser()
         //{
@@ -1501,22 +1481,39 @@ namespace LeakTestSystem
                                 ShowLogs(
                                     $"[开始过站] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
                                     Color.DarkBlue);
-
-                                if (!MES_Service.SerialNumberCorssingStationPass(r.serialNumber, ref message))
+                                if (r.testResult == "OK")
                                 {
-                                    this.Style = UIStyle.Red;
-                                    ShowLogs(
-                                        $"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
-                                        Color.Red);
-                                    this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
+                                    if (!MES_Service.SerialNumberCorssingStationPass(r.serialNumber, ref message))
+                                    {
+                                        this.Style = UIStyle.Red;
+                                        ShowLogs(
+                                            $"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
+                                            Color.Red);
+                                        this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
 
-                                  //  return;
+                                        //  return;
+                                    }
+
+                                    ShowLogs($"[过站成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
                                 }
+                                else 
+                                {
 
-                                ShowLogs(
-                                    $"[过站成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
-                                    Color.Green);
-                            }
+                                    if (!MES_Service.SerialNumberCorssingStationFail(r.serialNumber, _config.ngCode, ref message))
+                                    {
+                                        this.Style = UIStyle.Red;
+                                        ShowLogs(
+                                            $"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
+                                            Color.Red);
+                                        this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
+
+                                        //  return;
+                                    }
+
+                                    ShowLogs($"[过站成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
+                                }
+                                
+                           }
                             else
                             {
                                 // =========================

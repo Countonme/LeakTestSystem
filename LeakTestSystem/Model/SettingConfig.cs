@@ -94,6 +94,10 @@ namespace LeakTestSystem.Model
         /// </summary>
         public bool mesNgLock { get; set; }
         /// <summary>
+        /// MES 代码
+        /// </summary>
+        public string ngCode { get; set; } = "NG1234";
+        /// <summary>
         /// SN length
         /// </summary>
         public int snLength { get; set; } = 6;  
