@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Controller;
 using LeakTestSystem.Controller;
 using OfficeOpenXml;
+using SNetLogs;
 
 namespace LeakTestSystem
 {
@@ -17,6 +18,7 @@ namespace LeakTestSystem
         [STAThread]
         private static void Main()
         {
+            Log.Init();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ExcelPackage.License.SetNonCommercialPersonal("LeakTestSystem");
