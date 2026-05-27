@@ -1,4 +1,13 @@
-﻿using System;
+﻿using Controller;
+using LeakTestSystem.Controller;
+using LeakTestSystem.Model;
+using LeakTestSystem.Services;
+using LeakTestSystem.Services.MES;
+using Newtonsoft.Json;
+using SNetLogs;
+using Sunny.UI;
+using Sunny.UI.Win32;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,18 +19,11 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Controller;
-using LeakTestSystem.Controller;
-using LeakTestSystem.Model;
-using LeakTestSystem.Services;
-using LeakTestSystem.Services.MES;
-using Newtonsoft.Json;
-using SNetLogs;
-using Sunny.UI;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Application = System.Windows.Forms.Application;
@@ -48,7 +50,7 @@ namespace LeakTestSystem
         private SettingConfig _config = new SettingConfig();
         private FrmSN _frmSn;
         private readonly Dictionary<object, Color> _itemColorMap = new Dictionary<object, Color>();
-
+        private string uuid;
         /// <summary>
         /// 测试记录
         /// </summary>
@@ -1382,6 +1384,7 @@ namespace LeakTestSystem
 
                 if (result == DialogResult.Yes)
                 {
+                    uuid=Guid.NewGuid().ToString("N");
                     //this.ShowWaitForm("启动测试...请等待...");
                     ShowLogs("启动测试...请等待...", Color.Black);
                     StartTesting();
@@ -1417,22 +1420,18 @@ namespace LeakTestSystem
             }
         }
 
-        private void AddTestHistory(string sn, TestResult result, string status, string message)
+        private void AddTestHistory(string sn, TestResult result, string status, string message, string uuid)
         {
             var index = _config.GetChannelIndexByComName(_config, result.comName);
 
             ShowLogs($"ComName:{result.comName} ComIndex{index} TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
-
-            if (status == "OK")
-            {
-                InitUIDisplay(PASS, index, Color.Green);
-            }
-            else
-            {
-                InitUIDisplay(FAIL, index, Color.Red);
-            }
             result.testResult = status;
+            result.serialNumber = sn;
             resultList.Add(result);
+          
+           UploadMesSystem(uuid, index, result, status, message);
+    
+  
             ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
 
             if (resultList.Count == _config.GetEnableChannelCount(_config))
@@ -1448,138 +1447,129 @@ namespace LeakTestSystem
                 {
                     //new pageResult("PASS").ShowDialog();
                 }
-                var uuid = Guid.NewGuid().ToString("N");
-                if (switchMES.Active)
-                {
-                    int i = 0;
+                ShowLogs($"[MES全部完成] UUID:{uuid} {resultList.Count}:{maxCount}", Color.Green);
 
-                    ShowLogs($"[MES开始] UUID:{uuid} 总数:{resultList.Count}", Color.DarkBlue);
-
-                    foreach (var r in resultList)
-                    {
-                        i++;
-
-                        try
-                        {
-                            var snresult = r.testResult == "OK" ? PASS : FAIL;
-                            WriteExcel(uuid, r.serialNumber, r, snresult, message);
-                            ShowLogs(
-                                $"[MES处理开始] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} TestResult:{r.testResult}",
-                                Color.DarkBlue);
-
-                            var listItem = new List<string>
-                            {
-                                $"PressureValue:{r.PressureValue}:{snresult}",
-                                $"LeakValue:{r.LeakValue}:{snresult}"
-                            };
-
-                            // =========================
-                            // NG也上传
-                            // =========================
-                            if (switchMesNgLock.Active)
-                            {
-                                ShowLogs($"[上传测试记录] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.DarkBlue);
-
-                                if (!MES_Service.UploadTestRecords(r.serialNumber, listItem, ref message))
-                                {
-                                    ShowLogs($"[上传测试记录失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}", Color.Red);
-                                    this.Style = UIStyle.Red;
-                                    this.ShowErrorDialog(message);
-                                    //  return;
-                                }
-
-                                ShowLogs($"[上传测试记录成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
-                                    Color.Green);
-
-                                ShowLogs($"[开始过站] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
-                                    Color.DarkBlue);
-
-                                if (!MES_Service.SerialNumberCorssingStationFail(r.serialNumber, _config.ngCode, ref message))
-                                {
-                                    this.Style = UIStyle.Red;
-                                    ShowLogs($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
-                                        Color.Red);
-                                    this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
-
-                                    //  return;
-                                }
-
-                                ShowLogs($"[不良品 过站成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
-                                    Color.Green);
-                            }
-                            else
-                            {
-                                // =========================
-                                // 仅OK上传
-                                // =========================
-                                if (r.testResult == "OK")
-                                {
-                                    ShowLogs($"[OK产品上传MES] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
-                                        Color.DarkBlue);
-
-                                    ShowLogs($"[上传测试记录] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
-                                        Color.DarkBlue);
-
-                                    if (!MES_Service.UploadTestRecords(r.serialNumber, listItem, ref message))
-                                    {
-                                        this.Style = UIStyle.Red;
-                                        ShowLogs($"[上传测试记录失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
-                                            Color.Red);
-
-                                        this.ShowErrorDialog(message);
-                                        //  return;
-                                    }
-
-                                    ShowLogs($"[上传测试记录成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
-                                        Color.Green);
-
-                                    ShowLogs($"[开始过站] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
-                                        Color.DarkBlue);
-
-                                    if (!MES_Service.SerialNumberCorssingStationPass(r.serialNumber, ref message))
-                                    {
-                                        this.Style = UIStyle.Red;
-                                        ShowLogs($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}", Color.Red);
-                                        this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
-                                    }
-
-                                    ShowLogs($"[过站成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
-                                }
-                                else
-                                {
-                                    ShowLogs(
-                                        $"[NG跳过MES] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Orange);
-                                }
-                            }
-
-                            ShowLogs(
-                                $"[MES处理完成] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
-                        }
-                        catch (Exception ex)
-                        {
-                            this.Style = UIStyle.Red;
-                            ShowLogs(
-                                $"[MES异常] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Exception:{ex}",
-                                Color.Red);
-
-                            this.ShowErrorDialog(ex.Message);
-                            // return;
-                        }
-                        Thread.Sleep(20);
-                    }
-
-                    ShowLogs($"[MES全部完成] UUID:{uuid} 总数:{resultList.Count}", Color.Green);
-                }
-                else
-                {
-                    foreach (var r in resultList)
-                    {
-                        var snstatus = r.testResult == "OK" ? PASS : FAIL;
-                        WriteExcel(uuid, r.serialNumber, r, snstatus, message);
-                    }
-                }
                 this.Style = UIStyle.Green;
                 resultList.Clear();
+            }
+        }
+
+        private void UploadMesSystem(string uuid, int index, TestResult result, string status, string message)
+        {
+            var snresult = result.testResult == "OK" ? PASS : FAIL;
+            if (switchMES.Active)
+            {
+                try
+                {
+                    ShowLogs($"[MES开始] UUID:{uuid} 总数:{maxCount}", Color.DarkBlue);
+
+                    WriteExcel(uuid, result.serialNumber, result, snresult, message);
+                    ShowLogs($"[MES处理开始] UUID:{uuid} {resultList.Count}/{maxCount} SN:{result.serialNumber} TestResult:{result.testResult}", Color.DarkBlue);
+
+                    var listItem = new List<string>
+                            {
+                                $"PressureValue:{result.PressureValue}:{snresult}",
+                                $"LeakValue:{result.LeakValue}:{snresult}"
+                            };
+
+                    // =========================
+                    // NG也上传
+                    // =========================
+                    if (switchMesNgLock.Active)
+                    {
+                        ShowLogs($"[上传测试记录] UUID:{uuid} {resultList.Count}/{maxCount} SN:{result.serialNumber}", Color.DarkBlue);
+
+                        if (!MES_Service.UploadTestRecords(result.serialNumber, listItem, ref message))
+                        {
+                            ShowLogs($"[上传测试记录失败] UUID:{uuid} {resultList.Count}/{maxCount} SN:{result.serialNumber} Message:{message}", Color.Red);
+                            this.Style = UIStyle.Red;
+                            InitUIDisplay("上传记录失败", index, Color.Red);
+                            this.ShowErrorDialog(message);
+                            return;
+                        }
+
+                        ShowLogs($"[上传测试记录成功] UUID:{uuid} {resultList.Count}/{maxCount} SN:{result.serialNumber}", Color.Green);
+
+                        ShowLogs($"[开始过站] UUID:{uuid} {resultList.Count}/{maxCount} SN:{result.serialNumber}", Color.DarkBlue);
+
+                        if (!MES_Service.SerialNumberCorssingStationFail(result.serialNumber, _config.ngCode, ref message))
+                        {
+                            this.Style = UIStyle.Red;
+                            InitUIDisplay("锁定失败", index, Color.Red);
+                            ShowLogs($"[过站失败] UUID:{uuid} {resultList.Count}/{maxCount} SN:{result.serialNumber} Message:{message}", Color.Red);
+                            this.ShowErrorDialog($"[过站失败] UUID:{uuid} {resultList.Count}/{maxCount} SN:{result.serialNumber} Message:{message}");
+
+                            return;
+                        }
+                        InitUIDisplay("不良品锁定" + FAIL, index, Color.Red);
+                        ShowLogs($"[不良品 过站成功] UUID:{uuid} {resultList.Count}/{maxCount} SN:{result.serialNumber}", Color.Green);
+                    }
+                    else
+                    {
+                        // =========================
+                        // 仅OK上传
+                        // =========================
+                        if (result.testResult == "OK")
+                        {
+                            ShowLogs($"[OK产品上传MES] UUID:{uuid} {resultList.Count}/{maxCount} SN:{result.serialNumber}", Color.DarkBlue);
+
+                            ShowLogs($"[上传测试记录] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber}", Color.DarkBlue);
+
+                            if (!MES_Service.UploadTestRecords(result.serialNumber, listItem, ref message))
+                            {
+                                this.Style = UIStyle.Red;
+                                ShowLogs($"[上传测试记录失败] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber} Message:{message}", Color.Red);
+                                InitUIDisplay("上传记录失败", index, Color.Red);
+                                this.ShowErrorDialog(message);
+                                return;
+                            }
+
+                            ShowLogs($"[上传测试记录成功] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber}",                                Color.Green);
+
+                            ShowLogs($"[开始过站] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber}", Color.DarkBlue);
+
+                            if (!MES_Service.SerialNumberCorssingStationPass(result.serialNumber, ref message))
+                            {
+                                this.Style = UIStyle.Red;
+                                InitUIDisplay("过站失败", index, Color.Red);
+                                ShowLogs($"[过站失败] UUID:{uuid} {resultList.Count}/{maxCount} SN:{result.serialNumber} Message:{message}", Color.Red);
+                                this.ShowErrorDialog($"[过站失败] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber} Message:{message}");
+                                return;
+                            }
+                            InitUIDisplay("过站成功"+PASS, index, Color.Green);
+                            ShowLogs($"[过站成功] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber}", Color.Green);
+                        }
+                        else
+                        {
+                            InitUIDisplay("NG跳过MES", index, Color.IndianRed);
+                            ShowLogs($"[NG跳过MES] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber}", Color.Orange);
+                        }
+                    }
+
+                    ShowLogs($"[MES处理完成] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber}", Color.Green);
+                }
+                catch (Exception ex)
+                {
+                    this.Style = UIStyle.Red;
+                    ShowLogs($"[MES异常] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber} Exception:{ex}",  Color.Red);
+
+                    this.ShowErrorDialog(ex.Message);
+                    // return;
+                }
+                Thread.Sleep(20);
+            }
+            else
+            {
+                if (result.testResult == "OK")
+                {
+                    InitUIDisplay("跳过MES PASS", index, Color.Green);
+                }
+                else 
+                {
+                    InitUIDisplay("不良品", index, Color.Red);
+                }
+    
+                WriteExcel(uuid, result.serialNumber, result, snresult, message);
             }
         }
 
@@ -1604,7 +1594,7 @@ namespace LeakTestSystem
                     result.comName = comName;
                     result.channelsName = $"CH{index + 1}";
                     resultList.Add(result);
-                    AddTestHistory(sn, result, "NG", "数据格式错误");
+                    AddTestHistory(sn, result, "NG", "数据格式错误", uuid);
                     return;
                 }
 
@@ -1624,7 +1614,7 @@ namespace LeakTestSystem
                             $"压力:{result.PressureValue} " +
                             $"泄漏:{result.LeakValue}";
 
-                        AddTestHistory(sn, result, "OK", msg);
+                        AddTestHistory(sn, result, "OK", msg, uuid);
 
                         ShowLogs(msg, Color.Green);
                         break;
@@ -1636,7 +1626,7 @@ namespace LeakTestSystem
                             $"报警:{result.alarmMessage} " +
                             $"通道:{result.channelsName}";
 
-                        AddTestHistory(sn, result, "NG", msg);
+                        AddTestHistory(sn, result, "NG", msg, uuid);
                         ShowLogs(msg, Color.Red);
                         break;
 
@@ -1649,7 +1639,7 @@ namespace LeakTestSystem
                             $"压力:{result.PressureValue} " +
                             $"泄漏:{result.LeakValue}";
 
-                        AddTestHistory(sn, result, "NG", msg);
+                        AddTestHistory(sn, result, "NG", msg,uuid);
                         ShowLogs(msg, Color.Orange);
                         break;
 
@@ -1662,7 +1652,7 @@ namespace LeakTestSystem
                             $"压力:{result.PressureValue} " +
                             $"泄漏:{result.LeakValue}";
 
-                        AddTestHistory(sn, result, "NG", msg);
+                        AddTestHistory(sn, result, "NG", msg,uuid);
                         ShowLogs(msg, Color.Orange);
                         break;
 
@@ -1672,7 +1662,7 @@ namespace LeakTestSystem
                             $"测试结果:SN:{sn} " +
                             $"未知结果:{result.testResult} " +
                             $"原始数据:{data}";
-                        AddTestHistory(sn, result, "NG", msg);
+                        AddTestHistory(sn, result, "NG", msg,uuid);
                         ShowLogs(msg, Color.Gray);
                         break;
                 }
