@@ -1419,6 +1419,18 @@ namespace LeakTestSystem
 
         private void AddTestHistory(string sn, TestResult result, string status, string message)
         {
+            var index = _config.GetChannelIndexByComName(_config, result.comName);
+
+            ShowLogs($"ComName:{result.comName} ComIndex{index} TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
+
+            if (status == "OK")
+            {
+                InitUIDisplay(PASS, index, Color.Green);
+            }
+            else
+            {
+                InitUIDisplay(FAIL, index, Color.Red);
+            }
             result.testResult = status;
             resultList.Add(result);
             ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
@@ -1450,7 +1462,6 @@ namespace LeakTestSystem
                         try
                         {
                             var snresult = r.testResult == "OK" ? PASS : FAIL;
-
                             WriteExcel(uuid, r.serialNumber, r, snresult, message);
                             ShowLogs(
                                 $"[MES处理开始] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} TestResult:{r.testResult}",
@@ -1474,46 +1485,27 @@ namespace LeakTestSystem
                                     ShowLogs($"[上传测试记录失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}", Color.Red);
                                     this.Style = UIStyle.Red;
                                     this.ShowErrorDialog(message);
-                                    SettingColor(r, FAIL);
                                     //  return;
                                 }
 
-                                ShowLogs($"[上传测试记录成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
+                                ShowLogs($"[上传测试记录成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
+                                    Color.Green);
 
-                                ShowLogs($"[开始过站] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.DarkBlue);
-                                if (r.testResult == "OK")
-                                {
-                                    if (!MES_Service.SerialNumberCorssingStationPass(r.serialNumber, ref message))
-                                    {
-                                        this.Style = UIStyle.Red;
-                                        ShowLogs($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}", Color.Red);
-                                        this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
-                                        SettingColor(r, FAIL);
-                                        //  return;
-                                    }
-                                    else
-                                    {
-                                        SettingColor(r, snresult);
-                                        ShowLogs($"[过站成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
-                                    }
-                                }
-                                else
-                                {
-                                    if (!MES_Service.SerialNumberCorssingStationFail(r.serialNumber, _config.ngCode, ref message))
-                                    {
-                                        this.Style = UIStyle.Red;
-                                        ShowLogs($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}", Color.Red);
-                                        SettingColor(r, FAIL);
-                                        this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
+                                ShowLogs($"[开始过站] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
+                                    Color.DarkBlue);
 
-                                        //  return;
-                                    }
-                                    else
-                                    {
-                                        ShowLogs($"[过站成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
-                                        SettingColor(r, snresult);
-                                    }
+                                if (!MES_Service.SerialNumberCorssingStationFail(r.serialNumber, _config.ngCode, ref message))
+                                {
+                                    this.Style = UIStyle.Red;
+                                    ShowLogs($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
+                                        Color.Red);
+                                    this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
+
+                                    //  return;
                                 }
+
+                                ShowLogs($"[不良品 过站成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
+                                    Color.Green);
                             }
                             else
                             {
@@ -1522,56 +1514,58 @@ namespace LeakTestSystem
                                 // =========================
                                 if (r.testResult == "OK")
                                 {
-                                    ShowLogs($"[OK产品上传MES] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.DarkBlue);
+                                    ShowLogs($"[OK产品上传MES] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
+                                        Color.DarkBlue);
 
-                                    ShowLogs($"[上传测试记录] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.DarkBlue);
+                                    ShowLogs($"[上传测试记录] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
+                                        Color.DarkBlue);
 
                                     if (!MES_Service.UploadTestRecords(r.serialNumber, listItem, ref message))
                                     {
                                         this.Style = UIStyle.Red;
-                                        ShowLogs($"[上传测试记录失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}", Color.Red);
-                                        SettingColor(r, FAIL);
+                                        ShowLogs($"[上传测试记录失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}",
+                                            Color.Red);
+
                                         this.ShowErrorDialog(message);
                                         //  return;
                                     }
-                                    else
+
+                                    ShowLogs($"[上传测试记录成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
+                                        Color.Green);
+
+                                    ShowLogs($"[开始过站] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}",
+                                        Color.DarkBlue);
+
+                                    if (!MES_Service.SerialNumberCorssingStationPass(r.serialNumber, ref message))
                                     {
-                                        ShowLogs($"[上传测试记录成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
-
-                                        ShowLogs($"[开始过站] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.DarkBlue);
-
-                                        if (!MES_Service.SerialNumberCorssingStationPass(r.serialNumber, ref message))
-                                        {
-                                            this.Style = UIStyle.Red;
-                                            ShowLogs($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}", Color.Red);
-                                            this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
-
-                                            SettingColor(r, FAIL);
-                                        }
-                                        else
-                                        {
-                                            SettingColor(r, PASS);
-                                            ShowLogs($"[过站成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
-                                        }
+                                        this.Style = UIStyle.Red;
+                                        ShowLogs($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}", Color.Red);
+                                        this.ShowErrorDialog($"[过站失败] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Message:{message}");
                                     }
+
+                                    ShowLogs($"[过站成功] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
                                 }
                                 else
                                 {
-                                    ShowLogs($"[NG跳过MES] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Orange);
+                                    ShowLogs(
+                                        $"[NG跳过MES] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Orange);
                                 }
                             }
 
-                            ShowLogs($"[MES处理完成] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
+                            ShowLogs(
+                                $"[MES处理完成] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber}", Color.Green);
                         }
                         catch (Exception ex)
                         {
                             this.Style = UIStyle.Red;
-                            ShowLogs($"[MES异常] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Exception:{ex}", Color.Red);
+                            ShowLogs(
+                                $"[MES异常] UUID:{uuid} {i}/{resultList.Count} SN:{r.serialNumber} Exception:{ex}",
+                                Color.Red);
 
                             this.ShowErrorDialog(ex.Message);
                             // return;
                         }
-                        Thread.Sleep(100);
+                        Thread.Sleep(20);
                     }
 
                     ShowLogs($"[MES全部完成] UUID:{uuid} 总数:{resultList.Count}", Color.Green);
