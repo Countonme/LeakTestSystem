@@ -51,6 +51,7 @@ namespace LeakTestSystem
         private FrmSN _frmSn;
         private readonly Dictionary<object, Color> _itemColorMap = new Dictionary<object, Color>();
         private string uuid;
+
         /// <summary>
         /// 测试记录
         /// </summary>
@@ -1384,7 +1385,7 @@ namespace LeakTestSystem
 
                 if (result == DialogResult.Yes)
                 {
-                    uuid=Guid.NewGuid().ToString("N");
+                    uuid = Guid.NewGuid().ToString("N");
                     //this.ShowWaitForm("启动测试...请等待...");
                     ShowLogs("启动测试...请等待...", Color.Black);
                     StartTesting();
@@ -1428,10 +1429,9 @@ namespace LeakTestSystem
             result.testResult = status;
             result.serialNumber = sn;
             resultList.Add(result);
-          
-           UploadMesSystem(uuid, index, result, status, message);
-    
-  
+
+            UploadMesSystem(uuid, index, result, status, message);
+
             ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
 
             if (resultList.Count == _config.GetEnableChannelCount(_config))
@@ -1524,7 +1524,7 @@ namespace LeakTestSystem
                                 return;
                             }
 
-                            ShowLogs($"[上传测试记录成功] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber}",                                Color.Green);
+                            ShowLogs($"[上传测试记录成功] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber}", Color.Green);
 
                             ShowLogs($"[开始过站] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber}", Color.DarkBlue);
 
@@ -1536,7 +1536,7 @@ namespace LeakTestSystem
                                 this.ShowErrorDialog($"[过站失败] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber} Message:{message}");
                                 return;
                             }
-                            InitUIDisplay("过站成功"+PASS, index, Color.Green);
+                            InitUIDisplay("过站成功" + PASS, index, Color.Green);
                             ShowLogs($"[过站成功] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber}", Color.Green);
                         }
                         else
@@ -1551,12 +1551,12 @@ namespace LeakTestSystem
                 catch (Exception ex)
                 {
                     this.Style = UIStyle.Red;
-                    ShowLogs($"[MES异常] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber} Exception:{ex}",  Color.Red);
+                    ShowLogs($"[MES异常] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber} Exception:{ex}", Color.Red);
 
                     this.ShowErrorDialog(ex.Message);
                     // return;
                 }
-                Thread.Sleep(20);
+                // Thread.Sleep(20);
             }
             else
             {
@@ -1564,11 +1564,11 @@ namespace LeakTestSystem
                 {
                     InitUIDisplay("跳过MES PASS", index, Color.Green);
                 }
-                else 
+                else
                 {
                     InitUIDisplay("不良品", index, Color.Red);
                 }
-    
+
                 WriteExcel(uuid, result.serialNumber, result, snresult, message);
             }
         }
@@ -1639,7 +1639,7 @@ namespace LeakTestSystem
                             $"压力:{result.PressureValue} " +
                             $"泄漏:{result.LeakValue}";
 
-                        AddTestHistory(sn, result, "NG", msg,uuid);
+                        AddTestHistory(sn, result, "NG", msg, uuid);
                         ShowLogs(msg, Color.Orange);
                         break;
 
@@ -1652,7 +1652,7 @@ namespace LeakTestSystem
                             $"压力:{result.PressureValue} " +
                             $"泄漏:{result.LeakValue}";
 
-                        AddTestHistory(sn, result, "NG", msg,uuid);
+                        AddTestHistory(sn, result, "NG", msg, uuid);
                         ShowLogs(msg, Color.Orange);
                         break;
 
@@ -1662,7 +1662,7 @@ namespace LeakTestSystem
                             $"测试结果:SN:{sn} " +
                             $"未知结果:{result.testResult} " +
                             $"原始数据:{data}";
-                        AddTestHistory(sn, result, "NG", msg,uuid);
+                        AddTestHistory(sn, result, "NG", msg, uuid);
                         ShowLogs(msg, Color.Gray);
                         break;
                 }
@@ -1708,10 +1708,12 @@ namespace LeakTestSystem
         /// <param name="color"></param>
         private void InitUIDisplay(string value, int index, Color color)
         {
-            //var value =String.Empty ;
-            _uiLedDisplaysArry[index].Text = value;
-            _uiLedDisplaysArry[index].ForeColor = Color.White;
-            _uiLedDisplaysArry[index].LedBackColor = color;
+            var ctrl = _uiLedDisplaysArry[index];
+
+            ctrl.Text = value;
+            ctrl.LedBackColor = color;
+
+            ctrl.Refresh();
         }
 
         /// <summary>
