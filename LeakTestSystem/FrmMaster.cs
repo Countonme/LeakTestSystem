@@ -1032,7 +1032,6 @@ namespace LeakTestSystem
                 {
                     StopTesting();
                     byte[] data = new byte[port.BytesToRead];
-                    ShowLogs($"收到串口 {port.PortName} 的数据: {data}", Color.Yellow);
 
                     int len = port.Read(data, 0, data.Length);
 
@@ -1428,9 +1427,15 @@ namespace LeakTestSystem
             ShowLogs($"ComName:{result.comName} ComIndex{index} TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
             result.testResult = status;
             result.serialNumber = sn;
-            resultList.Add(result);
-
-            UploadMesSystem(uuid, index, result, status, message);
+            lock (resultList)
+            {
+                resultList.Add(result);
+            }
+            //多线程传
+            Task.Run(() =>
+            {
+                UploadMesSystem(uuid, index, result, status, message);
+            });
 
             ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
 
@@ -1593,7 +1598,10 @@ namespace LeakTestSystem
                     result.serialNumber = sn;
                     result.comName = comName;
                     result.channelsName = $"CH{index + 1}";
-                    resultList.Add(result);
+                    //lock (resultList)
+                    //{
+                    //    resultList.Add(result);
+                    //}
                     AddTestHistory(sn, result, "NG", "数据格式错误", uuid);
                     return;
                 }
@@ -1709,11 +1717,19 @@ namespace LeakTestSystem
         private void InitUIDisplay(string value, int index, Color color)
         {
             var ctrl = _uiLedDisplaysArry[index];
-
-            ctrl.Text = value;
-            ctrl.LedBackColor = color;
-
-            ctrl.Refresh();
+            if (ctrl.InvokeRequired)
+            {
+                ctrl.BeginInvoke(new Action(() =>
+                {
+                    ctrl.Text = value;
+                    ctrl.LedBackColor = color;
+                }));
+            }
+            else
+            {
+                ctrl.Text = value;
+                ctrl.LedBackColor = color;
+            }
         }
 
         /// <summary>
