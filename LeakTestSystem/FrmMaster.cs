@@ -1075,7 +1075,7 @@ namespace LeakTestSystem
                     byte[] data = new byte[port.BytesToRead];
                     port.Read(data, 0, data.Length);
                     string hex = BitConverter.ToString(data).Replace("-", " ");
-                    ShowLogs($"MCU 收到数据: {hex}", Color.Blue);
+                    //ShowLogs($"MCU 收到数据: {hex}", Color.Blue);
                     // ShowLogs($"MCU COM7 收到数据: {port.ReadExisting()}", Color.Blue);
                 }
             }
@@ -1741,9 +1741,12 @@ namespace LeakTestSystem
             //var value =String.Empty ;
             _uiLedDisplaysArry.ForEach(e =>
             {
-                e.Text = value;
-                e.ForeColor = Color.White;
-                e.LedBackColor = color;
+                e.BeginInvoke(new Action(() =>
+                {
+                    e.Text = value;
+                    e.ForeColor = Color.White;
+                    e.LedBackColor = color;
+                }));
             });
         }
 
