@@ -100,6 +100,7 @@ namespace LeakTestSystem
                 MES_Service.MesDisConnect();
                 StopTesting();
                 CloseAllPorts();
+                Environment.Exit(0);
             }
         }
 
