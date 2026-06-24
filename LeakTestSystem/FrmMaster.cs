@@ -40,7 +40,6 @@ namespace LeakTestSystem
         private readonly string PASS = "PASS", FAIL = "FAIL";
         private readonly string OK = "OK", NG = "NG";
         private readonly string Testing = "Testing ...";
-        private readonly StringBuilder _serialBuffer = new StringBuilder();
         private readonly object _lock = new object();
         private readonly object _logLock = new object();
         private readonly Dictionary<string, StringBuilder> _buffers = new Dictionary<string, StringBuilder>();
@@ -705,45 +704,68 @@ namespace LeakTestSystem
         /// </summary>
         private void StopTesting()
         {
-            //this.HideWaitForm();
-            //开启继电器
-            if (_config.channel1Status)
+            var channels = new[]
             {
-                modbusIo.SetRelay(1, 0, false);
-                Thread.Sleep(100);
-                ShowLogs("关闭继电器 1", Color.Black);
-            }
-            if (_config.channel2Status)
+                (_config.channel1Status, 0, "继电器1"),
+                (_config.channel2Status, 2, "继电器2"),
+                (_config.channel3Status, 4, "继电器3"),
+                (_config.channel4Status, 6, "继电器4"),
+                (_config.channel5Status, 8, "继电器5"),
+                (_config.channel6Status,10, "继电器6"),
+            };
+
+            foreach (var ch in channels)
             {
-                modbusIo.SetRelay(1, 2, false);
-                Thread.Sleep(100);
-                ShowLogs("关闭继电器 2", Color.Black);
-            }
-            if (_config.channel3Status)
-            {
-                modbusIo.SetRelay(1, 4, false);
-                Thread.Sleep(100);
-                ShowLogs("关闭继电器 3", Color.Black);
-            }
-            if (_config.channel4Status)
-            {
-                modbusIo.SetRelay(1, 6, false);
-                Thread.Sleep(100);
-                ShowLogs("关闭继电器 4", Color.Black);
-            }
-            if (_config.channel5Status)
-            {
-                modbusIo.SetRelay(1, 8, false);
-                Thread.Sleep(100);
-                ShowLogs("关闭继电器 5", Color.Black);
-            }
-            if (_config.channel6Status)
-            {
-                modbusIo.SetRelay(1, 10, false);
-                Thread.Sleep(100);
-                ShowLogs("关闭继电器 6", Color.Black);
+                if (ch.Item1)
+                {
+                    modbusIo.SetRelay(ch.Item2, 0, false);
+                    Thread.Sleep(100);
+                    ShowLogs($"关闭继电器 {ch.Item3}", Color.Black);
+                }
             }
         }
+
+        //private void StopTesting()
+        //{
+        //    //this.HideWaitForm();
+        //    //开启继电器
+        //    if (_config.channel1Status)
+        //    {
+        //        modbusIo.SetRelay(1, 0, false);
+        //        Thread.Sleep(100);
+        //        ShowLogs("关闭继电器 1", Color.Black);
+        //    }
+        //    if (_config.channel2Status)
+        //    {
+        //        modbusIo.SetRelay(1, 2, false);
+        //        Thread.Sleep(100);
+        //        ShowLogs("关闭继电器 2", Color.Black);
+        //    }
+        //    if (_config.channel3Status)
+        //    {
+        //        modbusIo.SetRelay(1, 4, false);
+        //        Thread.Sleep(100);
+        //        ShowLogs("关闭继电器 3", Color.Black);
+        //    }
+        //    if (_config.channel4Status)
+        //    {
+        //        modbusIo.SetRelay(1, 6, false);
+        //        Thread.Sleep(100);
+        //        ShowLogs("关闭继电器 4", Color.Black);
+        //    }
+        //    if (_config.channel5Status)
+        //    {
+        //        modbusIo.SetRelay(1, 8, false);
+        //        Thread.Sleep(100);
+        //        ShowLogs("关闭继电器 5", Color.Black);
+        //    }
+        //    if (_config.channel6Status)
+        //    {
+        //        modbusIo.SetRelay(1, 10, false);
+        //        Thread.Sleep(100);
+        //        ShowLogs("关闭继电器 6", Color.Black);
+        //    }
+        //}
 
         private void TxtMasterInput_TextChanged(object sender, EventArgs e)
         {
@@ -1428,7 +1450,7 @@ namespace LeakTestSystem
             ShowLogs($"ComName:{result.comName} ComIndex{index} TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
             result.testResult = status;
             result.serialNumber = sn;
-            lock (resultList)
+            lock (_lock)
             {
                 resultList.Add(result);
             }
@@ -1558,7 +1580,7 @@ namespace LeakTestSystem
                 {
                     this.Style = UIStyle.Red;
                     ShowLogs($"[MES异常] UUID:{uuid} {resultList.Count}/{maxCount}  SN:{result.serialNumber} Exception:{ex}", Color.Red);
-
+                    InitUIDisplay("MES异常", index, Color.Red);
                     this.ShowErrorDialog(ex.Message);
                     // return;
                 }
