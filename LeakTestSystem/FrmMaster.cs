@@ -1414,7 +1414,7 @@ namespace LeakTestSystem
                     // ⭐ 关键修复
                     Task.Run(() =>
                     {
-                        Thread.Sleep(3000);
+                        Thread.Sleep(4000);
 
                         this.BeginInvoke(new Action(() =>
                         {
@@ -1450,15 +1450,12 @@ namespace LeakTestSystem
             ShowLogs($"ComName:{result.comName} ComIndex{index} TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
             result.testResult = status;
             result.serialNumber = sn;
-            lock (_lock)
+            lock (resultList)
             {
                 resultList.Add(result);
             }
-            //多线程传
-            Task.Run(() =>
-            {
-                UploadMesSystem(uuid, index, result, status, message);
-            });
+
+            UploadMesSystem(uuid, index, result, status, message);
 
             ShowLogs($"TestCount:{resultList.Count}  TotalCount:{_config.GetEnableChannelCount(_config)}", Color.DarkGreen);
 
@@ -1584,7 +1581,7 @@ namespace LeakTestSystem
                     this.ShowErrorDialog(ex.Message);
                     // return;
                 }
-                // Thread.Sleep(20);
+                Thread.Sleep(20);
             }
             else
             {
