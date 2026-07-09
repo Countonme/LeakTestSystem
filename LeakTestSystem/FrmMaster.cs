@@ -613,7 +613,10 @@ namespace LeakTestSystem
                     {
                         if (serialPort7 != null && serialPort7.IsOpen)
                         {
-                            resultList.Clear();
+                            lock (resultList)
+                            {
+                                resultList.Clear();
+                            }
                             // this.ShowErrorNotifier("已扫满6个");
 
                             // 这里可以做提交逻辑
@@ -1451,7 +1454,12 @@ namespace LeakTestSystem
             }
 
             if (batch == null)
+            {
+                ShowLogs(
+                    $"TestCount:{resultList.Count} Total:{_config.GetEnableChannelCount(_config)}",
+                    Color.Red);
                 return;
+            }
 
             ProcessBatch(batch, message);
         }
